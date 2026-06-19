@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,18 +16,29 @@
       <a href="#home" class="nav-logo">LiYaze</a>
       <!-- 桌面端导航链接 -->
       <nav class="nav-links" id="navLinks">
-        <a href="#home">首页</a>
-        <a href="#about">关于我</a>
-        <a href="#projects">项目作品</a>
-        <a href="#skills">技能</a>
-        <a href="#contact">联系我</a>
+        <a href="#home" data-i18n="nav.home">首页</a>
+        <a href="#about" data-i18n="nav.about">关于我</a>
+        <a href="#projects" data-i18n="nav.projects">项目作品</a>
+        <a href="#skills" data-i18n="nav.skills">技能</a>
+        <a href="#contact" data-i18n="nav.contact">联系我</a>
       </nav>
-      <!-- 汉堡菜单按钮（移动端） -->
-      <button class="hamburger" id="hamburger" aria-label="菜单">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+      <!-- 右侧功能按钮 -->
+      <div class="nav-actions">
+        <!-- 中英文切换 -->
+        <button class="lang-toggle" id="langToggle" aria-label="切换语言">
+          <span class="lang-icon">EN</span>
+        </button>
+        <!-- 亮暗色切换 -->
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <!-- 汉堡菜单按钮（移动端） -->
+        <button class="hamburger" id="hamburger" aria-label="菜单">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -35,12 +46,20 @@
   <div class="mobile-menu" id="mobileMenu">
     <button class="close-btn" id="closeMenu" aria-label="关闭菜单">&times;</button>
     <nav class="mobile-nav-links">
-      <a href="#home">首页</a>
-      <a href="#about">关于我</a>
-      <a href="#projects">项目作品</a>
-      <a href="#skills">技能</a>
-      <a href="#contact">联系我</a>
+      <a href="#home" data-i18n="nav.home">首页</a>
+      <a href="#about" data-i18n="nav.about">关于我</a>
+      <a href="#projects" data-i18n="nav.projects">项目作品</a>
+      <a href="#skills" data-i18n="nav.skills">技能</a>
+      <a href="#contact" data-i18n="nav.contact">联系我</a>
     </nav>
+    <div class="mobile-actions">
+      <button class="lang-toggle" id="mobileLangToggle" aria-label="切换语言">
+        <span class="lang-icon">EN</span>
+      </button>
+      <button class="theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
   </div>
   <div class="menu-overlay" id="menuOverlay"></div>
 
@@ -50,8 +69,8 @@
     <section class="hero" id="home">
       <div class="hero-bg" id="heroBg"></div>
       <div class="hero-content">
-        <h1 class="hero-title">Hi, I'm LiYaze</h1>
-        <p class="hero-subtitle">前端 / AI 开发爱好者 · 热衷于构建优雅的数字体验</p>
+        <h1 class="hero-title" data-i18n="hero.title">Hi, I'm LiYaze</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">前端 / AI 开发爱好者 · 热衷于构建优雅的数字体验</p>
         <!-- 向下滚动引导箭头动画 -->
         <div class="scroll-indicator">
           <span class="scroll-arrow"></span>
@@ -62,14 +81,14 @@
     <!-- ===== 关于我 ===== -->
     <section class="section" id="about">
       <div class="section-inner">
-        <h2 class="section-title">关于我</h2>
+        <h2 class="section-title" data-i18n="about.title">关于我</h2>
         <div class="about-content">
           <div class="about-text">
-            <p>我是一名热爱前端技术与人工智能的开发爱好者，专注于构建美观、流畅、具有苹果级体验的 Web 应用。</p>
-            <p>目前深入学习 <strong>React、TypeScript</strong> 及 <strong>AI 工程化</strong>方向，持续探索如何将前沿技术落地为优雅的产品。</p>
+            <p data-i18n="about.p1">我是一名热爱前端技术与人工智能的开发爱好者，专注于构建美观、流畅、具有苹果级体验的 Web 应用。</p>
+            <p data-i18n="about.p2">目前深入学习 <strong>React、TypeScript</strong> 及 <strong>AI 工程化</strong>方向，持续探索如何将前沿技术落地为优雅的产品。</p>
           </div>
           <div class="about-image">
-            <img src="https://via.placeholder.com/400x400/e8f0fe/1d1d1f?text=LiYaze" alt="LiYaze 头像" loading="lazy">
+            <img src="https://via.placeholder.com/400x400/e8f0fe/1d1d1f?text=LiYaze" alt="LiYaze 头像" data-i18n-alt="about.avatarAlt" loading="lazy">
           </div>
         </div>
       </div>
@@ -78,7 +97,7 @@
     <!-- ===== 项目作品 ===== -->
     <section class="section section-alt" id="projects">
       <div class="section-inner">
-        <h2 class="section-title">项目作品</h2>
+        <h2 class="section-title" data-i18n="projects.title">项目作品</h2>
         <div class="projects-grid">
           <!-- 卡片 1 -->
           <div class="card">
@@ -86,8 +105,8 @@
               <img src="https://via.placeholder.com/600x400/b0c4de/1d1d1f?text=Project+A" alt="项目 A 预览" loading="lazy">
             </div>
             <div class="card-body">
-              <h3 class="card-title">智能简历解析器</h3>
-              <p class="card-desc">基于自然语言处理，自动提取简历关键信息并生成可视化报告，提升招聘筛选效率。</p>
+              <h3 class="card-title" data-i18n="projects.card1.title">智能简历解析器</h3>
+              <p class="card-desc" data-i18n="projects.card1.desc">基于自然语言处理，自动提取简历关键信息并生成可视化报告，提升招聘筛选效率。</p>
             </div>
           </div>
           <!-- 卡片 2 -->
@@ -96,8 +115,8 @@
               <img src="https://via.placeholder.com/600x400/c7d8f0/1d1d1f?text=Project+B" alt="项目 B 预览" loading="lazy">
             </div>
             <div class="card-body">
-              <h3 class="card-title">苹果风格设计系统</h3>
-              <p class="card-desc">复刻 Apple 设计语言的组件库，包含磨砂玻璃、平滑动效、响应式布局等核心模块。</p>
+              <h3 class="card-title" data-i18n="projects.card2.title">苹果风格设计系统</h3>
+              <p class="card-desc" data-i18n="projects.card2.desc">复刻 Apple 设计语言的组件库，包含磨砂玻璃、平滑动效、响应式布局等核心模块。</p>
             </div>
           </div>
           <!-- 卡片 3 -->
@@ -106,8 +125,8 @@
               <img src="https://via.placeholder.com/600x400/dce6f2/1d1d1f?text=Project+C" alt="项目 C 预览" loading="lazy">
             </div>
             <div class="card-body">
-              <h3 class="card-title">AI 对话助手</h3>
-              <p class="card-desc">接入大语言模型的智能聊天工具，支持上下文记忆与多轮对话，界面极简流畅。</p>
+              <h3 class="card-title" data-i18n="projects.card3.title">AI 对话助手</h3>
+              <p class="card-desc" data-i18n="projects.card3.desc">接入大语言模型的智能聊天工具，支持上下文记忆与多轮对话，界面极简流畅。</p>
             </div>
           </div>
         </div>
@@ -117,7 +136,7 @@
     <!-- ===== 技能展示 ===== -->
     <section class="section" id="skills">
       <div class="section-inner">
-        <h2 class="section-title">技能</h2>
+        <h2 class="section-title" data-i18n="skills.title">技能</h2>
         <div class="skills-cloud">
           <span class="skill-tag">HTML5</span>
           <span class="skill-tag">CSS3</span>
@@ -140,7 +159,7 @@
           <a href="mailto:liyaze@example.com" class="contact-link">liyaze@example.com</a>
           <a href="https://github.com/liyaze" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
         </div>
-        <p class="copyright">&copy; 2025 LiYaze. All Rights Reserved.</p>
+        <p class="copyright" data-i18n="footer.copyright">&copy; 2025 LiYaze. All Rights Reserved.</p>
       </div>
     </footer>
 
