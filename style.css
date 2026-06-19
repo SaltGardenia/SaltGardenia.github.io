@@ -414,6 +414,7 @@ img {
 /* 向下滚动指示箭头动画 */
 .scroll-indicator {
   margin-top: 48px;
+  margin-left: 15vw;
   display: flex;
   justify-content: flex-start;
 }
