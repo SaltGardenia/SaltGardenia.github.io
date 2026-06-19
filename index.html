@@ -67,10 +67,9 @@
 
     <!-- ===== 首屏全屏 Banner ===== -->
     <section class="hero" id="home">
-      <div class="hero-bg" id="heroBg"></div>
+      <img src="img/bg.jpg" alt="Background" class="hero-bg" id="heroBg">
       <div class="hero-content">
-        <h1 class="hero-title" data-i18n="hero.title">Hi, I'm LiYaze</h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle">前端 / AI 开发爱好者 · 热衷于构建优雅的数字体验</p>
+        <h1 class="hero-title" data-i18n="hero.title">欢迎来到我的世界</h1>
         <!-- 向下滚动引导箭头动画 -->
         <div class="scroll-indicator">
           <span class="scroll-arrow"></span>
@@ -83,12 +82,48 @@
       <div class="section-inner">
         <h2 class="section-title" data-i18n="about.title">关于我</h2>
         <div class="about-content">
-          <div class="about-text">
-            <p data-i18n="about.p1">我是一名热爱前端技术与人工智能的开发爱好者，专注于构建美观、流畅、具有苹果级体验的 Web 应用。</p>
-            <p data-i18n="about.p2">目前深入学习 <strong>React、TypeScript</strong> 及 <strong>AI 工程化</strong>方向，持续探索如何将前沿技术落地为优雅的产品。</p>
+          <!-- 左侧头像 -->
+          <div class="about-avatar">
+            <img src="https://via.placeholder.com/400x400/e8f0fe/1d1d1f?text=LiYaze" alt="LiYaze 头像" loading="lazy">
           </div>
-          <div class="about-image">
-            <img src="https://via.placeholder.com/400x400/e8f0fe/1d1d1f?text=LiYaze" alt="LiYaze 头像" data-i18n-alt="about.avatarAlt" loading="lazy">
+          <!-- 右侧信息列表 -->
+          <div class="about-info">
+            <div class="info-item">
+              <span class="info-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </span>
+              <div class="info-text">
+                <span class="info-label" data-i18n="about.githubLabel">GitHub</span>
+                <a href="https://github.com/SaltGardenia" target="_blank" rel="noopener noreferrer" class="info-value link">github.com/SaltGardenia</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+              <div class="info-text">
+                <span class="info-label" data-i18n="about.emailLabel">邮箱</span>
+                <a href="mailto:icepaper135@gmail.com" class="info-value link">icepaper135@gmail.com</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </span>
+              <div class="info-text">
+                <span class="info-label" data-i18n="about.degreeLabel">学位</span>
+                <span class="info-value">学士学位 · 合肥工业大学</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <div class="info-text">
+                <span class="info-label" data-i18n="about.majorLabel">专业</span>
+                <span class="info-value">智能科学与技术</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -156,8 +191,8 @@
     <footer class="footer" id="contact">
       <div class="footer-inner">
         <div class="contact-links">
-          <a href="mailto:liyaze@example.com" class="contact-link">liyaze@example.com</a>
-          <a href="https://github.com/liyaze" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+          <a href="mailto:icepaper135@gmail.com" class="contact-link">icepaper135@gmail.com</a>
+          <a href="https://github.com/SaltGardenia" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
         </div>
         <p class="copyright" data-i18n="footer.copyright">&copy; 2025 LiYaze. All Rights Reserved.</p>
       </div>
