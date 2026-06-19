@@ -157,8 +157,9 @@
           if (entry.isIntersecting) {
             // 当元素进入视口，添加 .visible 触发 CSS 过渡动画
             entry.target.classList.add('visible');
-            // 动画只触发一次，之后取消观察
-            observer.unobserve(entry.target);
+          } else {
+            // 当元素离开视口，移除 .visible 以便再次进入时重新播放动画
+            entry.target.classList.remove('visible');
           }
         });
       },
