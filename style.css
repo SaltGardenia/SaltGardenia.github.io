@@ -101,8 +101,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 默认半透明背景 + 持续高斯模糊效果（约 60% 透明度） */
-  background: rgba(255, 255, 255, 0.6);
+  /* 默认半透明背景 + 持续高斯模糊效果（约 30% 透明度） */
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: background 0.4s ease, backdrop-filter 0.4s ease,
@@ -642,25 +642,6 @@ img {
   margin: 0 auto;
 }
 
-.contact-links {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-}
-
-.contact-link {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-accent);
-  transition: opacity 0.2s;
-}
-
-.contact-link:hover {
-  opacity: 0.6;
-}
-
 .copyright {
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -739,12 +720,6 @@ img {
 
   .info-item {
     text-align: left;
-  }
-
-  .contact-links {
-    gap: 20px;
-    flex-direction: column;
-    align-items: center;
   }
 
   .mobile-menu.open {
