@@ -585,10 +585,10 @@ img {
 }
 
 .skills-categories {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 48px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -677,6 +677,11 @@ img {
 
 /* 平板：≤ 1024px */
 @media (max-width: 1024px) {
+  .skills-categories {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+
   .about-content {
     gap: 40px;
   }
