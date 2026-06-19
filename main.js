@@ -30,10 +30,6 @@
       'nav.contact': '联系我',
       'hero.title': '欢迎来到我的世界',
       'about.title': '关于我',
-      'about.githubLabel': 'GitHub',
-      'about.emailLabel': '邮箱',
-      'about.degreeLabel': '学位',
-      'about.majorLabel': '专业',
       'skills.title': '技能',
       'skills.devLang': 'Development language',
       'skills.devEnv': 'Development environment',
@@ -50,10 +46,6 @@
       'nav.contact': 'Contact',
       'hero.title': 'Welcome to My World',
       'about.title': 'About Me',
-      'about.githubLabel': 'GitHub',
-      'about.emailLabel': 'Email',
-      'about.degreeLabel': 'Degree',
-      'about.majorLabel': 'Major',
       'skills.title': 'Skills',
       'skills.devLang': 'Development language',
       'skills.devEnv': 'Development environment',
@@ -132,12 +124,14 @@
     updateTheme(newTheme);
   }
 
-  // ---------- 4. 导航栏滚动透明 -> 白色磨砂玻璃 ----------
+  // ---------- 4. 导航栏滚动透明 -> 白色磨砂玻璃 + 文字颜色切换 ----------
   function handleNavbarScroll() {
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
+      navbar.classList.remove('nav-light');
     } else {
       navbar.classList.remove('scrolled');
+      navbar.classList.add('nav-light');
     }
   }
 
@@ -258,7 +252,8 @@
 
   // ---------- 11. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
-    // 先执行一次，确认初始导航栏状态
+    // 先执行一次，确认初始导航栏状态（默认在首屏用白色文字）
+    navbar.classList.add('nav-light');
     handleNavbarScroll();
     // 设置滚动淡入动画观察器
     setupRevealAnimation();
