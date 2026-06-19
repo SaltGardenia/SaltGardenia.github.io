@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>我的个人主页</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiYaze - 个人主页</title>
+  <!-- 样式表 -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>你好，这是我的GitHub个人主页</h1>
-<p>网址：https://你的用户名.github.io</p>
+
+  <!-- ===== 顶部导航栏：透明 -> 滚动后白色磨砂玻璃 ===== -->
+  <header id="navbar">
+    <div class="nav-inner">
+      <!-- Logo：我的名字 -->
+      <a href="#home" class="nav-logo">LiYaze</a>
+      <!-- 桌面端导航链接 -->
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">首页</a>
+        <a href="#about">关于我</a>
+        <a href="#projects">项目作品</a>
+        <a href="#skills">技能</a>
+        <a href="#contact">联系我</a>
+      </nav>
+      <!-- 汉堡菜单按钮（移动端） -->
+      <button class="hamburger" id="hamburger" aria-label="菜单">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧边滑出菜单 -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="closeMenu" aria-label="关闭菜单">&times;</button>
+    <nav class="mobile-nav-links">
+      <a href="#home">首页</a>
+      <a href="#about">关于我</a>
+      <a href="#projects">项目作品</a>
+      <a href="#skills">技能</a>
+      <a href="#contact">联系我</a>
+    </nav>
+  </div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <main>
+
+    <!-- ===== 首屏全屏 Banner ===== -->
+    <section class="hero" id="home">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Hi, I'm LiYaze</h1>
+        <p class="hero-subtitle">前端 / AI 开发爱好者 · 热衷于构建优雅的数字体验</p>
+        <!-- 向下滚动引导箭头动画 -->
+        <div class="scroll-indicator">
+          <span class="scroll-arrow"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 关于我 ===== -->
+    <section class="section" id="about">
+      <div class="section-inner">
+        <h2 class="section-title">关于我</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>我是一名热爱前端技术与人工智能的开发爱好者，专注于构建美观、流畅、具有苹果级体验的 Web 应用。</p>
+            <p>目前深入学习 <strong>React、TypeScript</strong> 及 <strong>AI 工程化</strong>方向，持续探索如何将前沿技术落地为优雅的产品。</p>
+          </div>
+          <div class="about-image">
+            <img src="https://via.placeholder.com/400x400/e8f0fe/1d1d1f?text=LiYaze" alt="LiYaze 头像" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 项目作品 ===== -->
+    <section class="section section-alt" id="projects">
+      <div class="section-inner">
+        <h2 class="section-title">项目作品</h2>
+        <div class="projects-grid">
+          <!-- 卡片 1 -->
+          <div class="card">
+            <div class="card-img">
+              <img src="https://via.placeholder.com/600x400/b0c4de/1d1d1f?text=Project+A" alt="项目 A 预览" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">智能简历解析器</h3>
+              <p class="card-desc">基于自然语言处理，自动提取简历关键信息并生成可视化报告，提升招聘筛选效率。</p>
+            </div>
+          </div>
+          <!-- 卡片 2 -->
+          <div class="card">
+            <div class="card-img">
+              <img src="https://via.placeholder.com/600x400/c7d8f0/1d1d1f?text=Project+B" alt="项目 B 预览" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">苹果风格设计系统</h3>
+              <p class="card-desc">复刻 Apple 设计语言的组件库，包含磨砂玻璃、平滑动效、响应式布局等核心模块。</p>
+            </div>
+          </div>
+          <!-- 卡片 3 -->
+          <div class="card">
+            <div class="card-img">
+              <img src="https://via.placeholder.com/600x400/dce6f2/1d1d1f?text=Project+C" alt="项目 C 预览" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">AI 对话助手</h3>
+              <p class="card-desc">接入大语言模型的智能聊天工具，支持上下文记忆与多轮对话，界面极简流畅。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 技能展示 ===== -->
+    <section class="section" id="skills">
+      <div class="section-inner">
+        <h2 class="section-title">技能</h2>
+        <div class="skills-cloud">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub Pages</span>
+          <span class="skill-tag">AI 工具</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">Figma</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 联系我 / 页脚 ===== -->
+    <footer class="footer" id="contact">
+      <div class="footer-inner">
+        <div class="contact-links">
+          <a href="mailto:liyaze@example.com" class="contact-link">liyaze@example.com</a>
+          <a href="https://github.com/liyaze" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+        </div>
+        <p class="copyright">&copy; 2025 LiYaze. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- JavaScript 交互逻辑 -->
+  <script src="main.js"></script>
 </body>
 </html>
