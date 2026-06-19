@@ -18,7 +18,6 @@
       <nav class="nav-links" id="navLinks">
         <a href="#home" data-i18n="nav.home">首页</a>
         <a href="#about" data-i18n="nav.about">关于我</a>
-        <a href="#projects" data-i18n="nav.projects">项目作品</a>
         <a href="#skills" data-i18n="nav.skills">技能</a>
         <a href="#contact" data-i18n="nav.contact">联系我</a>
       </nav>
@@ -48,7 +47,6 @@
     <nav class="mobile-nav-links">
       <a href="#home" data-i18n="nav.home">首页</a>
       <a href="#about" data-i18n="nav.about">关于我</a>
-      <a href="#projects" data-i18n="nav.projects">项目作品</a>
       <a href="#skills" data-i18n="nav.skills">技能</a>
       <a href="#contact" data-i18n="nav.contact">联系我</a>
     </nav>
@@ -129,60 +127,60 @@
       </div>
     </section>
 
-    <!-- ===== 项目作品 ===== -->
-    <section class="section section-alt" id="projects">
-      <div class="section-inner">
-        <h2 class="section-title" data-i18n="projects.title">项目作品</h2>
-        <div class="projects-grid">
-          <!-- 卡片 1 -->
-          <div class="card">
-            <div class="card-img">
-              <img src="https://via.placeholder.com/600x400/b0c4de/1d1d1f?text=Project+A" alt="项目 A 预览" loading="lazy">
-            </div>
-            <div class="card-body">
-              <h3 class="card-title" data-i18n="projects.card1.title">智能简历解析器</h3>
-              <p class="card-desc" data-i18n="projects.card1.desc">基于自然语言处理，自动提取简历关键信息并生成可视化报告，提升招聘筛选效率。</p>
-            </div>
-          </div>
-          <!-- 卡片 2 -->
-          <div class="card">
-            <div class="card-img">
-              <img src="https://via.placeholder.com/600x400/c7d8f0/1d1d1f?text=Project+B" alt="项目 B 预览" loading="lazy">
-            </div>
-            <div class="card-body">
-              <h3 class="card-title" data-i18n="projects.card2.title">苹果风格设计系统</h3>
-              <p class="card-desc" data-i18n="projects.card2.desc">复刻 Apple 设计语言的组件库，包含磨砂玻璃、平滑动效、响应式布局等核心模块。</p>
-            </div>
-          </div>
-          <!-- 卡片 3 -->
-          <div class="card">
-            <div class="card-img">
-              <img src="https://via.placeholder.com/600x400/dce6f2/1d1d1f?text=Project+C" alt="项目 C 预览" loading="lazy">
-            </div>
-            <div class="card-body">
-              <h3 class="card-title" data-i18n="projects.card3.title">AI 对话助手</h3>
-              <p class="card-desc" data-i18n="projects.card3.desc">接入大语言模型的智能聊天工具，支持上下文记忆与多轮对话，界面极简流畅。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== 技能展示 ===== -->
     <section class="section" id="skills">
       <div class="section-inner">
         <h2 class="section-title" data-i18n="skills.title">技能</h2>
-        <div class="skills-cloud">
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">GitHub Pages</span>
-          <span class="skill-tag">AI 工具</span>
-          <span class="skill-tag">Responsive Design</span>
-          <span class="skill-tag">Figma</span>
+        <div class="skills-categories">
+          <div class="skill-category">
+            <h3 class="skill-category-title" data-i18n="skills.devLang">Development language</h3>
+            <div class="skill-category-tags">
+              <span class="skill-tag">C/C++</span>
+              <span class="skill-tag">Python</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="skill-category-title" data-i18n="skills.devEnv">Development environment</h3>
+            <div class="skill-category-tags">
+              <span class="skill-tag">Windows</span>
+              <span class="skill-tag">Mac</span>
+              <span class="skill-tag">Ubuntu</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="skill-category-title" data-i18n="skills.mlDl">ML &amp; DL</h3>
+            <div class="skill-category-tags">
+              <span class="skill-tag">Scikit-learn</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">OpenCV</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="skill-category-title" data-i18n="skills.dataProc">Data processing</h3>
+            <div class="skill-category-tags">
+              <span class="skill-tag">NumPy</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">Matplotlib</span>
+              <span class="skill-tag">labelImg</span>
+              <span class="skill-tag">MySQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="skill-category-title" data-i18n="skills.devTools">Development tools</h3>
+            <div class="skill-category-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Github</span>
+              <span class="skill-tag">Hugging Face</span>
+              <span class="skill-tag">Kaggle</span>
+              <span class="skill-tag">Pip</span>
+              <span class="skill-tag">Conda</span>
+              <span class="skill-tag">uv</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">PyQt</span>
+              <span class="skill-tag">Fast API</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

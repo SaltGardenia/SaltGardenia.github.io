@@ -18,7 +18,7 @@
 
   // 所有需要滚动进入视口淡入上浮的元素
   const revealElements = document.querySelectorAll(
-    '.section, .about-content, .projects-grid, .skills-cloud, .footer-inner'
+    '.section, .about-content, .skills-categories, .footer-inner'
   );
 
   // ---------- 国际化（i18n）翻译字典 ----------
@@ -26,7 +26,6 @@
     'zh-CN': {
       'nav.home': '首页',
       'nav.about': '关于我',
-      'nav.projects': '项目作品',
       'nav.skills': '技能',
       'nav.contact': '联系我',
       'hero.title': '欢迎来到我的世界',
@@ -35,21 +34,18 @@
       'about.emailLabel': '邮箱',
       'about.degreeLabel': '学位',
       'about.majorLabel': '专业',
-      'projects.title': '项目作品',
-      'projects.card1.title': '智能简历解析器',
-      'projects.card1.desc': '基于自然语言处理，自动提取简历关键信息并生成可视化报告，提升招聘筛选效率。',
-      'projects.card2.title': '苹果风格设计系统',
-      'projects.card2.desc': '复刻 Apple 设计语言的组件库，包含磨砂玻璃、平滑动效、响应式布局等核心模块。',
-      'projects.card3.title': 'AI 对话助手',
-      'projects.card3.desc': '接入大语言模型的智能聊天工具，支持上下文记忆与多轮对话，界面极简流畅。',
       'skills.title': '技能',
+      'skills.devLang': 'Development language',
+      'skills.devEnv': 'Development environment',
+      'skills.mlDl': 'ML & DL',
+      'skills.dataProc': 'Data processing',
+      'skills.devTools': 'Development tools',
       'footer.copyright': '© 2025 LiYaze. All Rights Reserved.',
       'lang.toggle': 'EN',
     },
     'en': {
       'nav.home': 'Home',
       'nav.about': 'About',
-      'nav.projects': 'Projects',
       'nav.skills': 'Skills',
       'nav.contact': 'Contact',
       'hero.title': 'Welcome to My World',
@@ -58,14 +54,12 @@
       'about.emailLabel': 'Email',
       'about.degreeLabel': 'Degree',
       'about.majorLabel': 'Major',
-      'projects.title': 'Projects',
-      'projects.card1.title': 'Smart Resume Parser',
-      'projects.card1.desc': 'NLP-based tool that automatically extracts key resume information and generates visual reports, improving recruitment efficiency.',
-      'projects.card2.title': 'Apple-Style Design System',
-      'projects.card2.desc': 'A component library recreating Apple\'s design language, featuring frosted glass, smooth animations, and responsive layouts.',
-      'projects.card3.title': 'AI Chat Assistant',
-      'projects.card3.desc': 'An intelligent chat tool powered by large language models, supporting context memory and multi-turn conversations with a minimal interface.',
       'skills.title': 'Skills',
+      'skills.devLang': 'Development language',
+      'skills.devEnv': 'Development environment',
+      'skills.mlDl': 'ML & DL',
+      'skills.dataProc': 'Data processing',
+      'skills.devTools': 'Development tools',
       'footer.copyright': '© 2025 LiYaze. All Rights Reserved.',
       'lang.toggle': '中',
     }

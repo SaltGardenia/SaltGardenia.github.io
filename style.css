@@ -542,81 +542,40 @@ img {
   opacity: 0.7;
 }
 
-/* ---------- 项目作品（3列卡片网格） ---------- */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+/* ---------- 技能分类展示 ---------- */
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* 卡片磨砂玻璃效果 */
-.card {
-  background: var(--card-bg);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 4px 14px var(--card-shadow);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.4s ease, background 0.3s ease;
-  cursor: default;
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* 卡片 hover 放大 + 阴影加深 + 上浮 */
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 16px 48px var(--card-shadow-hover);
-}
-
-.card-img {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  background: var(--bg-secondary);
-}
-
-.card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.card:hover .card-img img {
-  transform: scale(1.05);
-}
-
-.card-body {
-  padding: 24px;
-}
-
-.card-title {
-  font-size: 1.2rem;
+.skill-category-title {
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 10px;
-  color: var(--text-primary);
+  color: var(--text-accent);
+  letter-spacing: 0.03em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--skill-tag-bg);
 }
 
-.card-desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ---------- 技能标签云 ---------- */
-.skills-cloud {
+.skill-category-tags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  max-width: 700px;
-  margin: 0 auto;
+  gap: 10px;
 }
 
 .skill-tag {
   display: inline-block;
-  padding: 10px 24px;
-  font-size: 0.95rem;
+  padding: 8px 18px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-primary);
   background: var(--skill-tag-bg);
@@ -670,8 +629,7 @@ img {
 /* ---------- 滚动进入视口动画（默认隐藏，由JS添加 .visible 触发） ---------- */
 .section,
 .about-content,
-.projects-grid,
-.skills-cloud,
+.skills-categories,
 .footer-inner {
   opacity: 0;
   transform: translateY(40px);
@@ -681,8 +639,7 @@ img {
 /* 当元素进入视口后，添加 .visible 类显示 */
 .section.visible,
 .about-content.visible,
-.projects-grid.visible,
-.skills-cloud.visible,
+.skills-categories.visible,
 .footer-inner.visible {
   opacity: 1;
   transform: translateY(0);
@@ -741,14 +698,6 @@ img {
 
   .info-item {
     text-align: left;
-  }
-
-  .projects-grid {
-    gap: 24px;
-  }
-
-  .card-body {
-    padding: 18px;
   }
 
   .contact-links {
