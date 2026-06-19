@@ -37,7 +37,7 @@
       'skills.mlDl': 'ML & DL',
       'skills.dataProc': 'Data processing',
       'skills.devTools': 'Development tools',
-      'footer.copyright': '© 2025 LiYaze. All Rights Reserved.',
+      'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',
       'lang.toggle': 'EN',
     },
     'en': {
@@ -46,7 +46,7 @@
       'nav.skills': 'Skills',
       'hero.title': 'Welcome to My World',
       'about.title': 'About Me',
-      'about.name': 'Li Yaze',
+      'about.name': 'Yaze Li',
       'about.degree': "Bachelor's Degree in Intelligent Science and Technology @ Hefei University of Technology",
       'skills.title': 'Skills',
       'skills.devLang': 'Development language',
@@ -54,7 +54,7 @@
       'skills.mlDl': 'ML & DL',
       'skills.dataProc': 'Data processing',
       'skills.devTools': 'Development tools',
-      'footer.copyright': '© 2025 LiYaze. All Rights Reserved.',
+      'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',
       'lang.toggle': '中',
     }
   };
