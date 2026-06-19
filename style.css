@@ -398,7 +398,7 @@ img {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 24px;
+  padding: 10vh 24px 0;
   max-width: 900px;
 }
 
