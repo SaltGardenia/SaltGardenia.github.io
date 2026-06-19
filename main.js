@@ -244,15 +244,45 @@
     });
   }
 
-  // ---------- 10. 统一滚动事件监听（使用 passive 提高性能）----------
+  // ---------- 10. 滚动指示箭头动画重置 ----------
+  const scrollArrow = document.querySelector('.scroll-arrow');
+  let arrowAnimating = true;
+
+  function restartArrowAnimation() {
+    if (!scrollArrow) return;
+    // 先移除动画，强制回流后再恢复，实现动画重置
+    scrollArrow.style.animation = 'none';
+    scrollArrow.offsetHeight; // 强制回流
+    scrollArrow.style.animation = '';
+    // 同样重置伪元素的动画：通过切换类名实现
+    scrollArrow.classList.remove('anim-paused');
+    void scrollArrow.offsetWidth;
+    scrollArrow.classList.add('anim-paused');
+    scrollArrow.classList.remove('anim-paused');
+  }
+
+  function handleArrowAnimation() {
+    if (!scrollArrow) return;
+    const heroHeight = window.innerHeight;
+    const visible = window.scrollY < heroHeight * 0.8;
+    if (visible && !arrowAnimating) {
+      arrowAnimating = true;
+      restartArrowAnimation();
+    } else if (!visible && arrowAnimating) {
+      arrowAnimating = false;
+    }
+  }
+
+  // ---------- 11. 统一滚动事件监听（使用 passive 提高性能）----------
   function onScroll() {
     handleNavbarScroll();
     handleParallax();
+    handleArrowAnimation();
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ---------- 11. 页面加载完成后初始化 ----------
+  // ---------- 12. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
     // 先执行一次，确认初始导航栏状态（默认在首屏用白色文字）
     navbar.classList.add('nav-light');

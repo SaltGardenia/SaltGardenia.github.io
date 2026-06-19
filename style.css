@@ -367,7 +367,7 @@ img {
   min-height: 600px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
   background: var(--hero-bg);     /* 背景色 */
 }
@@ -397,9 +397,9 @@ img {
 .hero-content {
   position: relative;
   z-index: 1;
-  text-align: center;
-  padding: 10vh 24px 0;
-  max-width: 900px;
+  text-align: left;
+  padding: 10vh 0 0 5%;
+  width: 60%;
 }
 
 .hero-title {
@@ -415,7 +415,7 @@ img {
 .scroll-indicator {
   margin-top: 48px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .scroll-arrow {
