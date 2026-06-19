@@ -18,7 +18,7 @@
 
   // 所有需要滚动进入视口淡入上浮的元素
   const revealElements = document.querySelectorAll(
-    '.section, .about-content, .skills-categories, .footer-inner'
+    '.section, .about-content, .skills-categories'
   );
 
   // ---------- 国际化（i18n）翻译字典 ----------

@@ -651,8 +651,7 @@ img {
 /* ---------- 滚动进入视口动画（默认隐藏，由JS添加 .visible 触发） ---------- */
 .section,
 .about-content,
-.skills-categories,
-.footer-inner {
+.skills-categories {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -661,8 +660,7 @@ img {
 /* 当元素进入视口后，添加 .visible 类显示 */
 .section.visible,
 .about-content.visible,
-.skills-categories.visible,
-.footer-inner.visible {
+.skills-categories.visible {
   opacity: 1;
   transform: translateY(0);
 }
