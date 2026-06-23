@@ -11,7 +11,6 @@
   const navbar = document.getElementById('navbar');
   const navPills = document.querySelectorAll('.nav-actions-pill');
   const heroCanvas = document.getElementById('heroCanvas');
-  const hamburger = document.getElementById('hamburger');
   const closeMenu = document.getElementById('closeMenu');
   const mobileMenu = document.getElementById('mobileMenu');
   const menuOverlay = document.getElementById('menuOverlay');
@@ -35,6 +34,14 @@
       'skills.title': '技术栈',
       'nav.projects': '项目',
       'projects.title': '项目',
+      'proj1.title': '🚗 智慧座舱系统',
+      'proj1.desc': '基于 PyQt5 + YOLOv7 的智能座舱桌面应用，集成座舱目标检测、百度地图导航、音乐播放、电话拨号及用户登录注册模块。',
+      'proj2.title': '🏗️ 智慧工地监控系统',
+      'proj2.desc': '基于 PyQt5 + 华为云 AI 的工地视频监控桌面应用，支持本地视频播放、摄像头实时监控及云端安全帽佩戴检测。',
+      'proj3.title': '🧩 Klotski 拼图游戏',
+      'proj3.desc': '基于 PyQt5 的经典 3×3 滑块拼图游戏，包含用户登录/注册/验证码系统和核心拼图机制，支持操作计数与胜利检测。',
+      'proj4.title': '📝 在线考试系统',
+      'proj4.desc': '基于 C 语言的 Windows 控制台考试管理系统，支持管理员/学生双角色，提供在线考试计时、成绩查询及用户管理功能。',
       'skills.devLang': 'Development language',
       'skills.devEnv': 'Development environment',
       'skills.mlDl': 'ML & DL',
@@ -54,6 +61,14 @@
       'skills.title': 'Tech Stack',
       'nav.projects': 'Projects',
       'projects.title': 'Projects',
+      'proj1.title': '🚗 Intelligent Cockpit System',
+      'proj1.desc': 'A PyQt5 + YOLOv7 based intelligent cockpit desktop app featuring real-time object detection, Baidu Maps navigation, music player, phone dialer, and user authentication.',
+      'proj2.title': '🏗️ Smart Construction Site Surveillance',
+      'proj2.desc': 'A PyQt5 + Huawei Cloud AI based surveillance desktop app supporting local video playback, camera monitoring, and cloud-based hard hat detection.',
+      'proj3.title': '🧩 Klotski Puzzle Game',
+      'proj3.desc': 'A classic 3×3 sliding puzzle game built with PyQt5, featuring user login/register/captcha system and core puzzle mechanics with move counting.',
+      'proj4.title': '📝 Online Examination System',
+      'proj4.desc': 'A C-based Windows console exam management system supporting admin/student roles, timed exams, score queries, and user management.',
       'skills.devLang': 'Development language',
       'skills.devEnv': 'Development environment',
       'skills.mlDl': 'ML & DL',
@@ -101,35 +116,8 @@
     updateLanguage(newLang);
   }
 
-  // ---------- 3. 亮/暗色切换 ----------
-  function getPreferredTheme() {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    // 跟随系统偏好
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  }
-
-  let currentTheme = getPreferredTheme();
-
-  function updateTheme(theme) {
-    currentTheme = theme;
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
-
-    // 同步开关状态
-    const switchInput = document.getElementById('themeSwitch');
-    if (switchInput) {
-      switchInput.checked = theme === 'dark';
-    }
-  }
-
-  function toggleTheme() {
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    updateTheme(newTheme);
-  }
+  // ---------- 3. 固定为亮色主题 ----------
+  document.documentElement.setAttribute('data-theme', 'light');
 
   // ---------- 4. 导航栏滚动效果 + 激活链接高亮 ----------
   function handleNavbarScroll() {
@@ -352,7 +340,65 @@
     };
   }
 
-  // ---------- 6. 滚动淡入上浮动效（Intersection Observer）----------
+  // ---------- 6. 各页面静态背景 Canvas ----------
+  function initSectionCanvas(canvasId, palette) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const parent = canvas.parentElement;
+    let W = parent.offsetWidth, H = parent.offsetHeight;
+    canvas.width = W; canvas.height = H;
+
+    // 背景渐变
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, palette[0]);
+    bg.addColorStop(0.4, palette[1]);
+    bg.addColorStop(0.7, palette[2]);
+    bg.addColorStop(1, palette[3]);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // 光晕
+    for (let i = 0; i < 3; i++) {
+      const x = Math.random() * W;
+      const y = Math.random() * H;
+      const r = Math.random() * 200 + 120;
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+      grad.addColorStop(0, palette[4] || 'rgba(255,255,255,0.06)');
+      grad.addColorStop(0.5, palette[5] || 'rgba(255,255,255,0.03)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+
+    // 柔和曲线
+    for (let i = 0; i < 4; i++) {
+      ctx.save();
+      ctx.globalAlpha = 0.04;
+      ctx.lineWidth = Math.random() * 30 + 15;
+      ctx.lineCap = 'round';
+      ctx.shadowBlur = 40;
+      ctx.shadowColor = palette[6] || 'rgba(200,200,220,0.1)';
+      ctx.beginPath();
+      const yBase = Math.random() * H * 0.8 + H * 0.1;
+      ctx.moveTo(0, yBase + Math.sin(0) * 80);
+      for (let x = 2; x <= W; x += 3) {
+        const y = yBase + Math.sin(x * 0.002 + i * 1.5) * 60 + Math.sin(x * 0.005 + i) * 15;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = palette[7] || 'rgba(200,200,220,0.3)';
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  const sectionPalettes = {
+    about: ['#fef8f5','#fce8f0','#f0e4f8','#fcf2ec', 'rgba(235,160,200,0.12)', 'rgba(210,160,230,0.08)', 'rgba(230,160,220,0.18)', 'rgba(220,160,225,0.35)'],
+    skills: ['#f5fef8','#e4f4f8','#e8f5ec','#f0faf2', 'rgba(150,210,230,0.12)', 'rgba(150,230,190,0.08)', 'rgba(160,220,215,0.18)', 'rgba(155,215,200,0.35)'],
+    projects: ['#fef5f8','#f5e8f8','#ece4f8','#fcf0f8', 'rgba(210,170,235,0.12)', 'rgba(220,170,240,0.08)', 'rgba(215,175,230,0.18)', 'rgba(220,175,230,0.35)'],
+  };
+
+  // ---------- 7. 滚动淡入上浮动效（Intersection Observer）----------
   function setupRevealAnimation() {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -375,7 +421,7 @@
     revealElements.forEach((el) => observer.observe(el));
   }
 
-  // ---------- 7. 移动端汉堡菜单：滑入/滑出 ----------
+  // ---------- 8. 移动端汉堡菜单：滑入/滑出 ----------
   function openMobileMenu() {
     mobileMenu.classList.add('open');
     menuOverlay.classList.add('show');
@@ -386,11 +432,6 @@
     mobileMenu.classList.remove('open');
     menuOverlay.classList.remove('show');
     document.body.style.overflow = '';
-  }
-
-  // 汉堡按钮打开菜单
-  if (hamburger) {
-    hamburger.addEventListener('click', openMobileMenu);
   }
 
   // 关闭按钮关闭菜单
@@ -434,51 +475,56 @@
     }
   });
 
-  // ---------- 8. 语言切换按钮绑定 ----------
+  // ---------- 9. 语言切换按钮绑定 ----------
   const langToggles = document.querySelectorAll('.lang-toggle');
   langToggles.forEach(btn => {
     btn.addEventListener('click', toggleLanguage);
   });
 
-  // ---------- 9. 主题切换绑定 ----------
-  const themeSwitch = document.getElementById('themeSwitch');
-  if (themeSwitch) {
-    themeSwitch.addEventListener('change', function () {
-      updateTheme(this.checked ? 'dark' : 'light');
+  // ---------- 10. 回到顶部按钮显隐 ----------
+  const backTopBtn = document.getElementById('backTopBtn');
+  if (backTopBtn) {
+    backTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // 监听系统主题变化
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      // 只在用户未手动设置过主题时跟随系统
-      if (!localStorage.getItem('theme')) {
-        updateTheme(e.matches ? 'dark' : 'light');
-      }
-    });
+  function handleBackTopVisibility() {
+    if (!backTopBtn) return;
+    backTopBtn.classList.toggle('show', window.scrollY > window.innerHeight * 0.5);
   }
 
-  // ---------- 10. 统一滚动事件监听 ----------
+  // ---------- 11. 统一滚动事件监听 ----------
   function onScroll() {
     handleNavbarScroll();
+    handleBackTopVisibility();
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // 存储 canvas 清理函数
+  // 存储 hero canvas 清理函数
   let cleanupCanvas = null;
 
   // ---------- 12. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
     handleNavbarScroll();
-    // 初始化 Canvas 光效背景
+    // 初始化 Hero Canvas 光效背景
     cleanupCanvas = initLightCanvas();
+    // 初始化各 section 静态背景
+    initSectionCanvas('aboutCanvas', sectionPalettes.about);
+    initSectionCanvas('skillsCanvas', sectionPalettes.skills);
+    initSectionCanvas('projectsCanvas', sectionPalettes.projects);
+
+    // 窗口变化重绘 section canvas
+    window.addEventListener('resize', function () {
+      initSectionCanvas('aboutCanvas', sectionPalettes.about);
+      initSectionCanvas('skillsCanvas', sectionPalettes.skills);
+      initSectionCanvas('projectsCanvas', sectionPalettes.projects);
+    });
     // 设置滚动淡入动画观察器
     setupRevealAnimation();
     // 初始化语言
     updateLanguage(currentLang);
-    // 初始化主题
-    updateTheme(currentTheme);
   });
 
   // 页面完全加载后再检查一次（应对字体/图片加载后布局偏移）
