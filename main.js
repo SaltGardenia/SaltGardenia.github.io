@@ -9,7 +9,7 @@
 
   // ---------- 1. DOM 引用 ----------
   const navbar = document.getElementById('navbar');
-  const heroBg = document.getElementById('heroBg');
+  const heroCanvas = document.getElementById('heroCanvas');
   const hamburger = document.getElementById('hamburger');
   const closeMenu = document.getElementById('closeMenu');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -27,7 +27,7 @@
       'nav.home': '首页',
       'nav.about': '关于我',
       'nav.skills': '技能',
-      'hero.title': '欢迎来到我的世界',
+      'hero.title': '永远相信美好的事情即将发生',
       'about.title': '关于我',
       'about.name': '李亚泽',
       'about.degree': '学士学位 · 合肥工业大学 · 智能科学与技术',
@@ -44,7 +44,7 @@
       'nav.home': 'Home',
       'nav.about': 'About',
       'nav.skills': 'Skills',
-      'hero.title': 'Welcome to My World',
+      'hero.title': 'Always believe that something wonderful is about to happen',
       'about.title': 'About Me',
       'about.name': 'Yaze Li',
       'about.degree': "Bachelor's Degree in Intelligent Science and Technology @ Hefei University of Technology",
@@ -60,7 +60,7 @@
   };
 
   // ---------- 2. 语言切换 ----------
-  let currentLang = localStorage.getItem('lang') || 'zh-CN';
+  let currentLang = localStorage.getItem('lang') || 'en';
 
   function updateLanguage(lang) {
     currentLang = lang;
@@ -126,27 +126,238 @@
     updateTheme(newTheme);
   }
 
-  // ---------- 4. 导航栏滚动透明 -> 白色磨砂玻璃 + 文字颜色切换 ----------
+  // ---------- 4. 导航栏滚动效果 + 激活链接高亮 ----------
   function handleNavbarScroll() {
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
-      navbar.classList.remove('nav-light');
     } else {
       navbar.classList.remove('scrolled');
-      navbar.classList.add('nav-light');
     }
+
+    // 根据滚动位置高亮对应的导航链接
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 120;
+      if (window.scrollY >= top) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
   }
 
-  // ---------- 5. 首屏 Banner 视差滚动效果 ----------
-  function handleParallax() {
-    if (!heroBg) return;
-    const scrollY = window.scrollY;
-    const heroHeight = window.innerHeight;
-    // 只在首屏高度范围内位移，视差偏移量约 20%
-    if (scrollY <= heroHeight) {
-      const offset = scrollY * 0.08; // 轻微视差系数
-      heroBg.style.transform = `translateY(${offset}px)`;
+  // ---------- 5. Canvas 光的美学背景动画 ----------
+  function initLightCanvas() {
+    if (!heroCanvas) return;
+    const ctx = heroCanvas.getContext('2d');
+    let W, H;
+    let time = 0;
+    let particles = [];
+    let lightRays = [];
+    let glowOrbs = [];
+    let animationId = null;
+
+    // === 粒子类 ===
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3 - 0.1;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.005;
+        // 暖色光粒子
+        this.hue = Math.random() * 60 + 30; // 30-90 暖色范围
+        this.saturation = Math.random() * 40 + 60;
+        this.lightness = Math.random() * 30 + 60;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.pulse += this.pulseSpeed;
+        if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) {
+          this.reset();
+          if (this.y < 0) this.y = H;
+          if (this.y > H) this.y = 0;
+          if (this.x < 0) this.x = W;
+          if (this.x > W) this.x = 0;
+        }
+      }
+      draw() {
+        const pulseOpacity = this.opacity + Math.sin(this.pulse) * 0.15;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${pulseOpacity})`;
+        ctx.fill();
+        // 发光效果
+        ctx.shadowColor = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0.5)`;
+        ctx.shadowBlur = this.size * 8;
+        ctx.fill();
+        ctx.restore();
+      }
     }
+
+    // === 光线类 ===
+    class LightRay {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W;
+        this.width = Math.random() * 60 + 10;
+        this.height = Math.random() * H * 0.6 + H * 0.2;
+        this.opacity = Math.random() * 0.04 + 0.01;
+        this.angle = (Math.random() - 0.5) * 0.3;
+        this.speed = Math.random() * 0.002 + 0.001;
+        this.hue = Math.random() * 40 + 35; // 暖色光
+      }
+      update() {
+        this.x += Math.sin(time * this.speed) * 0.3;
+        this.opacity = Math.abs(Math.sin(time * this.speed)) * 0.04 + 0.01;
+      }
+      draw() {
+        const grad = ctx.createLinearGradient(this.x, 0, this.x + this.width * 0.3, this.height);
+        grad.addColorStop(0, `hsla(${this.hue}, 80%, 85%, ${this.opacity})`);
+        grad.addColorStop(0.5, `hsla(${this.hue + 10}, 70%, 75%, ${this.opacity * 0.6})`);
+        grad.addColorStop(1, `hsla(${this.hue + 20}, 60%, 65%, 0)`);
+        ctx.save();
+        ctx.transform(1, Math.sin(time * 0.0005) * 0.1, 0, 1, 0, 0);
+        ctx.fillStyle = grad;
+        ctx.fillRect(this.x - this.width / 2, 0, this.width, this.height);
+        ctx.restore();
+      }
+    }
+
+    // === 发光球体类 ===
+    class GlowOrb {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H * 0.6;
+        this.radius = Math.random() * 120 + 60;
+        this.opacity = Math.random() * 0.06 + 0.02;
+        this.hue = Math.random() * 60 + 30;
+        this.pulseSpeed = Math.random() * 0.005 + 0.002;
+        this.phase = Math.random() * Math.PI * 2;
+        this.moveSpeed = Math.random() * 0.1 + 0.05;
+        this.dirX = (Math.random() - 0.5) * 2;
+        this.dirY = (Math.random() - 0.5) * 2;
+      }
+      update() {
+        this.x += Math.sin(time * 0.0003 + this.phase) * this.moveSpeed;
+        this.y += Math.cos(time * 0.0004 + this.phase) * this.moveSpeed * 0.5;
+        if (this.x < -this.radius) this.x = W + this.radius;
+        if (this.x > W + this.radius) this.x = -this.radius;
+        if (this.y < -this.radius) this.y = H * 0.6 + this.radius;
+        if (this.y > H * 0.6 + this.radius) this.y = -this.radius;
+      }
+      draw() {
+        const pulse = Math.sin(time * this.pulseSpeed + this.phase) * 0.3 + 0.7;
+        const r = this.radius * pulse;
+        const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
+        grad.addColorStop(0, `hsla(${this.hue + 10}, 80%, 90%, ${this.opacity * 1.5})`);
+        grad.addColorStop(0.3, `hsla(${this.hue}, 70%, 80%, ${this.opacity})`);
+        grad.addColorStop(0.6, `hsla(${this.hue - 10}, 60%, 70%, ${this.opacity * 0.5})`);
+        grad.addColorStop(1, `hsla(${this.hue - 20}, 50%, 60%, 0)`);
+        ctx.save();
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function resizeCanvas() {
+      const rect = heroCanvas.parentElement.getBoundingClientRect();
+      W = heroCanvas.width = rect.width;
+      H = heroCanvas.height = rect.height;
+    }
+
+    function initScene() {
+      resizeCanvas();
+      particles = [];
+      lightRays = [];
+      glowOrbs = [];
+      const particleCount = Math.min(Math.floor(W * H / 8000), 200);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+      const rayCount = Math.min(Math.floor(W / 80), 15);
+      for (let i = 0; i < rayCount; i++) {
+        lightRays.push(new LightRay());
+      }
+      const orbCount = Math.min(Math.floor(W / 300) + 2, 6);
+      for (let i = 0; i < orbCount; i++) {
+        glowOrbs.push(new GlowOrb());
+      }
+    }
+
+    function drawBackground() {
+      // 基础渐变背景 - 从暖色到冷色过渡
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+      bgGrad.addColorStop(0, '#1a1a2e');
+      bgGrad.addColorStop(0.3, '#16213e');
+      bgGrad.addColorStop(0.6, '#0f3460');
+      bgGrad.addColorStop(0.8, '#1a1a3e');
+      bgGrad.addColorStop(1, '#0d0d1a');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 底部柔和光晕
+      const bottomGlow = ctx.createRadialGradient(W / 2, H * 1.1, 0, W / 2, H * 0.9, H * 0.7);
+      bottomGlow.addColorStop(0, 'hsla(210, 60%, 40%, 0.15)');
+      bottomGlow.addColorStop(0.5, 'hsla(240, 40%, 30%, 0.08)');
+      bottomGlow.addColorStop(1, 'transparent');
+      ctx.fillStyle = bottomGlow;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    function animate() {
+      time++;
+      drawBackground();
+
+      // 绘制光线
+      lightRays.forEach(ray => { ray.update(); ray.draw(); });
+
+      // 绘制发光球体
+      glowOrbs.forEach(orb => { orb.update(); orb.draw(); });
+
+      // 绘制粒子
+      particles.forEach(p => { p.update(); p.draw(); });
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    // 初始化
+    initScene();
+    animate();
+
+    // 窗口大小变化重置
+    const resizeObserver = new ResizeObserver(() => {
+      initScene();
+    });
+    resizeObserver.observe(heroCanvas.parentElement);
+
+    // 返回清理函数
+    return function cleanup() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      resizeObserver.disconnect();
+    };
   }
 
   // ---------- 6. 滚动淡入上浮动效（Intersection Observer）----------
@@ -245,49 +456,21 @@
     });
   }
 
-  // ---------- 10. 滚动指示箭头动画重置 ----------
-  const scrollArrow = document.querySelector('.scroll-arrow');
-  let arrowAnimating = true;
-
-  function restartArrowAnimation() {
-    if (!scrollArrow) return;
-    // 先移除动画，强制回流后再恢复，实现动画重置
-    scrollArrow.style.animation = 'none';
-    scrollArrow.offsetHeight; // 强制回流
-    scrollArrow.style.animation = '';
-    // 同样重置伪元素的动画：通过切换类名实现
-    scrollArrow.classList.remove('anim-paused');
-    void scrollArrow.offsetWidth;
-    scrollArrow.classList.add('anim-paused');
-    scrollArrow.classList.remove('anim-paused');
-  }
-
-  function handleArrowAnimation() {
-    if (!scrollArrow) return;
-    const heroHeight = window.innerHeight;
-    const visible = window.scrollY < heroHeight * 0.8;
-    if (visible && !arrowAnimating) {
-      arrowAnimating = true;
-      restartArrowAnimation();
-    } else if (!visible && arrowAnimating) {
-      arrowAnimating = false;
-    }
-  }
-
-  // ---------- 11. 统一滚动事件监听（使用 passive 提高性能）----------
+  // ---------- 10. 统一滚动事件监听（使用 passive 提高性能）----------
   function onScroll() {
     handleNavbarScroll();
-    handleParallax();
-    handleArrowAnimation();
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // 存储 canvas 清理函数
+  let cleanupCanvas = null;
+
   // ---------- 12. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
-    // 先执行一次，确认初始导航栏状态（默认在首屏用白色文字）
-    navbar.classList.add('nav-light');
     handleNavbarScroll();
+    // 初始化 Canvas 光效背景
+    cleanupCanvas = initLightCanvas();
     // 设置滚动淡入动画观察器
     setupRevealAnimation();
     // 初始化语言
