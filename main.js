@@ -145,108 +145,60 @@
     });
   }
 
-  // ---------- 5. Canvas 纯净炫彩流体光效背景 ----------
+  // ---------- 5. Canvas 多色彩融合流动背景 ----------
   function initLightCanvas() {
     if (!heroCanvas) return;
     const ctx = heroCanvas.getContext('2d');
     let W, H;
     let time = 0;
-    let ribbons = [];
     let blobs = [];
-    let beams = [];
+    let orbs = [];
     let animationId = null;
 
-    // 粉彩配色（稍增饱和度）
+    // 均衡饱和度配色
     const palette = [
-      { r: 255, g: 190, b: 210 }, // 粉
-      { r: 175, g: 215, b: 255 }, // 浅青
-      { r: 170, g: 240, b: 210 }, // 薄荷
-      { r: 205, g: 190, b: 255 }, // 淡紫
+      { r: 230, g: 140, b: 175 }, // 粉
+      { r: 120, g: 180, b: 240 }, // 天蓝
+      { r: 130, g: 220, b: 160 }, // 薄荷
+      { r: 200, g: 145, b: 240 }, // 紫
+      { r: 240, g: 190, b: 130 }, // 杏
+      { r: 120, g: 195, b: 240 }, // 雾蓝
+      { r: 235, g: 140, b: 170 }, // 玫瑰
+      { r: 170, g: 145, b: 240 }, // 薰衣草
     ];
 
     function rgba(c, a) { return `rgba(${c.r|0},${c.g|0},${c.b|0},${a})`; }
 
-    // ===== 飘逸光带 =====
-    class LightRibbon {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.yBase = Math.random() * H * 0.9 + H * 0.05;
-        this.amplitude = Math.random() * 100 + 60;
-        this.freq = Math.random() * 0.002 + 0.0008;
-        this.speed = Math.random() * 0.15 + 0.05;
-        this.phase = Math.random() * Math.PI * 2;
-        this.width = Math.random() * 50 + 30;
-        this.opacity = Math.random() * 0.10 + 0.08;
-        this.color = palette[Math.floor(Math.random() * palette.length)];
-        this.wobbleFreq = Math.random() * 0.004 + 0.002;
-        this.wobbleAmp = Math.random() * 15 + 5;
-        this.dir = Math.random() > 0.5 ? 1 : -1;
-      }
-      draw(t) {
-        ctx.save();
-        ctx.globalAlpha = this.opacity;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.lineWidth = this.width;
-        ctx.shadowColor = rgba(this.color, this.opacity * 2);
-        ctx.shadowBlur = 40;
-
-        // 主路径
-        ctx.beginPath();
-        const startY = this.yBase + Math.sin(t * this.freq * 0.5 + this.phase) * this.amplitude * 0.3;
-        ctx.moveTo(-20, startY);
-        for (let x = -10; x <= W + 20; x += 3) {
-          const envelope = Math.sin(x * 0.003 + t * this.speed * 0.3) * 0.5 + 0.5;
-          const y = this.yBase
-            + Math.sin(x * this.freq + t * this.speed + this.phase) * this.amplitude * envelope
-            + Math.sin(x * this.wobbleFreq + t * 0.08) * this.wobbleAmp;
-          ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = rgba(this.color, 1);
-        ctx.stroke();
-
-        // 第二层更宽更淡的光晕
-        ctx.shadowBlur = 80;
-        ctx.lineWidth = this.width * 2;
-        ctx.globalAlpha = this.opacity * 0.5;
-        ctx.strokeStyle = rgba(this.color, 0.5);
-        ctx.stroke();
-
-        ctx.restore();
-      }
-    }
-
-    // ===== 弥散光晕 =====
+    // ===== 大光晕 — 缓慢漂移，互相融合 =====
     class GlowBlob {
       constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * W;
-        this.y = Math.random() * H * 0.9 + H * 0.05;
-        this.radius = Math.random() * 250 + 120;
-        this.opacity = Math.random() * 0.08 + 0.06;
+        this.y = Math.random() * H;
+        this.radius = Math.random() * 400 + 300;
+        this.opacity = Math.random() * 0.25 + 0.25;
         this.phase = Math.random() * Math.PI * 2;
-        this.pulseSpeed = Math.random() * 0.002 + 0.001;
-        this.dx = (Math.random() - 0.5) * 0.12;
-        this.dy = (Math.random() - 0.5) * 0.08;
+        this.pulseSpeed = Math.random() * 0.0008 + 0.0003;
+        this.dx = (Math.random() - 0.5) * 0.25;
+        this.dy = (Math.random() - 0.5) * 0.2;
         this.color = palette[Math.floor(Math.random() * palette.length)];
       }
       update() {
-        this.x += Math.sin(time * 0.0002 + this.phase) * this.dx;
-        this.y += Math.cos(time * 0.0003 + this.phase) * this.dy;
+        this.x += Math.sin(time * 0.0001 + this.phase) * this.dx;
+        this.y += Math.cos(time * 0.00012 + this.phase) * this.dy;
         if (this.x < -this.radius) this.x = W + this.radius;
         if (this.x > W + this.radius) this.x = -this.radius;
         if (this.y < -this.radius) this.y = H + this.radius;
         if (this.y > H + this.radius) this.y = -this.radius;
       }
       draw() {
-        const pulse = Math.sin(time * this.pulseSpeed + this.phase) * 0.15 + 0.85;
+        const pulse = Math.sin(time * this.pulseSpeed + this.phase) * 0.12 + 0.88;
         const r = this.radius * pulse;
         const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
-        grad.addColorStop(0, rgba(this.color, this.opacity * 2));
-        grad.addColorStop(0.3, rgba(this.color, this.opacity));
-        grad.addColorStop(0.7, rgba(this.color, this.opacity * 0.3));
+        grad.addColorStop(0, rgba(this.color, this.opacity * 1.8));
+        grad.addColorStop(0.2, rgba(this.color, this.opacity));
+        grad.addColorStop(0.5, rgba(this.color, this.opacity * 0.4));
+        grad.addColorStop(0.75, rgba(this.color, this.opacity * 0.1));
         grad.addColorStop(1, rgba(this.color, 0));
         ctx.save();
         ctx.fillStyle = grad;
@@ -257,73 +209,74 @@
       }
     }
 
-    // ===== 柔和光束 =====
-    class LightBeam {
+    // ===== 中型浮游光团 — 稍快流动 =====
+    class FloatingOrb {
       constructor() { this.reset(); }
       reset() {
-        this.x = Math.random() * W * 1.5 - W * 0.25;
-        this.angle = (Math.random() - 0.5) * 0.5;
-        this.length = Math.random() * H * 0.6 + H * 0.2;
-        this.width = Math.random() * 100 + 50;
-        this.opacity = Math.random() * 0.04 + 0.03;
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.radius = Math.random() * 160 + 100;
+        this.opacity = Math.random() * 0.2 + 0.2;
+        this.phase = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.003 + 0.0015;
+        this.dx = (Math.random() - 0.5) * 0.4;
+        this.dy = (Math.random() - 0.5) * 0.3;
         this.color = palette[Math.floor(Math.random() * palette.length)];
-        this.speed = Math.random() * 0.1 + 0.03;
       }
-      draw(t) {
-        const grad = ctx.createLinearGradient(
-          this.x, -10,
-          this.x + Math.sin(this.angle) * this.length,
-          this.length
-        );
+      update() {
+        this.x += Math.sin(time * 0.00025 + this.phase) * this.dx;
+        this.y += Math.cos(time * 0.0002 + this.phase) * this.dy;
+        if (this.x < -120) this.x = W + 120;
+        if (this.x > W + 120) this.x = -120;
+        if (this.y < -120) this.y = H + 120;
+        if (this.y > H + 120) this.y = -120;
+      }
+      draw() {
+        const pulse = Math.sin(time * this.pulseSpeed + this.phase) * 0.25 + 0.75;
+        const r = this.radius * pulse;
+        const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
         grad.addColorStop(0, rgba(this.color, this.opacity));
-        grad.addColorStop(0.5, rgba(this.color, this.opacity * 0.5));
+        grad.addColorStop(0.35, rgba(this.color, this.opacity * 0.5));
+        grad.addColorStop(0.7, rgba(this.color, this.opacity * 0.12));
         grad.addColorStop(1, rgba(this.color, 0));
         ctx.save();
-        ctx.globalAlpha = 1;
         ctx.fillStyle = grad;
-        ctx.transform(1, Math.sin(t * 0.0003) * 0.08, 0, 1, 0, 0);
-        ctx.fillRect(this.x - this.width / 2, 0, this.width, this.length);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
       }
     }
 
     function resizeCanvas() {
-      const rect = heroCanvas.parentElement.getBoundingClientRect();
-      W = heroCanvas.width = rect.width;
-      H = heroCanvas.height = rect.height;
+      W = heroCanvas.width = window.innerWidth;
+      H = heroCanvas.height = window.innerHeight;
     }
 
     function initScene() {
       resizeCanvas();
-      ribbons = [];
       blobs = [];
-      beams = [];
-      const ribbonCount = Math.min(Math.floor(W / 120), 10);
-      for (let i = 0; i < ribbonCount; i++) ribbons.push(new LightRibbon());
-      const blobCount = Math.min(Math.floor(W / 200) + 2, 7);
+      orbs = [];
+      const blobCount = Math.min(Math.floor(W / 120) + 4, 14);
       for (let i = 0; i < blobCount; i++) blobs.push(new GlowBlob());
-      const beamCount = Math.min(Math.floor(W / 150), 6);
-      for (let i = 0; i < beamCount; i++) beams.push(new LightBeam());
+      const orbCount = Math.min(Math.floor(W / 80) + 4, 18);
+      for (let i = 0; i < orbCount; i++) orbs.push(new FloatingOrb());
     }
 
     function drawBackground() {
-      // 纯白基底
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#e8e4e6';
       ctx.fillRect(0, 0, W, H);
     }
 
     function animate() {
-      time += 0.2;
+      time += 0.15;
       drawBackground();
 
-      // 光束（底层）
-      beams.forEach(b => b.draw(time));
-
-      // 弥散光晕
+      // 大光晕底层 — 互相融合
       blobs.forEach(b => { b.update(); b.draw(); });
 
-      // 飘逸光带（上层）
-      ribbons.forEach(r => r.draw(time));
+      // 浮游光团 — 流动层次
+      orbs.forEach(b => { b.update(); b.draw(); });
 
       animationId = requestAnimationFrame(animate);
     }
@@ -332,7 +285,7 @@
     animate();
 
     const resizeObserver = new ResizeObserver(() => { initScene(); });
-    resizeObserver.observe(heroCanvas.parentElement);
+    resizeObserver.observe(document.body);
 
     return function cleanup() {
       if (animationId) cancelAnimationFrame(animationId);
@@ -340,65 +293,7 @@
     };
   }
 
-  // ---------- 6. 各页面静态背景 Canvas ----------
-  function initSectionCanvas(canvasId, palette) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const parent = canvas.parentElement;
-    let W = parent.offsetWidth, H = parent.offsetHeight;
-    canvas.width = W; canvas.height = H;
-
-    // 背景渐变
-    const bg = ctx.createLinearGradient(0, 0, 0, H);
-    bg.addColorStop(0, palette[0]);
-    bg.addColorStop(0.4, palette[1]);
-    bg.addColorStop(0.7, palette[2]);
-    bg.addColorStop(1, palette[3]);
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, W, H);
-
-    // 光晕
-    for (let i = 0; i < 3; i++) {
-      const x = Math.random() * W;
-      const y = Math.random() * H;
-      const r = Math.random() * 200 + 120;
-      const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
-      grad.addColorStop(0, palette[4] || 'rgba(255,255,255,0.06)');
-      grad.addColorStop(0.5, palette[5] || 'rgba(255,255,255,0.03)');
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.fillRect(x - r, y - r, r * 2, r * 2);
-    }
-
-    // 柔和曲线
-    for (let i = 0; i < 4; i++) {
-      ctx.save();
-      ctx.globalAlpha = 0.04;
-      ctx.lineWidth = Math.random() * 30 + 15;
-      ctx.lineCap = 'round';
-      ctx.shadowBlur = 40;
-      ctx.shadowColor = palette[6] || 'rgba(200,200,220,0.1)';
-      ctx.beginPath();
-      const yBase = Math.random() * H * 0.8 + H * 0.1;
-      ctx.moveTo(0, yBase + Math.sin(0) * 80);
-      for (let x = 2; x <= W; x += 3) {
-        const y = yBase + Math.sin(x * 0.002 + i * 1.5) * 60 + Math.sin(x * 0.005 + i) * 15;
-        ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = palette[7] || 'rgba(200,200,220,0.3)';
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  const sectionPalettes = {
-    about: ['#fef8f5','#fce8f0','#f0e4f8','#fcf2ec', 'rgba(235,160,200,0.12)', 'rgba(210,160,230,0.08)', 'rgba(230,160,220,0.18)', 'rgba(220,160,225,0.35)'],
-    skills: ['#f5fef8','#e4f4f8','#e8f5ec','#f0faf2', 'rgba(150,210,230,0.12)', 'rgba(150,230,190,0.08)', 'rgba(160,220,215,0.18)', 'rgba(155,215,200,0.35)'],
-    projects: ['#fef5f8','#f5e8f8','#ece4f8','#fcf0f8', 'rgba(210,170,235,0.12)', 'rgba(220,170,240,0.08)', 'rgba(215,175,230,0.18)', 'rgba(220,175,230,0.35)'],
-  };
-
-  // ---------- 7. 滚动淡入上浮动效（Intersection Observer）----------
+  // ---------- 6. 滚动淡入上浮动效（Intersection Observer）----------
   function setupRevealAnimation() {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -508,28 +403,125 @@
   // ---------- 12. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
     handleNavbarScroll();
-    // 初始化 Hero Canvas 光效背景
+    // 初始化 Hero Canvas 光效背景（固定，作为全站背景）
     cleanupCanvas = initLightCanvas();
-    // 初始化各 section 静态背景
-    initSectionCanvas('aboutCanvas', sectionPalettes.about);
-    initSectionCanvas('skillsCanvas', sectionPalettes.skills);
-    initSectionCanvas('projectsCanvas', sectionPalettes.projects);
 
-    // 窗口变化重绘 section canvas
-    window.addEventListener('resize', function () {
-      initSectionCanvas('aboutCanvas', sectionPalettes.about);
-      initSectionCanvas('skillsCanvas', sectionPalettes.skills);
-      initSectionCanvas('projectsCanvas', sectionPalettes.projects);
-    });
     // 设置滚动淡入动画观察器
     setupRevealAnimation();
     // 初始化语言
     updateLanguage(currentLang);
+
+    // 初始化 Liquid Glass 鼠标追踪
+    initLiquidGlass();
   });
 
   // 页面完全加载后再检查一次（应对字体/图片加载后布局偏移）
   window.addEventListener('load', function () {
     handleNavbarScroll();
   });
+
+  // ---------- 13. Liquid Glass 鼠标追踪弹性效果 ----------
+  function initLiquidGlass() {
+    // 所有需要玻璃鼠标追踪效果的元素
+    const glassSelectors = [
+      '.liquid-glass-nav',
+      '.liquid-glass-card',
+      '.liquid-glass-btn',
+      '.liquid-glass-btn-pill',
+      '.liquid-glass-section'
+    ];
+
+    glassSelectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(el => {
+        // Skip if already initialized
+        if (el.dataset.lgInitialized === 'true') return;
+        el.dataset.lgInitialized = 'true';
+
+        const highlight = el.querySelector(':scope > .glass-highlight');
+        const overlay = el.querySelector(':scope > .glass-highlight-overlay');
+        if (!highlight && !overlay) return;
+
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let currentX = 0.5;
+        let currentY = 0.5;
+        let rafId = null;
+        let isHovered = false;
+
+        function updateHighlight() {
+          if (!isHovered) return;
+          // 平滑插值（弹性跟随）
+          currentX += (mouseX - currentX) * 0.12;
+          currentY += (mouseY - currentY) * 0.12;
+
+          const cx = currentX * 100;
+          const cy = currentY * 100;
+
+          if (highlight) {
+            highlight.style.background = `radial-gradient(
+              circle at ${cx}% ${cy}%,
+              rgba(255, 255, 255, 0.45) 0%,
+              rgba(255, 255, 255, 0.15) 25%,
+              rgba(255, 255, 255, 0) 60%
+            )`;
+          }
+
+          // 更新边框高光渐变角度
+          if (overlay) {
+            const angle = 135 + (mouseX - 0.5) * 30;
+            overlay.style.background = `linear-gradient(
+              ${angle}deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, ${0.35 + Math.abs(mouseX - 0.5) * 0.3}) ${Math.max(20, 30 + (mouseY - 0.5) * 20)}%,
+              rgba(255, 255, 255, ${0.6 + Math.abs(mouseX - 0.5) * 0.2}) ${Math.min(80, 60 + (mouseY - 0.5) * 15)}%,
+              rgba(255, 255, 255, 0) 100%
+            )`;
+          }
+
+          rafId = requestAnimationFrame(updateHighlight);
+        }
+
+        el.addEventListener('mouseenter', () => {
+          isHovered = true;
+          rafId = requestAnimationFrame(updateHighlight);
+        });
+
+        el.addEventListener('mousemove', (e) => {
+          const rect = el.getBoundingClientRect();
+          mouseX = (e.clientX - rect.left) / rect.width;
+          mouseY = (e.clientY - rect.top) / rect.height;
+        });
+
+        el.addEventListener('mouseleave', () => {
+          isHovered = false;
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+          // 重置
+          currentX = 0.5;
+          currentY = 0.5;
+          if (highlight) {
+            highlight.style.background = `radial-gradient(
+              circle at 50% 50%,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0) 100%
+            )`;
+          }
+          if (overlay) {
+            overlay.style.background = `linear-gradient(
+              135deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.5) 30%,
+              rgba(255, 255, 255, 0.7) 50%,
+              rgba(255, 255, 255, 0.3) 70%,
+              rgba(255, 255, 255, 0) 100%
+            )`;
+          }
+        });
+      });
+    });
+  }
 
 })();

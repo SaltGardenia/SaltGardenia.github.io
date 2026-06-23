@@ -9,29 +9,55 @@
 </head>
 <body>
 
+  <!-- ===== SVG 滤镜定义（Liquid Glass 边缘折射效果） ===== -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+    <defs>
+      <!-- 边缘折射滤镜 — 仅作用于玻璃 warp 层 -->
+      <filter id="liquid-glass" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="92" result="noise" />
+        <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
+        <feDisplacementMap in="SourceGraphic" in2="blur" scale="30" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
   <!-- ===== 顶部导航栏 ===== -->
   <!-- 居中导航药丸 -->
-  <nav id="navbar">
+  <nav id="navbar" class="liquid-glass-nav">
+    <!-- 玻璃 warp 层（backdrop-filter + 边缘折射） -->
+    <span class="glass-warp"></span>
     <div class="nav-links" id="navLinks">
       <a href="#home" data-i18n="nav.home">首页</a>
       <a href="#about" data-i18n="nav.about">关于我</a>
       <a href="#skills" data-i18n="nav.skills">技术栈</a>
       <a href="#projects" data-i18n="nav.projects">项目</a>
     </div>
+    <!-- 玻璃高光层 -->
+    <div class="glass-highlight"></div>
+    <div class="glass-highlight-overlay"></div>
   </nav>
 
   <!-- 右上角中英切换药丸 -->
-  <div class="nav-actions-pill" id="langPill">
+  <div class="nav-actions-pill liquid-glass-nav" id="langPill">
+    <!-- 玻璃 warp 层 -->
+    <span class="glass-warp"></span>
     <button class="lang-toggle" id="langToggle" aria-label="切换语言">
       <span class="lang-icon">EN</span>
     </button>
+    <div class="glass-highlight"></div>
+    <div class="glass-highlight-overlay"></div>
   </div>
 
   <!-- 右下角回到顶部按钮 -->
-  <button class="back-top-btn" id="backTopBtn" aria-label="回到顶部">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"/>
-    </svg>
+  <button class="back-top-btn liquid-glass-btn-pill" id="backTopBtn" aria-label="回到顶部">
+    <span class="glass-warp"></span>
+    <span class="glass-highlight"></span>
+    <span class="glass-highlight-overlay"></span>
+    <span class="btn-text">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    </span>
   </button>
 
   <!-- 移动端侧边滑出菜单 -->
@@ -64,10 +90,13 @@
 
     <!-- ===== 关于我 ===== -->
     <section class="section" id="about">
-      <canvas id="aboutCanvas" class="section-canvas"></canvas>
       <div class="section-inner">
         <h2 class="section-title left" data-i18n="about.title">关于我</h2>
-        <div class="about-content section-glass">
+        <div class="about-content section-glass liquid-glass-section">
+          <span class="glass-warp"></span>
+          <div class="glass-highlight"></div>
+          <div class="glass-highlight-overlay"></div>
+          <div class="section-glass-inner">
           <!-- 左侧头像 -->
           <div class="about-avatar">
             <img src="img/tou.jpg" alt="LiYaze 头像" loading="lazy">
@@ -100,16 +129,20 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===== 技能展示 ===== -->
     <section class="section" id="skills">
-      <canvas id="skillsCanvas" class="section-canvas"></canvas>
       <div class="section-inner">
         <h2 class="section-title left" data-i18n="skills.title">技术栈</h2>
-        <div class="skills-categories section-glass">
+        <div class="skills-categories section-glass liquid-glass-section">
+          <span class="glass-warp"></span>
+          <div class="glass-highlight"></div>
+          <div class="glass-highlight-overlay"></div>
+          <div class="section-glass-inner">
           <div class="skill-category">
             <h3 class="skill-category-title" data-i18n="skills.devLang">Development language</h3>
             <div class="skill-category-tags">
@@ -159,51 +192,91 @@
               <span class="skill-tag">Fast API</span>
             </div>
           </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===== 项目 ===== -->
     <section class="section" id="projects">
-      <canvas id="projectsCanvas" class="section-canvas"></canvas>
       <div class="section-inner">
         <h2 class="section-title left" data-i18n="projects.title">项目</h2>
-        <div class="projects-grid section-glass">
+        <div class="projects-grid">
           <!-- 卡片 1：智慧座舱系统 -->
-          <div class="project-card">
-            <h3 class="project-card-title" data-i18n="proj1.title">🚗 智慧座舱系统</h3>
-            <p class="project-card-desc" data-i18n="proj1.desc">基于 PyQt5 + YOLOv7 的智能座舱桌面应用，集成座舱目标检测、百度地图导航、音乐播放、电话拨号及用户登录注册模块。</p>
-            <div class="project-card-tags">
-              <span>PyQt5</span><span>YOLOv7</span><span>OpenCV</span><span>MySQL</span>
+          <div class="project-card liquid-glass-card">
+            <span class="glass-warp"></span>
+            <div class="card-inner">
+              <h3 class="project-card-title" data-i18n="proj1.title">🚗 智慧座舱系统</h3>
+              <p class="project-card-desc" data-i18n="proj1.desc">基于 PyQt5 + YOLOv7 的智能座舱桌面应用，集成座舱目标检测、百度地图导航、音乐播放、电话拨号及用户登录注册模块。</p>
+              <div class="project-card-tags">
+                <span>PyQt5</span><span>YOLOv7</span><span>OpenCV</span><span>MySQL</span>
+              </div>
+              <a class="project-card-btn liquid-glass-btn" href="https://github.com/SaltGardenia/Intelligent-Cockpit-System" target="_blank" rel="noopener noreferrer">
+                <span class="glass-warp"></span>
+                <span class="btn-text">GitHub →</span>
+                <span class="glass-highlight"></span>
+                <span class="glass-highlight-overlay"></span>
+              </a>
             </div>
-            <a class="project-card-btn" href="https://github.com/SaltGardenia/Intelligent-Cockpit-System" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <div class="glass-highlight"></div>
+            <div class="glass-highlight-overlay"></div>
           </div>
           <!-- 卡片 2：智慧工地视频监控系统 -->
-          <div class="project-card">
-            <h3 class="project-card-title" data-i18n="proj2.title">🏗️ 智慧工地监控系统</h3>
-            <p class="project-card-desc" data-i18n="proj2.desc">基于 PyQt5 + 华为云 AI 的工地视频监控桌面应用，支持本地视频播放、摄像头实时监控及云端安全帽佩戴检测。</p>
-            <div class="project-card-tags">
-              <span>PyQt5</span><span>OpenCV</span><span>Huawei Cloud</span>
+          <div class="project-card liquid-glass-card">
+            <span class="glass-warp"></span>
+            <div class="card-inner">
+              <h3 class="project-card-title" data-i18n="proj2.title">🏗️ 智慧工地监控系统</h3>
+              <p class="project-card-desc" data-i18n="proj2.desc">基于 PyQt5 + 华为云 AI 的工地视频监控桌面应用，支持本地视频播放、摄像头实时监控及云端安全帽佩戴检测。</p>
+              <div class="project-card-tags">
+                <span>PyQt5</span><span>OpenCV</span><span>Huawei Cloud</span>
+              </div>
+              <a class="project-card-btn liquid-glass-btn" href="https://github.com/SaltGardenia/Smart-Construction-Site-Video-Surveillance-System" target="_blank" rel="noopener noreferrer">
+                <span class="glass-warp"></span>
+                <span class="btn-text">GitHub →</span>
+                <span class="glass-highlight"></span>
+                <span class="glass-highlight-overlay"></span>
+              </a>
             </div>
-            <a class="project-card-btn" href="https://github.com/SaltGardenia/Smart-Construction-Site-Video-Surveillance-System" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <div class="glass-highlight"></div>
+            <div class="glass-highlight-overlay"></div>
           </div>
           <!-- 卡片 3：Klotski 拼图游戏 -->
-          <div class="project-card">
-            <h3 class="project-card-title" data-i18n="proj3.title">🧩 Klotski 拼图游戏</h3>
-            <p class="project-card-desc" data-i18n="proj3.desc">基于 PyQt5 的经典 3×3 滑块拼图游戏，包含用户登录/注册/验证码系统和核心拼图机制，支持操作计数与胜利检测。</p>
-            <div class="project-card-tags">
-              <span>PyQt5</span><span>Python</span>
+          <div class="project-card liquid-glass-card">
+            <span class="glass-warp"></span>
+            <div class="card-inner">
+              <h3 class="project-card-title" data-i18n="proj3.title">🧩 Klotski 拼图游戏</h3>
+              <p class="project-card-desc" data-i18n="proj3.desc">基于 PyQt5 的经典 3×3 滑块拼图游戏，包含用户登录/注册/验证码系统和核心拼图机制，支持操作计数与胜利检测。</p>
+              <div class="project-card-tags">
+                <span>PyQt5</span><span>Python</span>
+              </div>
+              <a class="project-card-btn liquid-glass-btn" href="https://github.com/SaltGardenia/Klotski-Puzzle" target="_blank" rel="noopener noreferrer">
+                <span class="glass-warp"></span>
+                <span class="btn-text">GitHub →</span>
+                <span class="glass-highlight"></span>
+                <span class="glass-highlight-overlay"></span>
+              </a>
             </div>
-            <a class="project-card-btn" href="https://github.com/SaltGardenia/Klotski-Puzzle" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <div class="glass-highlight"></div>
+            <div class="glass-highlight-overlay"></div>
           </div>
           <!-- 卡片 4：在线考试系统 -->
-          <div class="project-card">
-            <h3 class="project-card-title" data-i18n="proj4.title">📝 在线考试系统</h3>
-            <p class="project-card-desc" data-i18n="proj4.desc">基于 C 语言的 Windows 控制台考试管理系统，支持管理员/学生双角色，提供在线考试计时、成绩查询及用户管理功能。</p>
-            <div class="project-card-tags">
-              <span>C</span><span>Windows API</span>
+          <div class="project-card liquid-glass-card">
+            <span class="glass-warp"></span>
+            <div class="card-inner">
+              <h3 class="project-card-title" data-i18n="proj4.title">📝 在线考试系统</h3>
+              <p class="project-card-desc" data-i18n="proj4.desc">基于 C 语言的 Windows 控制台考试管理系统，支持管理员/学生双角色，提供在线考试计时、成绩查询及用户管理功能。</p>
+              <div class="project-card-tags">
+                <span>C</span><span>Windows API</span>
+              </div>
+              <a class="project-card-btn liquid-glass-btn" href="https://github.com/SaltGardenia/Online-Examination-System" target="_blank" rel="noopener noreferrer">
+                <span class="glass-warp"></span>
+                <span class="btn-text">GitHub →</span>
+                <span class="glass-highlight"></span>
+                <span class="glass-highlight-overlay"></span>
+              </a>
             </div>
-            <a class="project-card-btn" href="https://github.com/SaltGardenia/Online-Examination-System" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <div class="glass-highlight"></div>
+            <div class="glass-highlight-overlay"></div>
           </div>
         </div>
       </div>
