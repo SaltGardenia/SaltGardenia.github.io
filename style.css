@@ -222,8 +222,17 @@ img {
 .bloom-switch {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   line-height: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.bloom-switch:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 .bloom-switch input {
   position: absolute;
