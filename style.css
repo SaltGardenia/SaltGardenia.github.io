@@ -20,8 +20,8 @@ html {
 
 /* ---------- 亮/暗色主题 CSS 变量 ---------- */
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f7;
+  --bg-primary: #fefdfa;
+  --bg-secondary: #fefdfa;
   --text-primary: #1d1d1f;
   --text-secondary: #86868b;
   --text-accent: #0066cc;
@@ -36,19 +36,19 @@ html {
   --skill-tag-bg: rgba(0, 102, 204, 0.06);
   --skill-tag-hover-bg: rgba(0, 102, 204, 0.14);
   --bar-bg: #1d1d1f;
-  --hero-bg: #f5f5f7;
+  --hero-bg: #fefdfa;
   --border-color: rgba(0, 0, 0, 0.08);
   --btn-hover-bg: rgba(0, 0, 0, 0.06);
   --btn-hover-bg-dark: rgba(0, 0, 0, 0.08);
-  --nav-border: rgba(255, 255, 255, 0.12);
-  --nav-bg: rgba(255, 255, 255, 0.15);
-  --nav-bg-scrolled: rgba(255, 255, 255, 0.2);
+  --nav-border: rgba(60, 60, 70, 0.25);
+  --nav-bg: rgba(50, 50, 60, 0.2);
+  --nav-bg-scrolled: rgba(50, 50, 60, 0.35);
 }
 
 /* 暗色主题 */
 [data-theme="dark"] {
-  --bg-primary: #1c1c1e;
-  --bg-secondary: #2c2c2e;
+  --bg-primary: #2a2a2d;
+  --bg-secondary: #2a2a2d;
   --text-primary: #f5f5f7;
   --text-secondary: #98989d;
   --text-accent: #64a8ff;
@@ -68,8 +68,8 @@ html {
   --btn-hover-bg: rgba(255, 255, 255, 0.1);
   --btn-hover-bg-dark: rgba(255, 255, 255, 0.12);
   --nav-border: rgba(255, 255, 255, 0.08);
-  --nav-bg: rgba(44, 44, 46, 0.15);
-  --nav-bg-scrolled: rgba(44, 44, 46, 0.25);
+  --nav-bg: rgba(200, 200, 210, 0.2);
+  --nav-bg-scrolled: rgba(200, 200, 210, 0.32);
 }
 
 body {
@@ -95,7 +95,9 @@ img {
   display: block;
 }
 
-/* ---------- 顶部导航栏：悬浮药丸样式 + 高斯模糊 ---------- */
+/* ===== 顶部导航栏 ===== */
+
+/* --- 居中导航药丸 --- */
 #navbar {
   position: fixed;
   top: 16px;
@@ -106,51 +108,18 @@ img {
   align-items: center;
   padding: 6px 8px;
   gap: 4px;
-  background: var(--nav-bg);
+  background: var(--nav-bg-scrolled);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: 999px;
-  border: 1px solid var(--nav-border);
-  box-shadow:
-    0 1px 1px rgba(14, 17, 22, 0.04),
-    0 20px 40px -24px rgba(14, 17, 22, 0.18);
-  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-}
-
-/* 滚动后略微增强 */
-#navbar.scrolled {
-  background: var(--nav-bg-scrolled);
+  border: none;
   box-shadow:
     0 1px 1px rgba(14, 17, 22, 0.06),
     0 24px 48px -20px rgba(14, 17, 22, 0.3);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-.nav-inner {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Logo */
-.nav-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  padding: 0 14px;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  border-radius: 999px;
-  transition: background 0.2s, opacity 0.2s;
-}
-.nav-logo:hover {
-  background: rgba(128, 128, 128, 0.1);
-}
-
-/* 桌面导航链接 — 药丸标签风格 */
+/* 导航链接 — 药丸标签 */
 .nav-links {
   display: flex;
   gap: 2px;
@@ -163,9 +132,9 @@ img {
   height: 36px;
   padding: 0 18px;
   border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
   white-space: nowrap;
   transition:
     background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -173,28 +142,52 @@ img {
 }
 
 .nav-links a:hover {
-  color: var(--text-primary);
-  background: rgba(128, 128, 128, 0.08);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-/* 导航链接激活状态（由 JS 根据滚动位置添加） */
 .nav-links a.active {
-  background: var(--text-primary);
-  color: var(--bg-primary);
+  background: #ffffff;
+  color: #2d2d3f;
   box-shadow:
     0 1px 1px rgba(14, 17, 22, 0.06),
     0 8px 18px -10px rgba(14, 17, 22, 0.5);
 }
 
-/* ---------- 导航栏右侧功能按钮 ---------- */
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  margin-left: 4px;
+/* 暗色模式导航文字全部白色 */
+[data-theme="dark"] .nav-links a.active {
+  background: #ffffff;
+  color: #2d2d3f;
 }
 
-/* 中英文切换按钮 */
+/* --- 右侧操作按钮独立药丸 --- */
+.nav-actions-pill {
+  position: fixed;
+  top: 16px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 6px;
+  gap: 2px;
+  background: var(--nav-bg-scrolled);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 999px;
+  border: none;
+  box-shadow:
+    0 1px 1px rgba(14, 17, 22, 0.06),
+    0 24px 48px -20px rgba(14, 17, 22, 0.3);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+#langPill {
+  right: 24px;
+}
+
+#themePill {
+  right: 94px;
+}
+
+/* 中英文切换 */
 .lang-toggle {
   display: inline-flex;
   align-items: center;
@@ -206,49 +199,83 @@ img {
   padding: 0 12px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.02em;
   border-radius: 999px;
   transition: background 0.2s, color 0.2s;
 }
 
 .lang-toggle:hover {
-  background: rgba(128, 128, 128, 0.08);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
 }
 
 .lang-icon {
   font-weight: 700;
 }
 
-/* 亮暗色切换按钮 */
-.theme-toggle {
+/* 亮暗切换开关 — bloom-switch（透明版） */
+.bloom-switch {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
   cursor: pointer;
-  height: 36px;
-  width: 36px;
-  padding: 0;
-  font-size: 1.1rem;
-  line-height: 1;
-  border-radius: 999px;
-  transition: background 0.2s;
+  line-height: 0;
 }
-
-.theme-toggle:hover {
-  background: rgba(128, 128, 128, 0.08);
+.bloom-switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
 }
-
-.theme-icon {
+.bloom-switch__track {
   display: inline-block;
-  transition: transform 0.3s ease;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: background 320ms;
+  overflow: hidden;
 }
-
-.theme-toggle:hover .theme-icon {
-  transform: rotate(15deg);
+.bloom-switch__thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  transition: none;
+}
+.bloom-switch__sun {
+  width: 1.3rem;
+  height: 1.3rem;
+  color: #ffd23f;
+  transition: opacity 220ms, transform 320ms;
+}
+.bloom-switch__moon {
+  position: absolute;
+  width: 1.3rem;
+  height: 1.3rem;
+  color: #c8b8ff;
+  opacity: 0;
+  transform: rotate(-60deg) scale(0.6);
+  transition: opacity 220ms, transform 320ms;
+}
+.bloom-switch__star {
+  display: none;
+}
+.bloom-switch input:checked ~ .bloom-switch__track .bloom-switch__sun {
+  opacity: 0;
+  transform: rotate(60deg) scale(0.6);
+}
+.bloom-switch input:checked ~ .bloom-switch__track .bloom-switch__moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
 }
 
 /* 汉堡按钮（默认隐藏） */
@@ -269,14 +296,14 @@ img {
 }
 
 .hamburger:hover {
-  background: rgba(128, 128, 128, 0.08);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .bar {
   display: block;
   width: 18px;
   height: 2px;
-  background: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 2px;
   transition: all 0.3s;
 }
@@ -403,12 +430,12 @@ img {
   z-index: 0;
 }
 
-/* 首屏背景暗色遮罩，提升文字可读性 */
+/* 首屏背景柔和雾感遮罩 */
 .hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
   z-index: 0;
 }
 
@@ -416,22 +443,25 @@ img {
   position: relative;
   z-index: 1;
   text-align: left;
-  padding: 10vh 0 0 5%;
+  padding: 24vh 0 0 5%;
   width: 60%;
 }
 
 .hero-title {
-  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #ffffff;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  color: #2d2d3f;
+  text-shadow: 0 2px 30px rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
 }
 
 /* ---------- 通用区块 ---------- */
 .section {
-  padding: 100px 24px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 24px;
 }
 
 .section-alt {
@@ -677,6 +707,37 @@ img {
     display: flex;
   }
 
+  #langPill {
+    right: 12px;
+    padding: 4px 4px;
+  }
+
+  #themePill {
+    right: 68px;
+    padding: 4px 4px;
+  }
+
+  #langPill .lang-toggle {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 0.65rem;
+  }
+
+  #themePill .hamburger {
+    height: 32px;
+    width: 32px;
+  }
+
+  .bloom-switch__track {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .bloom-switch__sun,
+  .bloom-switch__moon {
+    width: 1rem;
+    height: 1rem;
+  }
+
   .hero-title {
     font-size: clamp(2.2rem, 10vw, 3.2rem);
   }
@@ -714,34 +775,50 @@ img {
     top: 12px;
     padding: 4px 6px;
     gap: 2px;
+    transform: translateX(-50%) scale(0.85);
   }
 
-  .nav-logo {
-    font-size: 0.9rem;
+  .nav-links a {
     height: 32px;
-    padding: 0 10px;
+    padding: 0 12px;
+    font-size: 0.875rem;
   }
 
-  .nav-actions {
-    gap: 0;
-    margin-left: 2px;
+  #langPill {
+    top: 8px;
+    right: 8px;
+    padding: 3px 3px;
+    transform: scale(0.82);
+    transform-origin: top right;
   }
 
-  .lang-toggle {
-    height: 32px;
-    padding: 0 8px;
-    font-size: 0.65rem;
+  #themePill {
+    top: 8px;
+    right: 56px;
+    padding: 2px 2px;
+    transform: scale(0.82);
+    transform-origin: top right;
   }
 
-  .theme-toggle {
-    height: 32px;
-    width: 32px;
-    font-size: 0.95rem;
+  #langPill .lang-toggle {
+    height: 28px;
+    padding: 0 5px;
+    font-size: 0.55rem;
   }
 
-  .hamburger {
-    height: 32px;
-    width: 32px;
+  #themePill .hamburger {
+    height: 28px;
+    width: 28px;
+  }
+
+  .bloom-switch__track {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .bloom-switch__sun,
+  .bloom-switch__moon {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 
   .hero {
