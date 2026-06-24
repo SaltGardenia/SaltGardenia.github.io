@@ -587,8 +587,8 @@ img {
 
 .skill-category-title {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-accent);
+  font-weight: 700;
+  color: #000;
   letter-spacing: 0.03em;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--skill-tag-bg);
