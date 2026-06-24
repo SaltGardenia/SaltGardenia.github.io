@@ -25,10 +25,10 @@
   const i18n = {
     'zh-CN': {
       'nav.home': '首页',
-      'nav.about': '关于我',
+      'nav.about': '关于',
       'nav.skills': '技术栈',
       'hero.title': '永远相信美好的事情即将发生',
-      'about.title': '关于我',
+      'about.title': '关于',
       'about.name': '李亚泽',
       'about.degree': '学士学位 · 合肥工业大学 · 智能科学与技术',
       'skills.title': '技术栈',
@@ -55,7 +55,7 @@
       'nav.about': 'About',
       'nav.skills': 'Tech Stack',
       'hero.title': 'Always believe that something wonderful is about to happen',
-      'about.title': 'About Me',
+      'about.title': 'About',
       'about.name': 'Yaze Li',
       'about.degree': "Bachelor's Degree in Intelligent Science and Technology @ Hefei University of Technology",
       'skills.title': 'Tech Stack',
@@ -169,7 +169,7 @@
 
     function rgba(c, a) { return `rgba(${c.r|0},${c.g|0},${c.b|0},${a})`; }
 
-    // ===== 大光晕 — 缓慢漂移，互相融合 =====
+    // ===== 大光晕 — 随机布朗运动，每个颜色独立游走 =====
     class GlowBlob {
       constructor() { this.reset(); }
       reset() {
@@ -177,15 +177,26 @@
         this.y = Math.random() * H;
         this.radius = Math.random() * 400 + 300;
         this.opacity = Math.random() * 0.25 + 0.25;
-        this.phase = Math.random() * Math.PI * 2;
         this.pulseSpeed = Math.random() * 0.0008 + 0.0003;
-        this.dx = (Math.random() - 0.5) * 0.25;
-        this.dy = (Math.random() - 0.5) * 0.2;
+        this.phase = Math.random() * Math.PI * 2;
+        this.vx = (Math.random() - 0.5) * 6.0;
+        this.vy = (Math.random() - 0.5) * 5.0;
         this.color = palette[Math.floor(Math.random() * palette.length)];
       }
       update() {
-        this.x += Math.sin(time * 0.0001 + this.phase) * this.dx;
-        this.y += Math.cos(time * 0.00012 + this.phase) * this.dy;
+        // 布朗运动：每帧叠加随机扰动（速度翻倍）
+        this.vx += (Math.random() - 0.5) * 0.8;
+        this.vy += (Math.random() - 0.5) * 0.8;
+        // 阻尼
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        // 限速
+        const maxSpeed = 7.0;
+        const spd = Math.hypot(this.vx, this.vy);
+        if (spd > maxSpeed) { this.vx *= maxSpeed / spd; this.vy *= maxSpeed / spd; }
+        this.x += this.vx;
+        this.y += this.vy;
+        // 环绕边界
         if (this.x < -this.radius) this.x = W + this.radius;
         if (this.x > W + this.radius) this.x = -this.radius;
         if (this.y < -this.radius) this.y = H + this.radius;
@@ -209,7 +220,7 @@
       }
     }
 
-    // ===== 中型浮游光团 — 稍快流动 =====
+    // ===== 中型浮游光团 — 随机布朗运动，独立游走 =====
     class FloatingOrb {
       constructor() { this.reset(); }
       reset() {
@@ -217,15 +228,23 @@
         this.y = Math.random() * H;
         this.radius = Math.random() * 160 + 100;
         this.opacity = Math.random() * 0.2 + 0.2;
-        this.phase = Math.random() * Math.PI * 2;
         this.pulseSpeed = Math.random() * 0.003 + 0.0015;
-        this.dx = (Math.random() - 0.5) * 0.4;
-        this.dy = (Math.random() - 0.5) * 0.3;
+        this.phase = Math.random() * Math.PI * 2;
+        this.vx = (Math.random() - 0.5) * 12.0;
+        this.vy = (Math.random() - 0.5) * 10.0;
         this.color = palette[Math.floor(Math.random() * palette.length)];
       }
       update() {
-        this.x += Math.sin(time * 0.00025 + this.phase) * this.dx;
-        this.y += Math.cos(time * 0.0002 + this.phase) * this.dy;
+        // 布朗运动（速度翻倍）
+        this.vx += (Math.random() - 0.5) * 1.5;
+        this.vy += (Math.random() - 0.5) * 1.5;
+        this.vx *= 0.97;
+        this.vy *= 0.97;
+        const maxSpeed = 14.0;
+        const spd = Math.hypot(this.vx, this.vy);
+        if (spd > maxSpeed) { this.vx *= maxSpeed / spd; this.vy *= maxSpeed / spd; }
+        this.x += this.vx;
+        this.y += this.vy;
         if (this.x < -120) this.x = W + 120;
         if (this.x > W + 120) this.x = -120;
         if (this.y < -120) this.y = H + 120;

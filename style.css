@@ -28,6 +28,9 @@ html {
   --card-bg: rgba(255, 255, 255, 0.55);
   --card-shadow: rgba(0, 0, 0, 0.05);
   --card-shadow-hover: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --glass-shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.03);
   --nav-bg-scrolled: rgba(255, 255, 255, 0.7);
   --nav-shadow: rgba(0, 0, 0, 0.06);
   --mobile-menu-bg: rgba(250, 247, 243, 0.96);
@@ -94,11 +97,13 @@ img {
   border: none;
   overflow: hidden;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 #navbar:hover {
   transform: translateX(-50%) scale(1.05);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 /* 玻璃 warp 层：仅此层有 backdrop-blur + 边缘折射 */
@@ -139,11 +144,11 @@ img {
 }
 
 .nav-links a.active {
-  background: #3d3d50;
+  background: rgba(0, 0, 0, 0.45);
   color: #ffffff;
   box-shadow:
-    0 1px 1px rgba(14, 17, 22, 0.06),
-    0 8px 18px -10px rgba(14, 17, 22, 0.4);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.06);
 }
 
 
@@ -163,11 +168,13 @@ img {
   border: none;
   overflow: hidden;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 .nav-actions-pill:hover {
   transform: scale(1.05);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 #langPill {
@@ -392,6 +399,7 @@ img {
   border-radius: 20px;
   padding: 32px;
   border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--glass-shadow);
 }
 
 /* 首屏背景柔和雾感遮罩 */
@@ -597,17 +605,23 @@ img {
   padding: 8px 18px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #4a4a60;
-  background: rgba(120, 130, 160, 0.12);
+  color: #3d3d50;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 20px;
-  border: 1px solid rgba(120, 130, 160, 0.18);
-  transition: background 0.25s, transform 0.2s, border-color 0.25s;
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
   user-select: none;
+  cursor: default;
 }
 
 .skill-tag:hover {
-  background: rgba(120, 130, 160, 0.22);
-  border-color: rgba(120, 130, 160, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
 }
 
@@ -626,7 +640,7 @@ img {
   border-radius: 16px;
   overflow: hidden;
   background: transparent;
-  box-shadow: none;
+  box-shadow: var(--glass-shadow);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
@@ -634,7 +648,7 @@ img {
 
 .project-card.liquid-glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 /* 卡片内部的 glass-warp 层 */
@@ -727,12 +741,14 @@ img {
   padding: 4px 12px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #5a5a72;
-  background: rgba(120, 130, 160, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  color: #3d3d50;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 999px;
-  border: 1px solid rgba(120, 130, 160, 0.15);
+  border: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: background 0.25s, box-shadow 0.25s;
 }
 
 /* ===== Liquid Glass 按钮 ===== */
@@ -749,7 +765,8 @@ img {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--glass-shadow-btn);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 /* 磨砂玻璃底层 — 仅 blur，无底色 */
@@ -816,6 +833,7 @@ img {
 /* ----- 悬停 ----- */
 .liquid-glass-btn:hover {
   transform: scale(1.04);
+  box-shadow: var(--glass-shadow);
 }
 
 .liquid-glass-btn:hover .glass-highlight {
@@ -853,7 +871,8 @@ img {
   z-index: 900;
   opacity: 0;
   transform: translateY(16px) scale(0.9);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--glass-shadow-btn);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
   pointer-events: none;
 }
 
@@ -926,6 +945,7 @@ img {
 /* 悬停 */
 .liquid-glass-btn-pill:hover {
   transform: scale(1.1);
+  box-shadow: var(--glass-shadow);
 }
 
 .liquid-glass-btn-pill:hover .glass-highlight {
