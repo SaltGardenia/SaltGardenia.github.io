@@ -1175,6 +1175,10 @@ img {
 /* 手机：≤ 768px */
 @media (max-width: 768px) {
   /* 桌面导航隐藏，显示汉堡按钮 */
+  #navbar {
+    display: none;
+  }
+
   .nav-links {
     display: none;
   }
@@ -1298,50 +1302,29 @@ img {
 
 /* 小手机：≤ 480px */
 @media (max-width: 480px) {
-  #navbar {
-    top: 10px;
-    padding: 3px 5px;
-    gap: 1px;
-    height: 40px;
-    transform: translateX(-50%) scale(0.82);
-    transform-origin: top center;
-  }
-
-  .nav-links a {
-    height: 30px;
-    padding: 0 10px;
-    font-size: 0.78rem;
-  }
-
   #langPill {
-    top: 8px;
-    right: 52px;
-    padding: 3px 3px;
+    top: 10px;
+    right: 56px;
     height: 40px;
     min-width: 40px;
-    transform: scale(0.82);
-    transform-origin: top right;
   }
 
   #hamburgerPill {
-    top: 8px;
-    right: 8px;
-    padding: 2px 2px;
+    top: 10px;
+    right: 10px;
     height: 40px;
     min-width: 40px;
-    transform: scale(0.82);
-    transform-origin: top right;
   }
 
   #langPill .lang-toggle {
-    height: 28px;
-    padding: 0 5px;
-    font-size: 0.55rem;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 0.6rem;
   }
 
   .hamburger-btn {
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
   }
 
   .hamburger-icon {
