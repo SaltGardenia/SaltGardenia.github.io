@@ -380,13 +380,7 @@
     });
   });
 
-  // 点击桌面导航链接立即激活高亮（不等滚动事件）
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function (e) {
-      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
+  // 桌面导航点击交由滚动监听自动更新高亮，不干预 active 类以避免闪烁
 
   // 窗口尺寸变化时，如果回到桌面视图且菜单开着，自动关闭
   window.addEventListener('resize', function () {
