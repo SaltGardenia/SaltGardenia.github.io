@@ -12,6 +12,7 @@
   const navPills = document.querySelectorAll('.nav-actions-pill');
   const heroCanvas = document.getElementById('heroCanvas');
   const closeMenu = document.getElementById('closeMenu');
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const menuOverlay = document.getElementById('menuOverlay');
   const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
@@ -346,6 +347,11 @@
     mobileMenu.classList.remove('open');
     menuOverlay.classList.remove('show');
     document.body.style.overflow = '';
+  }
+
+  // 汉堡按钮打开菜单
+  if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', openMobileMenu);
   }
 
   // 关闭按钮关闭菜单
