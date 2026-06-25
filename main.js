@@ -430,14 +430,13 @@
     // 初始化语言
     updateLanguage(currentLang);
 
-    // Liquid Glass 鼠标追踪已禁用
+    // 初始化 Liquid Glass 引擎（Snell 折射 + 镜面高光 + 弹簧动画）
+    initLiquidGlassEngine();
   });
 
   // 页面完全加载后再检查一次（应对字体/图片加载后布局偏移）
   window.addEventListener('load', function () {
     handleNavbarScroll();
   });
-
-  // initLiquidGlass 已移除 — 鼠标发光效果已禁用
 
 })();

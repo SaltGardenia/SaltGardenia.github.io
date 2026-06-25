@@ -9,17 +9,8 @@
 </head>
 <body>
 
-  <!-- ===== SVG 滤镜定义（Liquid Glass 边缘折射效果） ===== -->
-  <svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
-    <defs>
-      <!-- 边缘折射滤镜 — 仅作用于玻璃 warp 层 -->
-      <filter id="liquid-glass" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="92" result="noise" />
-        <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
-        <feDisplacementMap in="SourceGraphic" in2="blur" scale="30" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
+  <!-- ===== SVG 滤镜容器（由 lg-engine.js 动态填充） ===== -->
+  <svg id="lg-filters" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true"></svg>
 
   <!-- ===== 顶部导航栏 ===== -->
   <!-- 居中导航药丸 -->
@@ -315,6 +306,7 @@
   </main>
 
   <!-- JavaScript 交互逻辑 -->
+  <script src="lg-engine.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
