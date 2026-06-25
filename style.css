@@ -28,9 +28,9 @@ html {
   --card-bg: rgba(255, 255, 255, 0.55);
   --card-shadow: rgba(0, 0, 0, 0.05);
   --card-shadow-hover: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
-  --glass-shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.03);
+  --glass-shadow: 0 12px 48px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --glass-shadow-hover: 0 18px 56px rgba(0, 0, 0, 0.20), 0 6px 20px rgba(0, 0, 0, 0.09);
+  --glass-shadow-btn: 0 6px 24px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
   --nav-bg-scrolled: rgba(255, 255, 255, 0.7);
   --nav-shadow: rgba(0, 0, 0, 0.06);
   --mobile-menu-bg: rgba(250, 247, 243, 0.96);
