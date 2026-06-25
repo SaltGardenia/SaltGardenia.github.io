@@ -430,8 +430,7 @@
     // 初始化语言
     updateLanguage(currentLang);
 
-    // 初始化 Liquid Glass 鼠标追踪
-    initLiquidGlass();
+    // Liquid Glass 鼠标追踪已禁用
   });
 
   // 页面完全加载后再检查一次（应对字体/图片加载后布局偏移）
@@ -439,108 +438,6 @@
     handleNavbarScroll();
   });
 
-  // ---------- 13. Liquid Glass 鼠标追踪弹性效果 ----------
-  function initLiquidGlass() {
-    // 所有需要玻璃鼠标追踪效果的元素
-    const glassSelectors = [
-      '.liquid-glass-nav',
-      '.liquid-glass-card',
-      '.liquid-glass-btn',
-      '.liquid-glass-btn-pill',
-      '.liquid-glass-section'
-    ];
-
-    glassSelectors.forEach(selector => {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
-        // Skip if already initialized
-        if (el.dataset.lgInitialized === 'true') return;
-        el.dataset.lgInitialized = 'true';
-
-        const highlight = el.querySelector(':scope > .glass-highlight');
-        const overlay = el.querySelector(':scope > .glass-highlight-overlay');
-        if (!highlight && !overlay) return;
-
-        let mouseX = 0.5;
-        let mouseY = 0.5;
-        let currentX = 0.5;
-        let currentY = 0.5;
-        let rafId = null;
-        let isHovered = false;
-
-        function updateHighlight() {
-          if (!isHovered) return;
-          // 平滑插值（弹性跟随）
-          currentX += (mouseX - currentX) * 0.12;
-          currentY += (mouseY - currentY) * 0.12;
-
-          const cx = currentX * 100;
-          const cy = currentY * 100;
-
-          if (highlight) {
-            highlight.style.background = `radial-gradient(
-              circle at ${cx}% ${cy}%,
-              rgba(255, 255, 255, 0.45) 0%,
-              rgba(255, 255, 255, 0.15) 25%,
-              rgba(255, 255, 255, 0) 60%
-            )`;
-          }
-
-          // 更新边框高光渐变角度
-          if (overlay) {
-            const angle = 135 + (mouseX - 0.5) * 30;
-            overlay.style.background = `linear-gradient(
-              ${angle}deg,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, ${0.35 + Math.abs(mouseX - 0.5) * 0.3}) ${Math.max(20, 30 + (mouseY - 0.5) * 20)}%,
-              rgba(255, 255, 255, ${0.6 + Math.abs(mouseX - 0.5) * 0.2}) ${Math.min(80, 60 + (mouseY - 0.5) * 15)}%,
-              rgba(255, 255, 255, 0) 100%
-            )`;
-          }
-
-          rafId = requestAnimationFrame(updateHighlight);
-        }
-
-        el.addEventListener('mouseenter', () => {
-          isHovered = true;
-          rafId = requestAnimationFrame(updateHighlight);
-        });
-
-        el.addEventListener('mousemove', (e) => {
-          const rect = el.getBoundingClientRect();
-          mouseX = (e.clientX - rect.left) / rect.width;
-          mouseY = (e.clientY - rect.top) / rect.height;
-        });
-
-        el.addEventListener('mouseleave', () => {
-          isHovered = false;
-          if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-          }
-          // 重置
-          currentX = 0.5;
-          currentY = 0.5;
-          if (highlight) {
-            highlight.style.background = `radial-gradient(
-              circle at 50% 50%,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0) 100%
-            )`;
-          }
-          if (overlay) {
-            overlay.style.background = `linear-gradient(
-              135deg,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0.5) 30%,
-              rgba(255, 255, 255, 0.7) 50%,
-              rgba(255, 255, 255, 0.3) 70%,
-              rgba(255, 255, 255, 0) 100%
-            )`;
-          }
-        });
-      });
-    });
-  }
+  // initLiquidGlass 已移除 — 鼠标发光效果已禁用
 
 })();

@@ -93,7 +93,7 @@ img {
   height: 48px;
   padding: 0 8px;
   gap: 4px;
-  border-radius: 60px;
+  border-radius: 24px;
   border: none;
   overflow: hidden;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
@@ -132,7 +132,7 @@ img {
   align-items: center;
   justify-content: center;
   height: 36px;
-  padding: 0 18px;
+  padding: 0 20px;
   border-radius: 60px;
   font-size: 1rem;
   font-weight: 700;
@@ -257,21 +257,9 @@ img {
 
 /* ===== Liquid Glass 高光与边框效果 ===== */
 
-/* 玻璃高光层 — 跟随鼠标的渐变光照 */
+/* 玻璃高光层 — 已禁用鼠标发光效果 */
 .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  display: none;
 }
 
 /* 边框高光 — 模拟玻璃边缘反光 */
@@ -299,14 +287,6 @@ img {
   box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.4) inset;
 }
 
-#navbar:hover .glass-highlight {
-  opacity: 1;
-}
-
-.nav-actions-pill:hover .glass-highlight {
-  opacity: 1;
-}
-
 /* ---------- 移动端侧边菜单 ---------- */
 .mobile-menu {
   position: fixed;
@@ -315,8 +295,8 @@ img {
   width: 260px;
   height: 100vh;
   background: var(--mobile-menu-bg);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(120%) blur(16px);
+  -webkit-backdrop-filter: saturate(120%) blur(16px);
   z-index: 2000;
   padding: 80px 32px 32px;
   transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -442,7 +422,7 @@ img {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 60px;
-  padding: 32px;
+  padding: 36px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: var(--glass-shadow);
 }
@@ -552,7 +532,7 @@ img {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px 20px;
+  padding: 24px 32px;
   border-radius: 60px;
   overflow: hidden;
   background: transparent;
@@ -571,26 +551,15 @@ img {
   inset: 0;
   border-radius: inherit;
   background: transparent;
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(120%) blur(16px);
+  -webkit-backdrop-filter: saturate(120%) blur(16px);
   filter: url(#liquid-glass);
   z-index: 0;
   pointer-events: none;
 }
 
 .info-item.liquid-glass-card > .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
-}
-
-.info-item.liquid-glass-card:hover > .glass-highlight {
-  opacity: 1;
+  display: none;
 }
 
 .info-item.liquid-glass-card > .glass-highlight-overlay {
@@ -691,7 +660,7 @@ img {
 
 .skill-tag {
   display: inline-block;
-  padding: 8px 18px;
+  padding: 10px 22px;
   font-size: 0.875rem;
   font-weight: 500;
   color: #3d3d50;
@@ -746,27 +715,16 @@ img {
   inset: 0;
   border-radius: inherit;
   background: transparent;
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(120%) blur(16px);
+  -webkit-backdrop-filter: saturate(120%) blur(16px);
   filter: url(#liquid-glass);
   z-index: 0;
   pointer-events: none;
 }
 
-/* 卡片高光层 */
+/* 卡片高光层 — 已禁用 */
 .project-card > .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
-}
-
-.project-card:hover > .glass-highlight {
-  opacity: 1;
+  display: none;
 }
 
 /* 卡片边框层 */
@@ -797,7 +755,7 @@ img {
 .card-inner {
   position: relative;
   z-index: 2;
-  padding: 28px 24px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -807,7 +765,7 @@ img {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .project-card-desc {
@@ -815,19 +773,19 @@ img {
   color: var(--text-secondary);
   line-height: 1.6;
   flex: 1;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .project-card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .project-card-tags span {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 6px 14px;
   font-size: 0.75rem;
   font-weight: 500;
   color: #3d3d50;
@@ -847,7 +805,7 @@ img {
   align-items: center;
   align-self: flex-end;
   margin-top: auto;
-  padding: 10px 22px;
+  padding: 12px 28px;
   border-radius: 60px;
   overflow: hidden;
   background: transparent;
@@ -895,16 +853,9 @@ img {
   transition: background 0.2s ease;
 }
 
-/* 鼠标跟随高光 — 由 JS 动态更新 background */
+/* 鼠标跟随高光 — 已禁用 */
 .liquid-glass-btn .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
+  display: none;
 }
 
 /* 文字层 */
@@ -923,10 +874,6 @@ img {
 .liquid-glass-btn:hover {
   transform: scale(1.04);
   box-shadow: var(--glass-shadow);
-}
-
-.liquid-glass-btn:hover .glass-highlight {
-  opacity: 1;
 }
 
 .liquid-glass-btn:hover .btn-text {
@@ -1008,16 +955,9 @@ img {
   transition: background 0.2s ease;
 }
 
-/* 鼠标跟随高光 */
+/* 鼠标跟随高光 — 已禁用 */
 .liquid-glass-btn-pill .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
+  display: none;
 }
 
 /* 图标 */
@@ -1035,10 +975,6 @@ img {
 .liquid-glass-btn-pill:hover {
   transform: scale(1.1);
   box-shadow: var(--glass-shadow);
-}
-
-.liquid-glass-btn-pill:hover .glass-highlight {
-  opacity: 1;
 }
 
 .liquid-glass-btn-pill:hover .btn-text {
@@ -1069,14 +1005,7 @@ img {
 }
 
 .liquid-glass-section .glass-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  mix-blend-mode: overlay;
+  display: none;
 }
 
 .liquid-glass-section .glass-highlight-overlay {
@@ -1100,10 +1029,6 @@ img {
     rgba(255, 255, 255, 0) 100%
   );
   transition: background 0.2s ease;
-}
-
-.liquid-glass-section:hover .glass-highlight {
-  opacity: 1;
 }
 
 .section-glass-inner {
