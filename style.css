@@ -118,8 +118,8 @@ img {
 
 /* 导航栏玻璃背景模糊 */
 #navbar > .glass-warp {
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* 导航链接 — 药丸标签 */
@@ -298,8 +298,8 @@ img {
   width: 260px;
   height: 100vh;
   background: var(--mobile-menu-bg);
-  backdrop-filter: saturate(120%) blur(16px);
-  -webkit-backdrop-filter: saturate(120%) blur(16px);
+  backdrop-filter: saturate(120%) blur(8px);
+  -webkit-backdrop-filter: saturate(120%) blur(8px);
   z-index: 2000;
   padding: 80px 32px 32px;
   transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);

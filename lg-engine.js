@@ -165,13 +165,13 @@ function imageDataToDataURL(imageData) {
 function buildFilterSVG(id, width, height) {
   return `
     <filter id="${id}" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blurred"/>
       <feImage id="${id}-dispImg" href="" x="0" y="0" width="${width}" height="${height}" result="displacement_map" preserveAspectRatio="none"/>
-      <feDisplacementMap id="${id}-dispMap" in="SourceGraphic" in2="displacement_map" scale="30" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
-      <feGaussianBlur in="displaced" stdDeviation="5" result="blurred"/>
-      <feColorMatrix in="blurred" type="saturate" values="1.0" result="displaced_saturated"/>
+      <feDisplacementMap id="${id}-dispMap" in="blurred" in2="displacement_map" scale="50" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feColorMatrix in="displaced" type="saturate" values="1.0" result="displaced_saturated"/>
       <feImage id="${id}-specImg" href="" x="0" y="0" width="${width}" height="${height}" result="specular_layer" preserveAspectRatio="none"/>
       <feComponentTransfer in="specular_layer" result="specular_faded">
-        <feFuncA id="${id}-specAlpha" type="linear" slope="0.4"/>
+        <feFuncA id="${id}-specAlpha" type="linear" slope="0.5"/>
       </feComponentTransfer>
       <feBlend in="specular_faded" in2="displaced_saturated" mode="screen"/>
     </filter>`;
@@ -203,8 +203,9 @@ function initLiquidGlassEngine() {
 
     // 非 Chromium 浏览器回退到简单 blur，不应用 SVG filter
     if (!supportsUrlBackdrop) {
-      warp.style.backdropFilter = 'saturate(1.2) blur(12px)';
-      warp.style.webkitBackdropFilter = 'saturate(1.2) blur(12px)';
+      warp.style.backdropFilter = 'blur(8px) saturate(1.2)';
+      warp.style.webkitBackdropFilter = 'blur(8px) saturate(1.2)';
+      warp.style.boxShadow = 'inset 0 0 0 1px rgba(255, 255, 255, 0.25)';
       parent.dataset.lgReady = 'true';
       return;
     }
