@@ -81,13 +81,26 @@ img {
   position: relative;
 }
 
-/* --- 居中导航药丸 --- */
-#navbar {
+/* --- 导航栏组（包裹小房子 + 居中导航） --- */
+.nav-group {
   position: fixed;
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-group:hover {
+  transform: translateX(-50%) scale(1.025);
+}
+
+/* --- 居中导航药丸 --- */
+#navbar {
+  position: relative;
   display: inline-flex;
   align-items: center;
   height: 48px;
@@ -102,7 +115,6 @@ img {
 }
 
 #navbar:hover {
-  transform: translateX(-50%) scale(1.05);
   box-shadow: var(--glass-shadow-hover);
 }
 
@@ -116,8 +128,11 @@ img {
   pointer-events: none;
 }
 
-/* 导航栏玻璃背景模糊 */
-#navbar > .glass-warp {
+/* 导航栏及按钮玻璃背景模糊 */
+#navbar > .glass-warp,
+#homePill > .glass-warp,
+#langPill > .glass-warp,
+.liquid-glass-btn-pill > .glass-warp {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -178,6 +193,33 @@ img {
 .nav-actions-pill:hover {
   transform: scale(1.05);
   box-shadow: var(--glass-shadow-hover);
+}
+
+/* --- 左侧小房子独立药丸 --- */
+#homePill {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.nav-home-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 60px;
+  color: #5a5a72;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-home-btn:hover {
+  color: #2d2d3f;
 }
 
 #langPill {
@@ -495,6 +537,21 @@ img {
   justify-content: center;
 }
 
+.about-left {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-content .about-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
 /* 左侧头像 - 保持原比例（放大 50%） */
 .about-avatar {
   position: relative;
@@ -537,19 +594,26 @@ img {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 24px 32px;
+  gap: 14px;
+  padding: 12px 22px;
   border-radius: 60px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
   border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
 }
 
 .info-item:hover {
-  transform: scale(1.04);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 
 /* Liquid Glass 效果层 — info-item 专用 */
@@ -593,6 +657,14 @@ img {
   min-width: 0;
   position: relative;
   z-index: 2;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
 }
 
 .info-value {
@@ -1199,7 +1271,10 @@ img {
     width: 220px;
   }
 
-  .about-name {
+  .about-left {
+    gap: 12px;
+  }
+  .about-content .about-name {
     font-size: 1.6rem;
   }
 
@@ -1334,7 +1409,10 @@ img {
     width: 180px;
   }
 
-  .about-name {
+  .about-left {
+    gap: 8px;
+  }
+  .about-content .about-name {
     font-size: 1.3rem;
   }
 

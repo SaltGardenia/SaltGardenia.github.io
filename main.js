@@ -31,6 +31,10 @@
       'hero.title': '永远相信美好的事情即将发生',
       'about.title': '关于',
       'about.name': '李亚泽',
+      'about.label.github': 'GitHub',
+      'about.label.email': '邮箱',
+      'about.label.degree': '学历',
+      'about.cert': '证书',
       'about.degree': '学士学位 · <a href="https://www.hfut.edu.cn/" target="_blank">合肥工业大学</a> · <a href="https://ci.hfut.edu.cn/index.htm" target="_blank">智能科学与技术</a>',
       'skills.title': '技术栈',
       'nav.projects': '项目',
@@ -48,6 +52,7 @@
       'skills.mlDl': '机器学习与深度学习',
       'skills.dataProc': '数据处理',
       'skills.devTools': '开发工具',
+      'skills.research': '科研',
       'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',
       'lang.toggle': 'EN',
     },
@@ -58,6 +63,10 @@
       'hero.title': 'Always believe that something<br>wonderful is about to happen',
       'about.title': 'About',
       'about.name': 'Yaze Li',
+      'about.label.github': 'GitHub',
+      'about.label.email': 'Email',
+      'about.label.degree': 'Education',
+      'about.cert': 'Certifications',
       'about.degree': "Bachelor's Degree in <a href=\"https://ci.hfut.edu.cn/English/Home.htm\" target=\"_blank\">Intelligent Science and Technology</a> @ <a href=\"https://www.hfut.edu.cn/\" target=\"_blank\">Hefei University of Technology</a>",
       'skills.title': 'Tech Stack',
       'nav.projects': 'Projects',
@@ -75,6 +84,7 @@
       'skills.mlDl': 'ML & DL',
       'skills.dataProc': 'Data processing',
       'skills.devTools': 'Development tools',
+      'skills.research': 'Research',
       'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',
       'lang.toggle': '中',
     }
@@ -92,6 +102,14 @@
       const key = el.getAttribute('data-i18n');
       if (i18n[lang] && i18n[lang][key]) {
         el.innerHTML = i18n[lang][key];
+      }
+    });
+
+    // 更新所有 data-i18n-aria 元素（不覆盖子元素，仅设置 aria-label）
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (i18n[lang] && i18n[lang][key]) {
+        el.setAttribute('aria-label', i18n[lang][key]);
       }
     });
 
