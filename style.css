@@ -600,12 +600,14 @@ img {
   word-break: break-word;
 }
 
-.info-value.link {
+.info-value.link,
+.info-value a {
   color: var(--text-accent);
   transition: opacity 0.2s;
 }
 
-.info-value.link:hover {
+.info-value.link:hover,
+.info-value a:hover {
   opacity: 0.7;
 }
 
