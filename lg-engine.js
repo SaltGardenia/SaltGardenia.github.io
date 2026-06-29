@@ -180,7 +180,18 @@ function buildFilterSVG(id, width, height) {
 // ---------- Liquid Glass 元素管理器 ----------
 const glassInstances = [];
 
-function initLiquidGlassEngine() {
+function initLiquidGlassEngine(force) {
+  // force 模式下：清除所有 lgReady 标记并移除旧 filter 元素
+  if (force) {
+    document.querySelectorAll('[data-lg-ready]').forEach(el => delete el.dataset.lgReady);
+    const svgContainer = document.getElementById('lg-filters');
+    if (svgContainer) {
+      const defs = svgContainer.querySelector('defs');
+      if (defs) defs.innerHTML = '';
+    }
+    glassInstances.length = 0;
+  }
+
   const glassWarps = document.querySelectorAll('.glass-warp');
   const svgContainer = document.getElementById('lg-filters') || createFilterContainer();
 

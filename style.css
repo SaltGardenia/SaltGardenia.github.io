@@ -20,11 +20,11 @@ html {
 
 /* ---------- 亮/暗色主题 CSS 变量 ---------- */
 :root {
-  --bg-primary: #faf7f3;
-  --bg-secondary: #faf7f3;
-  --text-primary: #2d2d3f;
-  --text-secondary: #787880;
-  --text-accent: #5b6e9a;
+  --bg-primary: #ffded5;   /* 多巴胺暖珊瑚 */
+  --bg-secondary: #e8d8ff;  /* 多巴胺淡紫 */
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-accent: #5a6b7c;
   --card-bg: rgba(255, 255, 255, 0.55);
   --card-shadow: rgba(0, 0, 0, 0.05);
   --card-shadow-hover: rgba(0, 0, 0, 0.1);
@@ -33,13 +33,13 @@ html {
   --glass-shadow-btn: 0 6px 24px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
   --nav-bg-scrolled: rgba(255, 255, 255, 0.7);
   --nav-shadow: rgba(0, 0, 0, 0.06);
-  --mobile-menu-bg: rgba(250, 247, 243, 0.96);
+  --mobile-menu-bg: rgba(255, 222, 213, 0.96);  /* 多巴胺暖珊瑚 */
   --overlay-bg: rgba(0, 0, 0, 0.15);
   --about-image-shadow: rgba(0, 0, 0, 0.08);
-  --skill-tag-bg: rgba(91, 110, 154, 0.07);
-  --skill-tag-hover-bg: rgba(91, 110, 154, 0.14);
+  --skill-tag-bg: rgba(90, 107, 124, 0.12);
+  --skill-tag-hover-bg: rgba(90, 107, 124, 0.20);
   --bar-bg: #2d2d3f;
-  --hero-bg: #faf7f3;
+  --hero-bg: #ffded5;     /* 多巴胺暖珊瑚 */
   --border-color: rgba(0, 0, 0, 0.08);
   --btn-hover-bg: rgba(0, 0, 0, 0.05);
   --btn-hover-bg-dark: rgba(0, 0, 0, 0.08);
@@ -541,7 +541,7 @@ img {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -569,6 +569,12 @@ img {
   display: block;
 }
 
+/* 左侧证书卡片 — 与头像同宽 */
+.about-left .info-item {
+  width: 390px;
+  max-width: 100%;
+}
+
 /* 右侧信息列表 */
 .about-info {
   flex: 1;
@@ -594,14 +600,15 @@ img {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0;
   padding: 12px 22px;
   border-radius: 60px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
   border: none;
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.10),
+    0 1px 4px rgba(0, 0, 0, 0.06),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
   transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
@@ -610,7 +617,8 @@ img {
 .info-item:hover {
   background: rgba(255, 255, 255, 0.15);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 6px 24px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
@@ -652,9 +660,11 @@ img {
 
 .info-text {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
   min-width: 0;
+  width: 100%;
   position: relative;
   z-index: 2;
 }
@@ -664,7 +674,8 @@ img {
   font-weight: 600;
   color: var(--text-secondary);
   letter-spacing: 0.04em;
-  margin-bottom: 2px;
+  flex-shrink: 0;
+  min-width: 48px;
 }
 
 .info-value {
@@ -676,13 +687,21 @@ img {
 
 .info-value.link,
 .info-value a {
-  color: var(--text-accent);
+  color: inherit;
   transition: opacity 0.2s;
 }
 
 .info-value.link:hover,
 .info-value a:hover {
   opacity: 0.7;
+}
+
+/* 外部链接小箭头 ↗（仅 about 区域） */
+.about-content a[target="_blank"]::after {
+  content: " ↗";
+  font-size: 0.75em;
+  opacity: 0.6;
+  display: inline;
 }
 
 /* ---------- 技能分类展示 ---------- */
@@ -978,14 +997,12 @@ img {
   pointer-events: auto;
 }
 
-/* 磨砂玻璃底层 */
+/* 磨砂玻璃底层（backdrop-filter 由上方 #navbar > .glass-warp 统一规则提供） */
 .liquid-glass-btn-pill .glass-warp {
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   z-index: 0;
   pointer-events: none;
 }
@@ -1012,6 +1029,53 @@ img {
     rgba(255, 255, 255, 0) 100%
   );
   transition: background 0.2s ease;
+}
+
+/* 按钮容器 — GitHub 与 Google Scholar 并排 */
+.about-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* GitHub/Google Scholar 胶囊按钮 */
+.github-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 28px;
+  border-radius: 60px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.10);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  align-self: flex-start;
+}
+.github-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+.github-btn .btn-text {
+  position: relative;
+  z-index: 2;
+}
+.github-btn .glass-highlight {
+  display: none;
 }
 
 /* 鼠标跟随高光 — 已禁用 */

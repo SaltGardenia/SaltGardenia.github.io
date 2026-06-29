@@ -33,9 +33,12 @@
       'about.name': '李亚泽',
       'about.label.github': 'GitHub',
       'about.label.email': '邮箱',
-      'about.label.degree': '学历',
+      'about.label.degree': '学士学位',
       'about.cert': '证书',
-      'about.degree': '学士学位 · <a href="https://www.hfut.edu.cn/" target="_blank">合肥工业大学</a> · <a href="https://ci.hfut.edu.cn/index.htm" target="_blank">智能科学与技术</a>',
+      'about.label.orcid': 'ORCiD',
+      'about.label.research': '研究方向',
+      'about.label.scholar': 'Google Scholar',
+      'about.degree': '<a href="https://www.hfut.edu.cn/" target="_blank">合肥工业大学</a> · <a href="https://ci.hfut.edu.cn/index.htm" target="_blank">智能科学与技术</a>',
       'skills.title': '技术栈',
       'nav.projects': '项目',
       'projects.title': '项目',
@@ -65,9 +68,12 @@
       'about.name': 'Yaze Li',
       'about.label.github': 'GitHub',
       'about.label.email': 'Email',
-      'about.label.degree': 'Education',
+      'about.label.degree': 'Bachelor\'s',
       'about.cert': 'Certifications',
-      'about.degree': "Bachelor's Degree in <a href=\"https://ci.hfut.edu.cn/English/Home.htm\" target=\"_blank\">Intelligent Science and Technology</a> @ <a href=\"https://www.hfut.edu.cn/\" target=\"_blank\">Hefei University of Technology</a>",
+      'about.label.orcid': 'ORCiD',
+      'about.label.research': 'Research',
+      'about.label.scholar': 'Google Scholar',
+      'about.degree': '<a href="https://ci.hfut.edu.cn/English/Home.htm" target="_blank">Intelligent Science and Technology</a> @ <a href="https://www.hfut.edu.cn/" target="_blank">Hefei University of Technology</a>',
       'skills.title': 'Tech Stack',
       'nav.projects': 'Projects',
       'projects.title': 'Projects',
@@ -172,18 +178,20 @@
     let time = 0;
     let blobs = [];
     let orbs = [];
+    const blobCount = 10;
+    const orbCount = 14;
     let animationId = null;
 
-    // 均衡饱和度配色
+    // 原本的多巴胺色系 — 明亮活力
     const palette = [
-      { r: 230, g: 140, b: 175 }, // 粉
-      { r: 120, g: 180, b: 240 }, // 天蓝
-      { r: 130, g: 220, b: 160 }, // 薄荷
-      { r: 200, g: 145, b: 240 }, // 紫
-      { r: 240, g: 190, b: 130 }, // 杏
-      { r: 120, g: 195, b: 240 }, // 雾蓝
-      { r: 235, g: 140, b: 170 }, // 玫瑰
-      { r: 170, g: 145, b: 240 }, // 薰衣草
+      { r: 255, g: 140, b: 125 },  // 珊瑚
+      { r: 255, g: 195, b: 85 },   // 橙
+      { r: 255, g: 230, b: 85 },   // 黄
+      { r: 85, g: 225, b: 175 },   // 薄荷
+      { r: 85, g: 200, b: 255 },   // 天蓝
+      { r: 220, g: 140, b: 255 },  // 紫
+      { r: 255, g: 145, b: 195 },  // 粉
+      { r: 255, g: 195, b: 145 },  // 蜜桃
     ];
 
     function rgba(c, a) { return `rgba(${c.r|0},${c.g|0},${c.b|0},${a})`; }
@@ -194,8 +202,8 @@
       reset() {
         this.x = Math.random() * W;
         this.y = Math.random() * H;
-        this.radius = Math.random() * 400 + 300;
-        this.opacity = Math.random() * 0.25 + 0.25;
+        this.radius = Math.random() * 600 + 400;
+        this.opacity = Math.random() * 0.22 + 0.20;
         this.pulseSpeed = Math.random() * 0.0008 + 0.0003;
         this.phase = Math.random() * Math.PI * 2;
         this.vx = (Math.random() - 0.5) * 6.0;
@@ -245,8 +253,8 @@
       reset() {
         this.x = Math.random() * W;
         this.y = Math.random() * H;
-        this.radius = Math.random() * 160 + 100;
-        this.opacity = Math.random() * 0.2 + 0.2;
+        this.radius = Math.random() * 220 + 130;
+        this.opacity = Math.random() * 0.18 + 0.15;
         this.pulseSpeed = Math.random() * 0.003 + 0.0015;
         this.phase = Math.random() * Math.PI * 2;
         this.vx = (Math.random() - 0.5) * 12.0;
@@ -295,14 +303,14 @@
       resizeCanvas();
       blobs = [];
       orbs = [];
-      const blobCount = Math.min(Math.floor(W / 120) + 4, 14);
+      const blobCount = Math.min(Math.floor(W / 140) + 3, 10);
       for (let i = 0; i < blobCount; i++) blobs.push(new GlowBlob());
-      const orbCount = Math.min(Math.floor(W / 80) + 4, 18);
+      const orbCount = Math.min(Math.floor(W / 100) + 3, 14);
       for (let i = 0; i < orbCount; i++) orbs.push(new FloatingOrb());
     }
 
     function drawBackground() {
-      ctx.fillStyle = '#e8e4e6';
+      ctx.fillStyle = '#ffece5';  /* 多巴胺暖底色 */
       ctx.fillRect(0, 0, W, H);
     }
 
@@ -452,9 +460,10 @@
     initLiquidGlassEngine();
   });
 
-  // 页面完全加载后再检查一次（应对字体/图片加载后布局偏移）
+  // 页面完全加载后重新初始化 Liquid Glass（应对图片加载后的布局偏移）
   window.addEventListener('load', function () {
     handleNavbarScroll();
+    initLiquidGlassEngine(true);
   });
 
 })();
