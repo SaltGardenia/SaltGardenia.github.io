@@ -432,17 +432,18 @@ img {
   z-index: 1;
   text-align: left;
   padding: 24vh 0 0 5%;
-  width: 80%;
+  width: 92%;
   max-width: 960px;
 }
 
 .hero-title {
   font-size: clamp(1.6rem, 4.5vw, 2.8rem);
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: clamp(0.03em, 0.6vw, 0.12em);
   color: #2d2d3f;
   text-shadow: 0 2px 30px rgba(255, 255, 255, 0.5);
   margin-bottom: 16px;
+  white-space: nowrap;
 }
 
 /* ---------- 通用区块 ---------- */
@@ -1175,11 +1176,12 @@ img {
 
   .hero-content {
     padding: 20vh 0 0 5%;
-    width: 90%;
+    width: 95%;
   }
 
   .hero-title {
     font-size: clamp(1.6rem, 7vw, 2.4rem);
+    letter-spacing: clamp(0.02em, 0.4vw, 0.06em);
   }
 
   .section-title {
@@ -1311,11 +1313,12 @@ img {
 
   .hero-content {
     padding: 16vh 0 0 4%;
-    width: 90%;
+    width: 95%;
   }
 
   .hero-title {
-    font-size: clamp(1.3rem, 6vw, 1.8rem);
+    font-size: clamp(1.1rem, 5.5vw, 1.8rem);
+    letter-spacing: 0.02em;
   }
 
   .section {
