@@ -432,13 +432,14 @@ img {
   z-index: 1;
   text-align: left;
   padding: 24vh 0 0 5%;
-  width: 60%;
+  width: 80%;
+  max-width: 960px;
 }
 
 .hero-title {
   font-size: clamp(1.6rem, 4.5vw, 2.8rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.12em;
   color: #2d2d3f;
   text-shadow: 0 2px 30px rgba(255, 255, 255, 0.5);
   margin-bottom: 16px;
@@ -878,7 +879,7 @@ img {
 /* ===== Liquid Glass 圆形按钮（回到顶部） ===== */
 .liquid-glass-btn-pill {
   position: fixed;
-  bottom: 32px;
+  top: 80%;
   right: 32px;
   width: 48px;
   height: 48px;
@@ -893,7 +894,7 @@ img {
   z-index: 900;
   opacity: 0;
   transform: translateY(16px) scale(0.9);
-  box-shadow: var(--glass-shadow-btn);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
   pointer-events: none;
 }
@@ -959,7 +960,7 @@ img {
 /* 悬停 */
 .liquid-glass-btn-pill:hover {
   transform: scale(1.1);
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .liquid-glass-btn-pill:hover .btn-text {
@@ -1174,7 +1175,7 @@ img {
 
   .hero-content {
     padding: 20vh 0 0 5%;
-    width: 80%;
+    width: 90%;
   }
 
   .hero-title {

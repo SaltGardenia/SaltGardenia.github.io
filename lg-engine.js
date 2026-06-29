@@ -284,12 +284,6 @@ function initGlassButtonSprings() {
       refraction: new Spring(0.8, 100, 5),
       specAngle: new Spring(Math.PI / 3, 300, 30),
     };
-    if (isPill) {
-      springs.shadowY = new Spring(4, 500, 40);
-      springs.shadowBlur = new Spring(12, 500, 40);
-      springs.shadowAlpha = new Spring(0.15, 500, 40);
-    }
-
     let state = { hovering: false, pressed: false };
     let rafId = null;
     let lastTimestamp = null;
@@ -305,29 +299,14 @@ function initGlassButtonSprings() {
 
       if (state.pressed) {
         springs.scale.setTarget(0.98);
-        if (isPill) {
-          springs.shadowY.setTarget(8);
-          springs.shadowBlur.setTarget(16);
-          springs.shadowAlpha.setTarget(0.25);
-        }
         springs.refraction.setTarget(1.5);
         springs.specAngle.setTarget(-4.19);
       } else if (state.hovering) {
         springs.scale.setTarget(1.05);
-        if (isPill) {
-          springs.shadowY.setTarget(16);
-          springs.shadowBlur.setTarget(24);
-          springs.shadowAlpha.setTarget(0.22);
-        }
         springs.refraction.setTarget(1.0);
         springs.specAngle.setTarget(-1.05);
       } else {
         springs.scale.setTarget(1);
-        if (isPill) {
-          springs.shadowY.setTarget(4);
-          springs.shadowBlur.setTarget(12);
-          springs.shadowAlpha.setTarget(0.15);
-        }
         springs.refraction.setTarget(0.8);
         springs.specAngle.setTarget(1.05);
       }
@@ -345,14 +324,6 @@ function initGlassButtonSprings() {
       if (roundedS !== lastScale) {
         btn.style.transform = roundedS === 1 ? '' : `scale(${roundedS})`;
         lastScale = roundedS;
-      }
-
-      if (isPill) {
-        const shadow = `${Math.round(springs.shadowY.value)}px ${Math.round(springs.shadowBlur.value)}px rgba(0,0,0,${Math.round(springs.shadowAlpha.value * 1000) / 1000})`;
-        if (shadow !== lastShadow) {
-          btn.style.boxShadow = shadow;
-          lastShadow = shadow;
-        }
       }
 
       // 动态更新 filter displacement scale
