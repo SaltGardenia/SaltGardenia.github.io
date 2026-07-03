@@ -406,7 +406,28 @@
     });
   });
 
-  // 桌面导航点击交由滚动监听自动更新高亮，不干预 active 类以避免闪烁
+  // ---------- 桌面导航链接点击处理（防止重复点击同一标签时页面微动）----------
+  const desktopNavLinks = document.querySelectorAll('.nav-links a');
+
+  desktopNavLinks.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId.startsWith('#')) {
+        // URL hash 已经与目标一致 -> 已在当前页面 -> 阻止浏览器默认行为，不滚动
+        if (location.hash === targetId) {
+          e.preventDefault();
+          return;
+        }
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // 滚动完成后更新 URL hash，确保下次点击同一标签时能匹配拦截
+          history.replaceState(null, '', targetId);
+        }
+      }
+    });
+  });
 
   // 窗口尺寸变化时，如果回到桌面视图且菜单开着，自动关闭
   window.addEventListener('resize', function () {
