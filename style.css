@@ -91,12 +91,9 @@ img {
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nav-group:hover {
-  transform: translateX(-50%) scale(1.025);
-}
+
 
 /* --- 居中导航药丸 --- */
 #navbar {
@@ -491,12 +488,8 @@ img {
 /* ---------- 通用区块 ---------- */
 .section {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
   display: flex;
-  align-items: center;
   padding: 80px 24px;
-  overflow: hidden;
 }
 
 .section-alt {
