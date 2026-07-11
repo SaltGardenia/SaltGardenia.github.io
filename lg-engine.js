@@ -256,10 +256,8 @@ function initLiquidGlassEngine(force) {
     svgContainer.getElementById(`${id}-specAlpha`).setAttribute('slope', '0.5');
 
     // 让 glass-warp 通过 backdrop-filter 引用专属 SVG filter
-    // 重要：必须是 backdrop-filter（过滤背后背景），不是 filter（过滤自身）
     warp.style.backdropFilter = `url(#${id})`;
     warp.style.webkitBackdropFilter = `url(#${id})`;
-    // 移除 inline filter，由 CSS 的 backdrop-filter 统一处理
     warp.style.filter = 'none';
 
     parent.dataset.lgReady = 'true';
@@ -298,7 +296,7 @@ function initGlassButtonSprings() {
     let state = { hovering: false, pressed: false };
     let rafId = null;
     let lastTimestamp = null;
-    let lastScale, lastShadow, lastFilterScale, lastSpecAngle;
+    let lastShadow, lastFilterScale, lastSpecAngle;
 
     const warp = btn.querySelector('.glass-warp');
     const filterId = warp ? warp.style.filter.replace('url(#', '').replace(')', '') : null;
@@ -309,11 +307,11 @@ function initGlassButtonSprings() {
       lastTimestamp = ts;
 
       if (state.pressed) {
-        springs.scale.setTarget(0.98);
+        springs.scale.setTarget(1);
         springs.refraction.setTarget(1.5);
         springs.specAngle.setTarget(-4.19);
       } else if (state.hovering) {
-        springs.scale.setTarget(1.05);
+        springs.scale.setTarget(1);
         springs.refraction.setTarget(1.0);
         springs.specAngle.setTarget(-1.05);
       } else {
@@ -331,11 +329,8 @@ function initGlassButtonSprings() {
       }
 
       const s = springs.scale.value;
-      const roundedS = Math.round(s * 10000) / 10000;
-      if (roundedS !== lastScale) {
-        btn.style.transform = roundedS === 1 ? '' : `scale(${roundedS})`;
-        lastScale = roundedS;
-      }
+      // Scale transform disabled — button size stays fixed
+
 
       // 动态更新 filter displacement scale
       if (filterId) {

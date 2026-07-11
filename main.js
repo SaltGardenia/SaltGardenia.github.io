@@ -176,6 +176,77 @@
         link.classList.add('active');
       }
     });
+    if (!window._navHovering && !window._navClickLocked) {
+      updateNavIndicator();
+    }
+  }
+
+  // ---------- 液态玻璃指示器位置更新 ----------
+  function updateNavIndicator() {
+    const indicator = document.getElementById('navIndicator');
+    const activeLink = document.querySelector('.nav-links a.active');
+    if (indicator) {
+      if (activeLink) {
+        indicator.style.width = activeLink.offsetWidth + 'px';
+        indicator.style.left = activeLink.offsetLeft + 'px';
+        // 不在此处控制 opacity，由 CSS/mousemove/mouseleave 管理
+      } else {
+        indicator.style.opacity = '0';
+      }
+    }
+  }
+
+  // ---------- 导航栏鼠标悬浮选择模式 ----------
+  function initNavHoverSelection() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    if (!navbar || !navLinks.length) return;
+
+    navbar.addEventListener('mousemove', function (e) {
+      window._navHovering = true;
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const indicator = document.getElementById('navIndicator');
+      if (!indicator) return;
+
+      // 找到光标下方最近的导航链接
+      let closestLink = null;
+      let closestDist = Infinity;
+      navLinks.forEach(link => {
+        const linkRect = link.getBoundingClientRect();
+        const linkCenterX = linkRect.left + linkRect.width / 2;
+        const dist = Math.abs(mouseX - linkCenterX);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestLink = link;
+        }
+      });
+
+      if (closestLink) {
+        // 移动指示器到该链接（如果已隐藏则重新显示）
+        const linkRelLeft = closestLink.offsetLeft;
+        indicator.style.width = closestLink.offsetWidth + 'px';
+        indicator.style.left = linkRelLeft + 'px';
+        indicator.style.opacity = '1';
+
+        // 悬浮模式下：仅 hovered 链接变粉，其他链接黑色
+        navLinks.forEach(l => {
+          l.classList.remove('active', 'hovered');
+        });
+        closestLink.classList.add('hovered');
+      }
+    });
+
+    navbar.addEventListener('mouseleave', function () {
+      window._navHovering = false;
+      // 移除所有 hovered 状态
+      navLinks.forEach(l => l.classList.remove('hovered'));
+      // 恢复 active 状态，保持选中链接为粉色
+      handleNavbarScroll();
+      // 指示器消失
+      const indicator = document.getElementById('navIndicator');
+      if (indicator) indicator.style.opacity = '0';
+    });
   }
 
   // ---------- 5. Canvas 多色彩融合流动背景 ----------
@@ -414,24 +485,26 @@
     });
   });
 
-  // ---------- 桌面导航链接点击处理（防止重复点击同一标签时页面微动）----------
+  // ---------- 桌面导航链接点击处理 ----------
   const desktopNavLinks = document.querySelectorAll('.nav-links a');
 
   desktopNavLinks.forEach((link) => {
     link.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
       if (targetId && targetId.startsWith('#')) {
-        // URL hash 已经与目标一致 -> 已在当前页面 -> 阻止浏览器默认行为，不滚动
-        if (location.hash === targetId) {
-          e.preventDefault();
-          return;
-        }
         const target = document.querySelector(targetId);
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // 滚动完成后更新 URL hash，确保下次点击同一标签时能匹配拦截
           history.replaceState(null, '', targetId);
+          // 退出悬浮选择模式，锁定指示器位置，防止滚动过程中抽动
+          window._navHovering = false;
+          window._navClickLocked = true;
+          desktopNavLinks.forEach(l => l.classList.remove('active', 'hovered'));
+          this.classList.add('active');
+          updateNavIndicator();
+          // 滚动结束后释放锁定
+          setTimeout(() => { window._navClickLocked = false; }, 800);
         }
       }
     });
@@ -442,6 +515,7 @@
     if (window.innerWidth > 768 && mobileMenu.classList.contains('open')) {
       closeMobileMenu();
     }
+    updateNavIndicator();
   });
 
   // ---------- 9. 语言切换按钮绑定 ----------
@@ -477,6 +551,8 @@
   // ---------- 12. 页面加载完成后初始化 ----------
   window.addEventListener('DOMContentLoaded', function () {
     handleNavbarScroll();
+    // 初始化导航栏鼠标悬浮选择模式
+    initNavHoverSelection();
     // 初始化 Hero Canvas 光效背景（固定，作为全站背景）
     cleanupCanvas = initLightCanvas();
 

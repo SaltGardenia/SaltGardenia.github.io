@@ -14,26 +14,24 @@
 
   <!-- ===== 顶部导航栏组 ===== -->
   <div class="nav-group">
-    <!-- 左侧小房子药丸（独立组件） -->
-    <div class="nav-actions-pill liquid-glass-nav" id="homePill">
-      <span class="glass-warp"></span>
-      <a href="#home" data-i18n-aria="nav.home" class="nav-home-btn" aria-label="首页">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-      </a>
-      <div class="glass-highlight"></div>
-      <div class="glass-highlight-overlay"></div>
-    </div>
     <!-- 居中导航药丸 -->
     <nav id="navbar" class="liquid-glass-nav">
       <!-- 玻璃 warp 层（backdrop-filter + 边缘折射） -->
       <span class="glass-warp"></span>
       <div class="nav-links" id="navLinks">
-        <a href="#about" data-i18n="nav.about">关于</a>
-        <a href="#projects" data-i18n="nav.projects">项目</a>
-        <a href="#skills" data-i18n="nav.skills">技术栈</a>
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="#about" data-i18n="nav.about">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          关于
+        </a>
+        <a href="#projects" data-i18n="nav.projects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          项目
+        </a>
+        <a href="#skills" data-i18n="nav.skills">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          技术栈
+        </a>
       </div>
       <!-- 玻璃高光层 -->
       <div class="glass-highlight"></div>

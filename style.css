@@ -53,7 +53,12 @@ html {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  background-color: transparent;
+  --grid-color: #E1E1E1;
+  background-color: #F3F3F3;
+  background-image:
+    linear-gradient(0deg, transparent 24%, var(--grid-color) 25%, var(--grid-color) 26%, transparent 27%, transparent 74%, var(--grid-color) 75%, var(--grid-color) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, var(--grid-color) 25%, var(--grid-color) 26%, transparent 27%, transparent 74%, var(--grid-color) 75%, var(--grid-color) 76%, transparent 77%, transparent);
+  background-size: 55px 55px;
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -95,24 +100,39 @@ img {
 
 
 
-/* --- 居中导航药丸 --- */
+/* --- 居中导航药丸（Neumorphic 风格 + 磨砂高斯模糊） --- */
 #navbar {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 48px;
-  padding: 0 8px;
-  gap: 4px;
-  border-radius: 24px;
+  height: 52px;
+  padding: 0 6px;
+  gap: 0;
+  border-radius: 30px;
   border: none;
-  overflow: hidden;
+  overflow: visible;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  box-shadow: var(--glass-shadow);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  background: rgba(248, 248, 248, 0.025);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
+    inset 6px -6px 1px -6px rgba(255,255,255,0.4),
+    inset -6px 6px 1px -6px rgba(255,255,255,0.4),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 4px 8px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s ease;
 }
 
 #navbar:hover {
-  box-shadow: var(--glass-shadow-hover);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
+    inset 6px -6px 1px -6px rgba(255,255,255,0.4),
+    inset -6px 6px 1px -6px rgba(255,255,255,0.4),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 6px 16px rgba(0,0,0,0.18);
 }
 
 /* 玻璃 warp 层：位置/尺寸占位，backdrop-filter 由 lg-engine.js 按需注入 */
@@ -125,16 +145,12 @@ img {
   pointer-events: none;
 }
 
-/* 导航栏及按钮玻璃背景模糊 */
-#navbar > .glass-warp,
-#homePill > .glass-warp,
-#langPill > .glass-warp,
-.liquid-glass-btn-pill > .glass-warp {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+#navbar > .glass-highlight-overlay,
+#langPill > .glass-highlight-overlay {
+  display: none;
 }
 
-/* 导航链接 — 药丸标签 */
+/* 导航链接 — 分段控件标签 */
 .nav-links {
   display: flex;
   gap: 2px;
@@ -146,28 +162,86 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  padding: 0 20px;
-  border-radius: 60px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #3d3d50;
+  gap: 7px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000000;
   white-space: nowrap;
+  background: transparent;
   transition:
     background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
     color 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nav-links a.active {
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 0.06);
+.nav-links a svg {
+  flex-shrink: 0;
 }
 
+.nav-links a.active {
+  background: transparent;
+  color: #EB5771;
+  box-shadow: none;
+}
 
-/* --- 右侧操作按钮独立药丸 --- */
+/* 鼠标悬浮选择模式：跟踪的链接变粉 */
+.nav-links a.hovered {
+  color: #EB5771;
+}
+
+/* --- 液态玻璃选中指示器 --- */
+.nav-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.6),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.6),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.3),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.3),
+    inset 0 0 2px rgba(0,0,0,0.4),
+    0 1px 3px rgba(0,0,0,0.08);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: left 350ms cubic-bezier(0.22, 1, 0.36, 1), width 350ms cubic-bezier(0.22, 1, 0.36, 1), opacity 350ms ease;
+  overflow: hidden;
+}
+
+/* 液态玻璃指示器渐变覆层（模拟原始 CSS 的 ::after） */
+.nav-indicator::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* 液态玻璃指示器边框光晕 */
+.nav-indicator::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  filter: blur(1px);
+  pointer-events: none;
+}
 .nav-actions-pill {
   position: fixed;
   top: 16px;
@@ -184,39 +258,13 @@ img {
   overflow: hidden;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   box-shadow: var(--glass-shadow);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: box-shadow 0.35s ease;
 }
 
 .nav-actions-pill:hover {
-  transform: scale(1.05);
   box-shadow: var(--glass-shadow-hover);
-}
-
-/* --- 左侧小房子独立药丸 --- */
-#homePill {
-  position: relative;
-  top: auto;
-  left: auto;
-}
-
-.nav-home-btn {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 60px;
-  color: #5a5a72;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.nav-home-btn:hover {
-  color: #2d2d3f;
 }
 
 #langPill {
@@ -240,12 +288,11 @@ img {
   color: #5a5a72;
   letter-spacing: 0.02em;
   border-radius: 60px;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .lang-toggle:hover {
-  transform: scale(1.1);
-  color: #2d2d3f;
+  color: #EB5771;
 }
 
 .lang-icon {
@@ -266,11 +313,11 @@ img {
   width: 36px;
   padding: 0;
   border-radius: 60px;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hamburger-btn:hover {
-  transform: scale(1.1);
+  color: #EB5771;
 }
 
 .hamburger-icon {
@@ -337,8 +384,6 @@ img {
   width: 260px;
   height: 100vh;
   background: var(--mobile-menu-bg);
-  backdrop-filter: saturate(120%) blur(8px);
-  -webkit-backdrop-filter: saturate(120%) blur(8px);
   z-index: 2000;
   padding: 80px 32px 32px;
   transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -376,7 +421,7 @@ img {
 }
 
 .mobile-nav-links a:hover {
-  color: var(--text-accent);
+  color: #EB5771;
 }
 
 /* 移动端菜单底部功能按钮 */
@@ -406,6 +451,7 @@ img {
 .mobile-actions .lang-toggle:hover,
 .mobile-actions .theme-toggle:hover {
   background: var(--btn-hover-bg-dark);
+  color: #EB5771;
 }
 
 .mobile-actions .border-top {
@@ -597,24 +643,26 @@ img {
   padding: 12px 22px;
   border-radius: 60px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border: none;
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.10),
     0 1px 4px rgba(0, 0, 0, 0.06),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
-  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  transition: box-shadow 0.25s;
 }
 
 .info-item:hover {
-  background: rgba(255, 255, 255, 0.15);
   box-shadow:
     0 6px 24px rgba(0, 0, 0, 0.14),
     0 2px 8px rgba(0, 0, 0, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+}
+
+.info-item:hover .info-label,
+.info-item:hover .info-value {
 }
 
 /* Liquid Glass 效果层 — info-item 专用 */
@@ -686,7 +734,8 @@ img {
 
 .info-value.link:hover,
 .info-value a:hover {
-  opacity: 0.7;
+  color: #EB5771;
+  opacity: 1;
 }
 
 /* 外部链接小箭头 ↗（仅 about 区域） */
@@ -737,25 +786,23 @@ img {
   font-size: 0.875rem;
   font-weight: 500;
   color: #3d3d50;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border-radius: 60px;
   border: none;
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.06),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
-  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  transition: box-shadow 0.25s;
   user-select: none;
   cursor: default;
 }
 
 .skill-tag:hover {
-  background: rgba(255, 255, 255, 0.15);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
 }
 
 /* ---------- 项目卡片 ---------- */
@@ -776,11 +823,10 @@ img {
   box-shadow: var(--glass-shadow);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  transition: box-shadow 0.35s ease;
 }
 
 .project-card.liquid-glass-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--glass-shadow-hover);
 }
 
@@ -861,14 +907,14 @@ img {
   font-size: 0.75rem;
   font-weight: 500;
   color: #3d3d50;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border-radius: 60px;
   border: none;
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.06),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
-  transition: background 0.25s, box-shadow 0.25s;
+  transition: box-shadow 0.25s;
 }
 
 /* ===== Liquid Glass 按钮 ===== */
@@ -881,12 +927,12 @@ img {
   padding: 12px 28px;
   border-radius: 60px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border: none;
   cursor: pointer;
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  transition: box-shadow 0.35s ease;
 }
 
 /* 磨砂玻璃底层 — 仅 blur，无底色 */
@@ -944,17 +990,15 @@ img {
 
 /* ----- 悬停 ----- */
 .liquid-glass-btn:hover {
-  transform: scale(1.04);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .liquid-glass-btn:hover .btn-text {
-  color: var(--text-accent);
+  color: #EB5771;
 }
 
 /* ----- 按下 ----- */
 .liquid-glass-btn:active {
-  transform: scale(0.96);
 }
 
 .liquid-glass-btn:active .glass-warp {
@@ -980,6 +1024,8 @@ img {
   opacity: 0;
   transform: translateY(16px) scale(0.9);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
   pointer-events: none;
 }
@@ -1041,7 +1087,7 @@ img {
   padding: 8px 28px;
   border-radius: 60px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.10);
+  background: transparent;
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -1052,16 +1098,17 @@ img {
     0 2px 8px rgba(0, 0, 0, 0.06),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
-  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  transition: box-shadow 0.25s;
   align-self: flex-start;
 }
 .github-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+.github-btn:hover .btn-text {
+  color: #EB5771;
 }
 .github-btn .btn-text {
   position: relative;
@@ -1089,17 +1136,15 @@ img {
 
 /* 悬停 */
 .liquid-glass-btn-pill:hover {
-  transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .liquid-glass-btn-pill:hover .btn-text {
-  color: #2d2d3f;
+  color: #EB5771;
 }
 
 /* 按下 */
 .liquid-glass-btn-pill:active {
-  transform: scale(0.92);
 }
 
 /* ===== Liquid Glass Section 玻璃面板增强 ===== */
@@ -1175,11 +1220,11 @@ img {
   width: 36px;
   padding: 0;
   border-radius: 60px;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hamburger-btn:hover {
-  transform: scale(1.1);
+  color: #EB5771;
 }
 
 .hamburger-icon {
@@ -1202,7 +1247,7 @@ img {
 }
 
 .hamburger-btn:hover .hamburger-icon span {
-  background: #2d2d3f;
+  background: #EB5771;
 }
 
 /* ---------- 页脚 ---------- */
@@ -1549,4 +1594,277 @@ button {
 /* 所有可点击元素细微回弹 */
 a, button {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   Neumorphic Glass 效果 — 应用到所有按钮和卡片
+   ============================================================ */
+
+/* --- 共享 neumorphic 内阴影变量 --- */
+.liquid-glass-nav,
+.nav-actions-pill,
+.info-item.liquid-glass-card,
+.project-card.liquid-glass-card,
+.liquid-glass-btn,
+.liquid-glass-btn-pill,
+.github-btn,
+.skill-tag {
+  --neumorph-inset-top: inset 2px -2px 1px -1px rgba(255,255,255,0.7);
+  --neumorph-inset-bottom: inset -2px 2px 1px -1px rgba(255,255,255,0.7);
+  --neumorph-inset-wide-top: inset 6px -6px 1px -6px rgba(255,255,255,0.4);
+  --neumorph-inset-wide-bottom: inset -6px 6px 1px -6px rgba(255,255,255,0.4);
+  --neumorph-inset-dark: inset 0 0 2px rgba(0,0,0,0.5);
+  --neumorph-drop: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+/* --- 导航药丸 neumorphic 增强（仅 .nav-actions-pill，不含 #navbar） --- */
+.nav-actions-pill {
+  box-shadow:
+    var(--neumorph-inset-top),
+    var(--neumorph-inset-bottom),
+    var(--neumorph-inset-wide-top),
+    var(--neumorph-inset-wide-bottom),
+    var(--neumorph-inset-dark),
+    var(--neumorph-drop);
+  background: transparent;
+}
+
+.nav-actions-pill:hover {
+  box-shadow:
+    var(--neumorph-inset-top),
+    var(--neumorph-inset-bottom),
+    var(--neumorph-inset-wide-top),
+    var(--neumorph-inset-wide-bottom),
+    var(--neumorph-inset-dark),
+    0 6px 16px rgba(0,0,0,0.18);
+}
+
+/* --- 信息卡片 neumorphic 增强 --- */
+.info-item.liquid-glass-card {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 4px 12px rgba(0,0,0,0.1);
+  background: transparent;
+}
+
+.info-item.liquid-glass-card:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.75),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.75),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.45),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.45),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* --- 项目卡片 neumorphic 增强 --- */
+.project-card.liquid-glass-card {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.5),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.5),
+    inset 6px -6px 1px -6px rgba(255,255,255,0.3),
+    inset -6px 6px 1px -6px rgba(255,255,255,0.3),
+    inset 0 0 2px rgba(0,0,0,0.4),
+    0 4px 12px rgba(0,0,0,0.1);
+  background: transparent;
+}
+
+.project-card.liquid-glass-card:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.55),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.55),
+    inset 6px -6px 1px -6px rgba(255,255,255,0.35),
+    inset -6px 6px 1px -6px rgba(255,255,255,0.35),
+    inset 0 0 2px rgba(0,0,0,0.4),
+    0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Liquid Glass 按钮 neumorphic 增强 --- */
+.liquid-glass-btn {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.6),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.6),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.35),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.35),
+    inset 0 0 1px rgba(0,0,0,0.5),
+    0 3px 8px rgba(0,0,0,0.1) !important;
+  background: transparent;
+}
+
+.liquid-glass-btn:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.65),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.65),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.5),
+    0 5px 14px rgba(0,0,0,0.15) !important;
+}
+
+/* --- 回到顶部圆形按钮 neumorphic 增强 --- */
+.liquid-glass-btn-pill {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 4px 12px rgba(0,0,0,0.12) !important;
+}
+
+.liquid-glass-btn-pill:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.75),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.75),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.45),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.45),
+    inset 0 0 2px rgba(0,0,0,0.5),
+    0 6px 16px rgba(0,0,0,0.18) !important;
+}
+
+/* --- GitHub/Scholar 胶囊按钮 neumorphic 增强 --- */
+.github-btn {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.6),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.6),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.35),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.35),
+    inset 0 0 1px rgba(0,0,0,0.5),
+    0 3px 8px rgba(0,0,0,0.08);
+  background: transparent;
+}
+
+.github-btn:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.65),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.65),
+    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
+    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.5),
+    0 5px 14px rgba(0,0,0,0.12);
+}
+
+/* --- 技能标签 neumorphic 增强 --- */
+.skill-tag {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.5),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.5),
+    inset 0 0 1px rgba(0,0,0,0.3),
+    0 2px 6px rgba(0,0,0,0.06);
+  background: transparent;
+}
+
+.skill-tag:hover {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.55),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.55),
+    inset 0 0 1px rgba(0,0,0,0.3),
+    0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- 项目卡片内标签 neumorphic --- */
+.project-card-tags span {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.4),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.25),
+    0 2px 4px rgba(0,0,0,0.05);
+  background: transparent;
+}
+
+/* --- 玻璃面板 Section neumorphic --- */
+.liquid-glass-section {
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255,255,255,0.3),
+    inset -2px 2px 1px -1px rgba(255,255,255,0.3),
+    inset 6px -6px 1px -6px rgba(255,255,255,0.2),
+    inset -6px 6px 1px -6px rgba(255,255,255,0.2),
+    inset 0 0 2px rgba(0,0,0,0.3),
+    0 4px 16px rgba(0,0,0,0.08) !important;
+}
+
+/* --- 导航链接激活态（由主样式区 .nav-links a.active 控制） --- */
+
+/* ============================================================
+   Neumorphic Glass 效果 — 导航栏内部元素
+   ============================================================ */
+
+/* --- 语言切换按钮 neumorphic --- */
+.lang-toggle {
+  background: transparent;
+}
+
+.lang-toggle:hover {
+  color: #EB5771;
+}
+
+/* --- 汉堡菜单按钮 neumorphic --- */
+.hamburger-btn {
+  box-shadow:
+    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
+    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.2);
+  background: transparent;
+}
+
+.hamburger-btn:hover {
+  box-shadow:
+    inset 1px -1px 1px -1px rgba(255,255,255,0.5),
+    inset -1px 1px 1px -1px rgba(255,255,255,0.5),
+    inset 0 0 1px rgba(0,0,0,0.25);
+  color: #EB5771;
+}
+
+/* --- 移动端侧边菜单 neumorphic --- */
+.mobile-menu {
+  box-shadow:
+    inset 2px 0 1px -1px rgba(255,255,255,0.4),
+    inset -4px 0 1px -4px rgba(255,255,255,0.3),
+    inset 0 0 2px rgba(0,0,0,0.4),
+    -4px 0 16px rgba(0,0,0,0.1) !important;
+}
+
+/* --- 移动端菜单关闭按钮 neumorphic --- */
+.close-btn {
+  box-shadow:
+    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
+    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.2);
+  background: transparent;
+  border-radius: 60px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #EB5771;
+}
+
+/* --- 移动端导航链接 neumorphic --- */
+.mobile-nav-links a {
+  box-shadow:
+    inset 1px -1px 1px -1px rgba(255,255,255,0.3),
+    inset -1px 1px 1px -1px rgba(255,255,255,0.3),
+    inset 0 0 1px rgba(0,0,0,0.15);
+  background: transparent;
+  border-radius: 60px;
+  padding: 6px 16px;
+}
+
+/* --- 移动端操作按钮 neumorphic --- */
+.mobile-actions .lang-toggle,
+.mobile-actions .theme-toggle {
+  box-shadow:
+    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
+    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
+    inset 0 0 1px rgba(0,0,0,0.2);
+  background: transparent;
 }
