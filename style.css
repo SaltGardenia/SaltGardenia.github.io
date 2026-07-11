@@ -433,8 +433,7 @@ img {
   border-top: 1px solid var(--border-color);
 }
 
-.mobile-actions .lang-toggle,
-.mobile-actions .theme-toggle {
+.mobile-actions .lang-toggle {
   flex: 1;
   padding: 10px 16px;
   font-size: 0.875rem;
@@ -448,14 +447,9 @@ img {
   transition: background 0.25s;
 }
 
-.mobile-actions .lang-toggle:hover,
-.mobile-actions .theme-toggle:hover {
+.mobile-actions .lang-toggle:hover {
   background: var(--btn-hover-bg-dark);
   color: #EB5771;
-}
-
-.mobile-actions .border-top {
-  border-top: 1px solid var(--border-color);
 }
 
 /* 菜单遮罩 */
@@ -497,11 +491,6 @@ img {
   z-index: -1;
 }
 
-/* 各 section 的 canvas 已移除，不再需要 */
-.section-canvas {
-  display: none;
-}
-
 /* 内容区域毛玻璃效果（liquid-glass-section 增强版会覆盖此样式） */
 .section-glass {
   position: relative;
@@ -536,10 +525,6 @@ img {
   position: relative;
   display: flex;
   padding: 80px 24px;
-}
-
-.section-alt {
-  background-color: var(--bg-secondary);   /* 交替背景 */
 }
 
 .section-inner {
@@ -606,12 +591,6 @@ img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-/* 左侧证书卡片 — 与头像同宽 */
-.about-left .info-item {
-  width: 390px;
-  max-width: 100%;
 }
 
 /* 右侧信息列表 */
@@ -683,20 +662,6 @@ img {
 
 .info-item.liquid-glass-card > .glass-highlight-overlay {
   display: none;
-}
-
-.info-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: var(--skill-tag-bg);
-  color: var(--text-accent);
-  position: relative;
-  z-index: 2;
 }
 
 .info-text {
@@ -1392,16 +1357,6 @@ img {
     text-align: left;
   }
 
-  .info-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .info-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-
   .info-value {
     font-size: 0.85rem;
   }
@@ -1525,16 +1480,6 @@ img {
   .info-item {
     padding: 10px 12px;
     gap: 10px;
-  }
-
-  .info-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .info-icon svg {
-    width: 16px;
-    height: 16px;
   }
 
   .info-value {
@@ -1860,8 +1805,7 @@ a, button {
 }
 
 /* --- 移动端操作按钮 neumorphic --- */
-.mobile-actions .lang-toggle,
-.mobile-actions .theme-toggle {
+.mobile-actions .lang-toggle {
   box-shadow:
     inset 1px -1px 1px -1px rgba(255,255,255,0.4),
     inset -1px 1px 1px -1px rgba(255,255,255,0.4),
