@@ -1,6 +1,6 @@
 /* ============================================================
-   苹果风格个人主页 - style.css
-   配色 / 字体 / 磨砂玻璃 / 响应式布局
+   苹果风格个人主页 - main.css
+   配色 / 字体 / 磨砂玻璃 / 响应式布局 / 液态玻璃
    ============================================================ */
 
 /* ---------- 全局重置 & 基础 ---------- */
@@ -13,15 +13,14 @@
 }
 
 html {
-  /* 全局平滑滚动 */
   scroll-behavior: smooth;
   font-size: 16px;
 }
 
-/* ---------- 亮/暗色主题 CSS 变量 ---------- */
+/* ---------- CSS 变量 ---------- */
 :root {
-  --bg-primary: #ffded5;   /* 多巴胺暖珊瑚 */
-  --bg-secondary: #e8d8ff;  /* 多巴胺淡紫 */
+  --bg-primary: #ffded5;
+  --bg-secondary: #e8d8ff;
   --text-primary: #1a1a1a;
   --text-secondary: #555555;
   --text-accent: #5a6b7c;
@@ -33,13 +32,13 @@ html {
   --glass-shadow-btn: 0 6px 24px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
   --nav-bg-scrolled: rgba(255, 255, 255, 0.7);
   --nav-shadow: rgba(0, 0, 0, 0.06);
-  --mobile-menu-bg: rgba(255, 222, 213, 0.96);  /* 多巴胺暖珊瑚 */
+  --mobile-menu-bg: rgba(255, 222, 213, 0.96);
   --overlay-bg: rgba(0, 0, 0, 0.15);
   --about-image-shadow: rgba(0, 0, 0, 0.08);
   --skill-tag-bg: rgba(90, 107, 124, 0.12);
   --skill-tag-hover-bg: rgba(90, 107, 124, 0.20);
   --bar-bg: #2d2d3f;
-  --hero-bg: #ffded5;     /* 多巴胺暖珊瑚 */
+  --hero-bg: #ffded5;
   --border-color: rgba(0, 0, 0, 0.08);
   --btn-hover-bg: rgba(0, 0, 0, 0.05);
   --btn-hover-bg-dark: rgba(0, 0, 0, 0.08);
@@ -47,8 +46,6 @@ html {
   --nav-bg: rgba(50, 50, 60, 0.15);
   --nav-bg-scrolled: rgba(50, 50, 60, 0.3);
 }
-
-
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -78,15 +75,12 @@ img {
 }
 
 /* ============================================================
-   Liquid Glass 导航栏效果（移植自 rdev/liquid-glass-react）
+   Liquid Glass 导航栏效果
    ============================================================ */
-
-/* --- 玻璃导航容器（共用的定位/布局） --- */
 .liquid-glass-nav {
   position: relative;
 }
 
-/* --- 导航栏组（包裹小房子 + 居中导航） --- */
 .nav-group {
   position: fixed;
   top: 16px;
@@ -98,9 +92,6 @@ img {
   gap: 16px;
 }
 
-
-
-/* --- 居中导航药丸（Neumorphic 风格 + 磨砂高斯模糊） --- */
 #navbar {
   position: relative;
   display: inline-flex;
@@ -135,7 +126,6 @@ img {
     0 6px 16px rgba(0,0,0,0.18);
 }
 
-/* 玻璃 warp 层：位置/尺寸占位，backdrop-filter 由 lg-engine.js 按需注入 */
 .glass-warp {
   position: absolute;
   inset: 0;
@@ -150,7 +140,6 @@ img {
   display: none;
 }
 
-/* 导航链接 — 分段控件标签 */
 .nav-links {
   display: flex;
   gap: 2px;
@@ -186,12 +175,11 @@ img {
   box-shadow: none;
 }
 
-/* 鼠标悬浮选择模式：跟踪的链接变粉 */
 .nav-links a.hovered {
   color: #EB5771;
 }
 
-/* --- 液态玻璃选中指示器 --- */
+/* 液态玻璃选中指示器 */
 .nav-indicator {
   position: absolute;
   top: 0;
@@ -215,7 +203,6 @@ img {
   overflow: hidden;
 }
 
-/* 液态玻璃指示器渐变覆层（模拟原始 CSS 的 ::after） */
 .nav-indicator::after {
   content: '';
   position: absolute;
@@ -232,7 +219,6 @@ img {
   pointer-events: none;
 }
 
-/* 液态玻璃指示器边框光晕 */
 .nav-indicator::before {
   content: '';
   position: absolute;
@@ -242,6 +228,8 @@ img {
   filter: blur(1px);
   pointer-events: none;
 }
+
+/* 右上角操作药丸 */
 .nav-actions-pill {
   position: fixed;
   top: 16px;
@@ -271,7 +259,6 @@ img {
   right: 24px;
 }
 
-/* 中英文切换 */
 .lang-toggle {
   position: relative;
   z-index: 2;
@@ -299,7 +286,7 @@ img {
   font-weight: 700;
 }
 
-/* ===== 汉堡菜单按钮（移动端） ===== */
+/* ===== 汉堡菜单按钮 ===== */
 .hamburger-btn {
   position: relative;
   z-index: 2;
@@ -339,19 +326,15 @@ img {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* 桌面端隐藏汉堡菜单按钮 */
 #hamburgerPill {
   display: none;
 }
 
 /* ===== Liquid Glass 高光与边框效果 ===== */
-
-/* 玻璃高光层 — 已禁用鼠标发光效果 */
 .glass-highlight {
   display: none;
 }
 
-/* 边框高光 — 模拟玻璃边缘反光 */
 .glass-highlight-overlay {
   position: absolute;
   inset: 0;
@@ -376,11 +359,11 @@ img {
   box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.4) inset;
 }
 
-/* ---------- 移动端侧边菜单 ---------- */
+/* ===== 移动端侧边菜单 ===== */
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -280px;    /* 从右侧滑入 */
+  right: -280px;
   width: 260px;
   height: 100vh;
   background: var(--mobile-menu-bg);
@@ -424,7 +407,6 @@ img {
   color: #EB5771;
 }
 
-/* 移动端菜单底部功能按钮 */
 .mobile-actions {
   display: flex;
   gap: 12px;
@@ -452,7 +434,6 @@ img {
   color: #EB5771;
 }
 
-/* 菜单遮罩 */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -468,7 +449,7 @@ img {
   pointer-events: auto;
 }
 
-/* ---------- 首屏全屏 Banner ---------- */
+/* ===== 首屏 Hero ===== */
 .hero {
   position: relative;
   width: 100%;
@@ -479,9 +460,10 @@ img {
   justify-content: flex-start;
   overflow: hidden;
   background: transparent;
+  opacity: 1;
+  transform: none;
 }
 
-/* Canvas 光效背景 — 固定不动，作为全站背景 */
 .hero-canvas {
   position: fixed;
   top: 0;
@@ -491,7 +473,6 @@ img {
   z-index: -1;
 }
 
-/* 内容区域毛玻璃效果（liquid-glass-section 增强版会覆盖此样式） */
 .section-glass {
   position: relative;
   z-index: 1;
@@ -520,7 +501,7 @@ img {
   white-space: nowrap;
 }
 
-/* ---------- 通用区块 ---------- */
+/* ===== 通用区块 ===== */
 .section {
   position: relative;
   display: flex;
@@ -544,15 +525,15 @@ img {
   text-align: center;
 }
 
-/* 标题左对齐 */
 .section-title.left {
   text-align: left;
 }
 
-/* ---------- 关于我（左右分栏） ---------- */
+/* ===== 关于我 ===== */
 #about {
   background: transparent;
 }
+
 .about-content .section-glass-inner {
   display: flex;
   align-items: center;
@@ -576,7 +557,6 @@ img {
   letter-spacing: 0.02em;
 }
 
-/* 左侧头像 - 保持原比例（放大 50%） */
 .about-avatar {
   position: relative;
   z-index: 2;
@@ -593,7 +573,6 @@ img {
   display: block;
 }
 
-/* 右侧信息列表 */
 .about-info {
   flex: 1;
   min-width: 280px;
@@ -603,7 +582,6 @@ img {
   gap: 20px;
 }
 
-/* 姓名 — 不放在框内，大号文字 */
 .about-name {
   position: relative;
   z-index: 2;
@@ -614,6 +592,7 @@ img {
   padding: 0 4px;
 }
 
+/* ===== Info Item ===== */
 .info-item {
   position: relative;
   display: flex;
@@ -640,11 +619,6 @@ img {
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
 }
 
-.info-item:hover .info-label,
-.info-item:hover .info-value {
-}
-
-/* Liquid Glass 效果层 — info-item 专用 */
 .info-item.liquid-glass-card > .glass-warp {
   position: absolute;
   inset: 0;
@@ -656,10 +630,7 @@ img {
   pointer-events: none;
 }
 
-.info-item.liquid-glass-card > .glass-highlight {
-  display: none;
-}
-
+.info-item.liquid-glass-card > .glass-highlight,
 .info-item.liquid-glass-card > .glass-highlight-overlay {
   display: none;
 }
@@ -703,7 +674,6 @@ img {
   opacity: 1;
 }
 
-/* 外部链接小箭头 ↗（仅 about 区域） */
 .about-content a[target="_blank"]::after {
   content: " ↗";
   font-size: 0.75em;
@@ -711,7 +681,7 @@ img {
   display: inline;
 }
 
-/* ---------- 技能分类展示 ---------- */
+/* ===== 技能分类 ===== */
 #skills {
   background: transparent;
 }
@@ -770,7 +740,13 @@ img {
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- 项目卡片 ---------- */
+.info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ===== 项目卡片 ===== */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -779,7 +755,6 @@ img {
   margin: 0 auto;
 }
 
-/* Liquid Glass 卡片容器 */
 .project-card.liquid-glass-card {
   position: relative;
   border-radius: 60px;
@@ -795,7 +770,6 @@ img {
   box-shadow: var(--glass-shadow-hover);
 }
 
-/* 卡片内部的 glass-warp 层 */
 .project-card .glass-warp {
   position: absolute;
   inset: 0;
@@ -805,12 +779,10 @@ img {
   pointer-events: none;
 }
 
-/* 卡片高光层 — 已禁用 */
 .project-card > .glass-highlight {
   display: none;
 }
 
-/* 卡片边框层 */
 .project-card > .glass-highlight-overlay {
   position: absolute;
   inset: 0;
@@ -834,7 +806,6 @@ img {
   transition: background 0.2s ease;
 }
 
-/* 卡片内容区 */
 .card-inner {
   position: relative;
   z-index: 2;
@@ -900,7 +871,6 @@ img {
   transition: box-shadow 0.35s ease;
 }
 
-/* 磨砂玻璃底层 — 仅 blur，无底色 */
 .liquid-glass-btn .glass-warp {
   position: absolute;
   inset: 0;
@@ -912,7 +882,6 @@ img {
   pointer-events: none;
 }
 
-/* 玻璃边框 — mask-composite 技法，仅边缘有细白线 */
 .liquid-glass-btn .glass-highlight-overlay {
   position: absolute;
   inset: 0;
@@ -936,12 +905,10 @@ img {
   transition: background 0.2s ease;
 }
 
-/* 鼠标跟随高光 — 已禁用 */
 .liquid-glass-btn .glass-highlight {
   display: none;
 }
 
-/* 文字层 */
 .liquid-glass-btn .btn-text {
   position: relative;
   z-index: 2;
@@ -953,7 +920,6 @@ img {
   transition: color 0.2s;
 }
 
-/* ----- 悬停 ----- */
 .liquid-glass-btn:hover {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
@@ -962,15 +928,11 @@ img {
   color: #EB5771;
 }
 
-/* ----- 按下 ----- */
-.liquid-glass-btn:active {
-}
-
 .liquid-glass-btn:active .glass-warp {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 
-/* ===== Liquid Glass 圆形按钮（回到顶部） ===== */
+/* ===== 回到顶部按钮 ===== */
 .liquid-glass-btn-pill {
   position: fixed;
   top: 80%;
@@ -1001,7 +963,6 @@ img {
   pointer-events: auto;
 }
 
-/* 磨砂玻璃底层（backdrop-filter 由上方 #navbar > .glass-warp 统一规则提供） */
 .liquid-glass-btn-pill .glass-warp {
   position: absolute;
   inset: 0;
@@ -1011,7 +972,6 @@ img {
   pointer-events: none;
 }
 
-/* 玻璃边框 */
 .liquid-glass-btn-pill .glass-highlight-overlay {
   position: absolute;
   inset: 0;
@@ -1035,7 +995,29 @@ img {
   transition: background 0.2s ease;
 }
 
-/* 按钮容器 — GitHub 与 Google Scholar 并排 */
+.liquid-glass-btn-pill .glass-highlight {
+  display: none;
+}
+
+.liquid-glass-btn-pill .btn-text {
+  position: relative;
+  z-index: 2;
+  color: #4a4a60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.liquid-glass-btn-pill:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.liquid-glass-btn-pill:hover .btn-text {
+  color: #EB5771;
+}
+
+/* ===== About buttons (GitHub/Scholar/ORCiD) ===== */
 .about-btns {
   display: flex;
   flex-direction: row;
@@ -1043,7 +1025,6 @@ img {
   flex-wrap: wrap;
 }
 
-/* GitHub/Google Scholar 胶囊按钮 */
 .github-btn {
   position: relative;
   display: inline-flex;
@@ -1066,53 +1047,28 @@ img {
   transition: box-shadow 0.25s;
   align-self: flex-start;
 }
+
 .github-btn:hover {
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.12);
 }
+
 .github-btn:hover .btn-text {
   color: #EB5771;
 }
+
 .github-btn .btn-text {
   position: relative;
   z-index: 2;
 }
+
 .github-btn .glass-highlight {
   display: none;
 }
 
-/* 鼠标跟随高光 — 已禁用 */
-.liquid-glass-btn-pill .glass-highlight {
-  display: none;
-}
-
-/* 图标 */
-.liquid-glass-btn-pill .btn-text {
-  position: relative;
-  z-index: 2;
-  color: #4a4a60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s;
-}
-
-/* 悬停 */
-.liquid-glass-btn-pill:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.liquid-glass-btn-pill:hover .btn-text {
-  color: #EB5771;
-}
-
-/* 按下 */
-.liquid-glass-btn-pill:active {
-}
-
-/* ===== Liquid Glass Section 玻璃面板增强 ===== */
+/* ===== Liquid Glass Section ===== */
 .liquid-glass-section {
   position: relative;
   overflow: hidden;
@@ -1159,7 +1115,6 @@ img {
   z-index: 2;
 }
 
-/* 移除原先 section-glass 上的 backdrop-filter（已移至 glass-warp） */
 .section-glass.liquid-glass-section {
   background: transparent;
   backdrop-filter: none;
@@ -1167,55 +1122,7 @@ img {
   border: none;
 }
 
-/* ========== 移动端汉堡菜单按钮（桌面隐藏） ========== */
-#hamburgerPill {
-  display: none;
-}
-
-.hamburger-btn {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  height: 36px;
-  width: 36px;
-  padding: 0;
-  border-radius: 60px;
-  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hamburger-btn:hover {
-  color: #EB5771;
-}
-
-.hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  width: 20px;
-  height: 20px;
-}
-
-.hamburger-icon span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #5a5a72;
-  border-radius: 2px;
-  transition: background 0.2s;
-}
-
-.hamburger-btn:hover .hamburger-icon span {
-  background: #EB5771;
-}
-
-/* ---------- 页脚 ---------- */
+/* ===== Footer ===== */
 .footer {
   background: transparent;
   padding: 48px 24px 32px;
@@ -1233,7 +1140,7 @@ img {
   letter-spacing: 0.02em;
 }
 
-/* ---------- 滚动进入视口动画（默认隐藏，由JS添加 .visible 触发） ---------- */
+/* ===== 滚动进入视口动画 ===== */
 .section,
 .about-content,
 .skills-categories {
@@ -1242,7 +1149,6 @@ img {
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 当元素进入视口后，添加 .visible 类显示 */
 .section.visible,
 .about-content.visible,
 .skills-categories.visible {
@@ -1250,21 +1156,17 @@ img {
   transform: translateY(0);
 }
 
-/* 首屏无需动画，立即显示 */
 .hero {
   opacity: 1;
   transform: none;
 }
 
-/* ---------- 响应式：平板及手机 ---------- */
-
-/* 平板：≤ 1024px */
+/* ===== 响应式 ===== */
 @media (max-width: 1024px) {
   .skills-categories .section-glass-inner {
     grid-template-columns: 1fr;
     max-width: 600px;
   }
-
   .about-content .section-glass-inner {
     gap: 40px;
   }
@@ -1273,129 +1175,102 @@ img {
   }
 }
 
-/* 手机：≤ 768px */
 @media (max-width: 768px) {
-  /* 桌面导航隐藏，显示汉堡按钮 */
   #navbar {
     display: none;
   }
-
   .nav-links {
     display: none;
   }
-
   #hamburgerPill {
     display: inline-flex;
     right: 12px;
     padding: 4px 4px;
   }
-
   #langPill {
     right: 66px;
     padding: 4px 4px;
   }
-
   #langPill .lang-toggle {
     height: 32px;
     padding: 0 8px;
     font-size: 0.65rem;
   }
-
-  /* 手机端改为自适应高度，但保持至少一屏 */
   .section {
     height: auto;
     min-height: 100vh;
     padding: 80px 16px;
   }
-
   .hero {
     height: 100vh;
     min-height: 500px;
   }
-
   .hero-content {
     padding: 20vh 0 0 5%;
     width: 95%;
   }
-
   .hero-title {
     font-size: clamp(1.6rem, 7vw, 2.4rem);
     letter-spacing: clamp(0.02em, 0.4vw, 0.06em);
   }
-
   .section-title {
     margin-bottom: 32px;
     font-size: clamp(1.5rem, 5vw, 2rem);
   }
-
   .about-content .section-glass-inner {
     flex-direction: column;
     text-align: center;
     gap: 28px;
   }
-
   .about-avatar {
     width: 220px;
   }
-
   .about-left {
     gap: 12px;
   }
   .about-content .about-name {
     font-size: 1.6rem;
   }
-
   .about-info {
     min-width: 0;
     max-width: 100%;
     gap: 14px;
   }
-
   .info-item {
     padding: 12px 16px;
     gap: 12px;
     text-align: left;
   }
-
   .info-value {
     font-size: 0.85rem;
   }
-
   .skills-categories .section-glass-inner {
     gap: 24px;
   }
-
   .skill-category-title {
     font-size: 0.9rem;
   }
-
   .skill-tag {
     padding: 6px 14px;
     font-size: 0.8rem;
   }
-
   .card-inner {
     padding: 22px 18px;
   }
-
   .project-card-title {
     font-size: 1rem;
   }
-
   .project-card-desc {
     font-size: 0.8rem;
   }
-
   .mobile-menu.open {
     right: 0;
   }
-
   .projects-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* 小手机：≤ 480px */
 @media (max-width: 480px) {
   #langPill {
     top: 10px;
@@ -1403,412 +1278,19 @@ img {
     height: 40px;
     min-width: 40px;
   }
-
   #hamburgerPill {
     top: 10px;
     right: 10px;
     height: 40px;
     min-width: 40px;
   }
-
   #langPill .lang-toggle {
     height: 30px;
     padding: 0 8px;
     font-size: 0.6rem;
   }
-
   .hamburger-btn {
-    height: 32px;
-    width: 32px;
+    height: 30px;
+    width: 30px;
   }
-
-  .hamburger-icon {
-    gap: 3px;
-    width: 16px;
-    height: 16px;
-  }
-
-  .hamburger-icon span {
-    height: 1.8px;
-  }
-
-  .liquid-glass-btn-pill {
-    bottom: 16px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .hero {
-    min-height: 420px;
-  }
-
-  .hero-content {
-    padding: 16vh 0 0 4%;
-    width: 95%;
-  }
-
-  .hero-title {
-    font-size: clamp(1.1rem, 5.5vw, 1.8rem);
-    letter-spacing: 0.02em;
-  }
-
-  .section {
-    padding: 60px 12px;
-  }
-
-  .section-title {
-    margin-bottom: 24px;
-    font-size: clamp(1.3rem, 5vw, 1.6rem);
-  }
-
-  .about-avatar {
-    width: 180px;
-  }
-
-  .about-left {
-    gap: 8px;
-  }
-  .about-content .about-name {
-    font-size: 1.3rem;
-  }
-
-  .about-info {
-    gap: 10px;
-  }
-
-  .info-item {
-    padding: 10px 12px;
-    gap: 10px;
-  }
-
-  .info-value {
-    font-size: 0.78rem;
-  }
-
-  .skills-categories .section-glass-inner {
-    gap: 18px;
-  }
-
-  .skill-tag {
-    padding: 5px 12px;
-    font-size: 0.75rem;
-  }
-
-  .card-inner {
-    padding: 18px 14px;
-  }
-
-  .project-card-title {
-    font-size: 0.9rem;
-  }
-
-  .project-card-desc {
-    font-size: 0.75rem;
-  }
-
-  .project-card-tags span {
-    font-size: 0.7rem;
-    padding: 3px 10px;
-  }
-
-  .liquid-glass-btn {
-    padding: 8px 16px;
-  }
-
-  .liquid-glass-btn .btn-text {
-    font-size: 0.78rem;
-  }
-
-  .footer {
-    padding: 32px 16px 24px;
-  }
-
-  .copyright {
-    font-size: 0.75rem;
-  }
-}
-
-/* ---------- 回到顶部按钮（已迁移至 liquid-glass-btn-pill） ---------- */
-
-/* ---------- 按钮和链接通用交互 ---------- */
-button {
-  font-family: inherit;
-}
-
-/* 所有可点击元素细微回弹 */
-a, button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ============================================================
-   Neumorphic Glass 效果 — 应用到所有按钮和卡片
-   ============================================================ */
-
-/* --- 共享 neumorphic 内阴影变量 --- */
-.liquid-glass-nav,
-.nav-actions-pill,
-.info-item.liquid-glass-card,
-.project-card.liquid-glass-card,
-.liquid-glass-btn,
-.liquid-glass-btn-pill,
-.github-btn,
-.skill-tag {
-  --neumorph-inset-top: inset 2px -2px 1px -1px rgba(255,255,255,0.7);
-  --neumorph-inset-bottom: inset -2px 2px 1px -1px rgba(255,255,255,0.7);
-  --neumorph-inset-wide-top: inset 6px -6px 1px -6px rgba(255,255,255,0.4);
-  --neumorph-inset-wide-bottom: inset -6px 6px 1px -6px rgba(255,255,255,0.4);
-  --neumorph-inset-dark: inset 0 0 2px rgba(0,0,0,0.5);
-  --neumorph-drop: 0 4px 8px rgba(0,0,0,0.12);
-}
-
-/* --- 导航药丸 neumorphic 增强（仅 .nav-actions-pill，不含 #navbar） --- */
-.nav-actions-pill {
-  box-shadow:
-    var(--neumorph-inset-top),
-    var(--neumorph-inset-bottom),
-    var(--neumorph-inset-wide-top),
-    var(--neumorph-inset-wide-bottom),
-    var(--neumorph-inset-dark),
-    var(--neumorph-drop);
-  background: transparent;
-}
-
-.nav-actions-pill:hover {
-  box-shadow:
-    var(--neumorph-inset-top),
-    var(--neumorph-inset-bottom),
-    var(--neumorph-inset-wide-top),
-    var(--neumorph-inset-wide-bottom),
-    var(--neumorph-inset-dark),
-    0 6px 16px rgba(0,0,0,0.18);
-}
-
-/* --- 信息卡片 neumorphic 增强 --- */
-.info-item.liquid-glass-card {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
-    inset 0 0 2px rgba(0,0,0,0.5),
-    0 4px 12px rgba(0,0,0,0.1);
-  background: transparent;
-}
-
-.info-item.liquid-glass-card:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.75),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.75),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.45),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.45),
-    inset 0 0 2px rgba(0,0,0,0.5),
-    0 6px 20px rgba(0,0,0,0.15);
-}
-
-/* --- 项目卡片 neumorphic 增强 --- */
-.project-card.liquid-glass-card {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.5),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.5),
-    inset 6px -6px 1px -6px rgba(255,255,255,0.3),
-    inset -6px 6px 1px -6px rgba(255,255,255,0.3),
-    inset 0 0 2px rgba(0,0,0,0.4),
-    0 4px 12px rgba(0,0,0,0.1);
-  background: transparent;
-}
-
-.project-card.liquid-glass-card:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.55),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.55),
-    inset 6px -6px 1px -6px rgba(255,255,255,0.35),
-    inset -6px 6px 1px -6px rgba(255,255,255,0.35),
-    inset 0 0 2px rgba(0,0,0,0.4),
-    0 6px 20px rgba(0,0,0,0.15);
-}
-
-/* --- Liquid Glass 按钮 neumorphic 增强 --- */
-.liquid-glass-btn {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.6),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.6),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.35),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.35),
-    inset 0 0 1px rgba(0,0,0,0.5),
-    0 3px 8px rgba(0,0,0,0.1) !important;
-  background: transparent;
-}
-
-.liquid-glass-btn:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.65),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.65),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.5),
-    0 5px 14px rgba(0,0,0,0.15) !important;
-}
-
-/* --- 回到顶部圆形按钮 neumorphic 增强 --- */
-.liquid-glass-btn-pill {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.7),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.7),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
-    inset 0 0 2px rgba(0,0,0,0.5),
-    0 4px 12px rgba(0,0,0,0.12) !important;
-}
-
-.liquid-glass-btn-pill:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.75),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.75),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.45),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.45),
-    inset 0 0 2px rgba(0,0,0,0.5),
-    0 6px 16px rgba(0,0,0,0.18) !important;
-}
-
-/* --- GitHub/Scholar 胶囊按钮 neumorphic 增强 --- */
-.github-btn {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.6),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.6),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.35),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.35),
-    inset 0 0 1px rgba(0,0,0,0.5),
-    0 3px 8px rgba(0,0,0,0.08);
-  background: transparent;
-}
-
-.github-btn:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.65),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.65),
-    inset 4px -4px 1px -4px rgba(255,255,255,0.4),
-    inset -4px 4px 1px -4px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.5),
-    0 5px 14px rgba(0,0,0,0.12);
-}
-
-/* --- 技能标签 neumorphic 增强 --- */
-.skill-tag {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.5),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.5),
-    inset 0 0 1px rgba(0,0,0,0.3),
-    0 2px 6px rgba(0,0,0,0.06);
-  background: transparent;
-}
-
-.skill-tag:hover {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.55),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.55),
-    inset 0 0 1px rgba(0,0,0,0.3),
-    0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* --- 项目卡片内标签 neumorphic --- */
-.project-card-tags span {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.4),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.25),
-    0 2px 4px rgba(0,0,0,0.05);
-  background: transparent;
-}
-
-/* --- 玻璃面板 Section neumorphic --- */
-.liquid-glass-section {
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255,255,255,0.3),
-    inset -2px 2px 1px -1px rgba(255,255,255,0.3),
-    inset 6px -6px 1px -6px rgba(255,255,255,0.2),
-    inset -6px 6px 1px -6px rgba(255,255,255,0.2),
-    inset 0 0 2px rgba(0,0,0,0.3),
-    0 4px 16px rgba(0,0,0,0.08) !important;
-}
-
-/* --- 导航链接激活态（由主样式区 .nav-links a.active 控制） --- */
-
-/* ============================================================
-   Neumorphic Glass 效果 — 导航栏内部元素
-   ============================================================ */
-
-/* --- 语言切换按钮 neumorphic --- */
-.lang-toggle {
-  background: transparent;
-}
-
-.lang-toggle:hover {
-  color: #EB5771;
-}
-
-/* --- 汉堡菜单按钮 neumorphic --- */
-.hamburger-btn {
-  box-shadow:
-    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
-    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.2);
-  background: transparent;
-}
-
-.hamburger-btn:hover {
-  box-shadow:
-    inset 1px -1px 1px -1px rgba(255,255,255,0.5),
-    inset -1px 1px 1px -1px rgba(255,255,255,0.5),
-    inset 0 0 1px rgba(0,0,0,0.25);
-  color: #EB5771;
-}
-
-/* --- 移动端侧边菜单 neumorphic --- */
-.mobile-menu {
-  box-shadow:
-    inset 2px 0 1px -1px rgba(255,255,255,0.4),
-    inset -4px 0 1px -4px rgba(255,255,255,0.3),
-    inset 0 0 2px rgba(0,0,0,0.4),
-    -4px 0 16px rgba(0,0,0,0.1) !important;
-}
-
-/* --- 移动端菜单关闭按钮 neumorphic --- */
-.close-btn {
-  box-shadow:
-    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
-    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.2);
-  background: transparent;
-  border-radius: 60px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s;
-}
-
-.close-btn:hover {
-  color: #EB5771;
-}
-
-/* --- 移动端导航链接 neumorphic --- */
-.mobile-nav-links a {
-  box-shadow:
-    inset 1px -1px 1px -1px rgba(255,255,255,0.3),
-    inset -1px 1px 1px -1px rgba(255,255,255,0.3),
-    inset 0 0 1px rgba(0,0,0,0.15);
-  background: transparent;
-  border-radius: 60px;
-  padding: 6px 16px;
-}
-
-/* --- 移动端操作按钮 neumorphic --- */
-.mobile-actions .lang-toggle {
-  box-shadow:
-    inset 1px -1px 1px -1px rgba(255,255,255,0.4),
-    inset -1px 1px 1px -1px rgba(255,255,255,0.4),
-    inset 0 0 1px rgba(0,0,0,0.2);
-  background: transparent;
 }
