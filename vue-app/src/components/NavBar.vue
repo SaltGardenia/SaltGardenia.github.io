@@ -39,15 +39,28 @@ const indicatorRef = ref<HTMLElement | null>(null)
 const { activeSection } = useScrollSpy(['about', 'projects', 'skills'], navRef)
 const { navClickLocked, lockUntilScrollSettles } = useNavLock()
 
+const onResize = (_ev: Event) => updateIndicator(false)
+
 let navHovering = false
 
-function updateIndicator() {
+function updateIndicator(animate = true) {
   const indicator = indicatorRef.value
   const activeLink = navRef.value?.querySelector<HTMLElement>('.nav-links a.active')
-  if (indicator && activeLink) {
-    indicator.style.width = activeLink.offsetWidth + 'px'
-    indicator.style.left = activeLink.offsetLeft + 'px'
-    indicator.style.opacity = '1'
+  if (indicator) {
+    if (activeLink) {
+      if (!animate) {
+        indicator.style.transition = 'none'
+      }
+      indicator.style.width = activeLink.offsetWidth + 'px'
+      indicator.style.left = activeLink.offsetLeft + 'px'
+      indicator.style.opacity = '1'
+      if (!animate) {
+        void indicator.offsetHeight
+        indicator.style.transition = ''
+      }
+    } else {
+      indicator.style.opacity = '0'
+    }
   }
 }
 
@@ -71,7 +84,7 @@ function onNavMouseMove(e: MouseEvent) {
     indicator.style.width = closestLink.offsetWidth + 'px'
     indicator.style.left = closestLink.offsetLeft + 'px'
     indicator.style.opacity = '1'
-    links.forEach(l => { l.classList.remove('active', 'hovered') })
+    links.forEach(l => l.classList.remove('hovered'))
     closestLink.classList.add('hovered')
   }
 }
@@ -80,12 +93,17 @@ function onNavMouseLeave() {
   navHovering = false
   const links = navRef.value?.querySelectorAll('.nav-links a')
   links?.forEach(l => l.classList.remove('hovered'))
-  updateIndicator()
+  updateIndicator(true)
 }
 
 function scrollTo(id: string) {
   navHovering = false
   navClickLocked.value = true
+  const links = navRef.value?.querySelectorAll<HTMLElement>('.nav-links a')
+  links?.forEach(l => l.classList.remove('active'))
+  const target = navRef.value?.querySelector<HTMLElement>('.nav-links a[href="#' + id + '"]')
+  target?.classList.add('active')
+  updateIndicator(false)
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   history.replaceState(null, '', '#' + id)
@@ -97,21 +115,21 @@ watch(activeSection, () => {
   if (!navHovering) nextTick(updateIndicator)
 })
 
-// 语言切换后链接文案/宽度变化，必须重新计算指示器位置
+// 语言切换后链接文案/宽度变化，必须重新计算指示器位置（无动画，避免用户感知错位）
 watch(() => i18nStore.locale, () => {
-  nextTick(updateIndicator)
+  nextTick(() => updateIndicator(false))
 })
 
 onMounted(() => {
   navRef.value?.addEventListener('mousemove', onNavMouseMove)
   navRef.value?.addEventListener('mouseleave', onNavMouseLeave)
   nextTick(updateIndicator)
-  window.addEventListener('resize', updateIndicator)
+  window.addEventListener('resize', onResize)
 })
 
 onUnmounted(() => {
   navRef.value?.removeEventListener('mousemove', onNavMouseMove)
   navRef.value?.removeEventListener('mouseleave', onNavMouseLeave)
-  window.removeEventListener('resize', updateIndicator)
+  window.removeEventListener('resize', onResize)
 })
 </script>

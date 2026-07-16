@@ -3,10 +3,7 @@
     <div class="section-inner reveal">
       <div class="section-head">
         <span class="sec-index">03</span>
-        <div class="sec-head-text">
-          <span class="sec-kicker">{{ t('skills.kicker') }}</span>
-          <h2 class="section-title">{{ t('skills.title') }}</h2>
-        </div>
+        <h2 class="section-title">{{ t('skills.title') }}</h2>
       </div>
       <div class="skills-grid stagger">
         <div v-for="cat in categories" :key="cat.key" class="skill-category">

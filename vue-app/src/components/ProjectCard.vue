@@ -3,7 +3,6 @@
     <div class="project-folio">{{ exp }}</div>
     <div class="project-body">
       <div class="project-meta">
-        <span class="domain">{{ domain === 'system' ? t('projects.cat.system') : t('projects.cat.vision') }}</span>
         <span v-if="role" class="role-badge">{{ t('projects.role.' + role) }}</span>
       </div>
       <h3 class="project-card-title">{{ title }}</h3>
