@@ -1,11 +1,6 @@
 <template>
-  <button class="back-top-btn liquid-glass-btn-pill" :class="{ show }" @click="scrollToTop" aria-label="回到顶部">
-    <span class="glass-warp"></span>
-    <span class="glass-highlight"></span>
-    <span class="glass-highlight-overlay"></span>
-    <span class="btn-text">
-      <IconChevronUp />
-    </span>
+  <button class="back-top-btn" :class="{ show }" @click="scrollToTop" aria-label="回到顶部">
+    <IconChevronUp />
   </button>
 </template>
 

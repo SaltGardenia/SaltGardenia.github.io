@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useLiquidGlass } from '@/composables/useLiquidGlass'
 import HeroSection from '@/components/HeroSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import ProjectsSection from '@/components/ProjectsSection.vue'
@@ -19,15 +18,20 @@ import SkillsSection from '@/components/SkillsSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import BackTopButton from '@/components/BackTopButton.vue'
 
-const { initEngine } = useLiquidGlass()
 const showBackTop = ref(false)
 
 function onScroll() {
   showBackTop.value = window.scrollY > window.innerHeight * 0.5
 }
 
-// Reveal animation via Intersection Observer
-function setupRevealAnimation() {
+// 滚动进入视口动画（reveal）
+function setupReveal() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const els = document.querySelectorAll('.reveal, .stagger')
+  if (reduce) {
+    els.forEach(el => el.classList.add('visible'))
+    return null
+  }
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -40,21 +44,18 @@ function setupRevealAnimation() {
     },
     { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
   )
-  const revealElements = document.querySelectorAll('.section, .about-content, .skills-categories')
-  revealElements.forEach(el => observer.observe(el))
+  els.forEach(el => observer.observe(el))
   return observer
 }
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
-  const observer = setupRevealAnimation()
-
-  initEngine()
-  window.addEventListener('load', () => initEngine(true))
+  onScroll()
+  const observer = setupReveal()
 
   onUnmounted(() => {
     window.removeEventListener('scroll', onScroll)
-    observer.disconnect()
+    observer?.disconnect()
   })
 })
 </script>

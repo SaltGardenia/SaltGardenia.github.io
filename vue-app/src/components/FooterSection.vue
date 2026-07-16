@@ -1,7 +1,8 @@
 <template>
   <footer class="footer">
     <div class="footer-inner">
-      <p class="copyright" v-html="t('footer.copyright')"></p>
+      <span class="sig"><b>LiYaze</b> — Profile & Selected Work</span>
+      <span v-html="t('footer.copyright')"></span>
     </div>
   </footer>
 </template>

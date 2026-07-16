@@ -15,6 +15,9 @@
         <button class="lang-toggle" @click="toggleLocale">
           <span class="lang-icon">{{ t('lang.toggle') }}</span>
         </button>
+        <button class="theme-toggle" @click="toggleTheme">
+          <span class="theme-icon">{{ theme === 'light' ? '☾' : '☀' }}</span>
+        </button>
       </div>
     </div>
   </Teleport>
@@ -24,7 +27,7 @@
 import { useI18nStore } from '@/stores/i18n'
 import IconHome from '@/components/icons/IconHome.vue'
 
-const { t, toggleLocale } = useI18nStore()
+const { t, theme, toggleLocale, toggleTheme } = useI18nStore()
 
 defineProps<{ isOpen: boolean }>()
 const emit = defineEmits<{ close: [] }>()

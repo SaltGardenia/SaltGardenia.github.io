@@ -1,5 +1,6 @@
 <template>
   <svg id="lg-filters" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true"></svg>
+  <div class="bg-aura" aria-hidden="true"></div>
   <div class="nav-group">
     <NavBar />
   </div>
@@ -17,11 +18,11 @@ import LangToggle from '@/components/LangToggle.vue'
 import HamburgerButton from '@/components/HamburgerButton.vue'
 import MobileMenu from '@/components/MobileMenu.vue'
 
-const { setLocale, locale } = useI18nStore()
+const { setLocale, locale, applyTheme } = useI18nStore()
 const mobileOpen = ref(false)
 
 onMounted(() => {
   setLocale(locale)
-  document.documentElement.setAttribute('data-theme', 'light')
+  applyTheme()
 })
 </script>

@@ -1,6 +1,5 @@
 <template>
   <nav ref="navRef" class="liquid-glass-nav" id="navbar">
-    <span class="glass-warp"></span>
     <div class="nav-links">
       <div ref="indicatorRef" class="nav-indicator"></div>
       <a
@@ -14,20 +13,20 @@
         {{ t(item.label) }}
       </a>
     </div>
-    <div class="glass-highlight"></div>
-    <div class="glass-highlight-overlay"></div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useI18nStore } from '@/stores/i18n'
 import { useScrollSpy } from '@/composables/useScrollSpy'
+import { useNavLock } from '@/composables/useNavLock'
 import IconInfo from '@/components/icons/IconInfo.vue'
 import IconFolder from '@/components/icons/IconFolder.vue'
 import IconCode from '@/components/icons/IconCode.vue'
 
-const { t } = useI18nStore()
+const i18nStore = useI18nStore()
+const { t } = i18nStore
 
 const navItems = [
   { id: 'about', label: 'nav.about', icon: IconInfo },
@@ -38,9 +37,9 @@ const navItems = [
 const navRef = ref<HTMLElement | null>(null)
 const indicatorRef = ref<HTMLElement | null>(null)
 const { activeSection } = useScrollSpy(['about', 'projects', 'skills'], navRef)
+const { navClickLocked, lockUntilScrollSettles } = useNavLock()
 
 let navHovering = false
-let navClickLocked = false
 
 function updateIndicator() {
   const indicator = indicatorRef.value
@@ -86,19 +85,33 @@ function onNavMouseLeave() {
 
 function scrollTo(id: string) {
   navHovering = false
-  navClickLocked = true
+  navClickLocked.value = true
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  setTimeout(() => { navClickLocked = false }, 800)
+  history.replaceState(null, '', '#' + id)
+  lockUntilScrollSettles()
 }
+
+// 激活项变化时同步指示器（包括 scroll-spy 正常更新时）
+watch(activeSection, () => {
+  if (!navHovering) nextTick(updateIndicator)
+})
+
+// 语言切换后链接文案/宽度变化，必须重新计算指示器位置
+watch(() => i18nStore.locale, () => {
+  nextTick(updateIndicator)
+})
 
 onMounted(() => {
   navRef.value?.addEventListener('mousemove', onNavMouseMove)
   navRef.value?.addEventListener('mouseleave', onNavMouseLeave)
+  nextTick(updateIndicator)
+  window.addEventListener('resize', updateIndicator)
 })
 
 onUnmounted(() => {
   navRef.value?.removeEventListener('mousemove', onNavMouseMove)
   navRef.value?.removeEventListener('mouseleave', onNavMouseLeave)
+  window.removeEventListener('resize', updateIndicator)
 })
 </script>
