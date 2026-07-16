@@ -4,6 +4,7 @@
     <div class="project-body">
       <div class="project-meta">
         <span class="domain">{{ domain === 'system' ? t('projects.cat.system') : t('projects.cat.vision') }}</span>
+        <span v-if="role" class="role-badge">{{ t('projects.role.' + role) }}</span>
       </div>
       <h3 class="project-card-title">{{ title }}</h3>
       <p class="project-card-desc">{{ description }}</p>
@@ -23,6 +24,7 @@ import { useI18nStore } from '@/stores/i18n'
 defineProps<{
   exp: string
   domain: 'vision' | 'system'
+  role?: string
   title: string
   description: string
   tags: string[]

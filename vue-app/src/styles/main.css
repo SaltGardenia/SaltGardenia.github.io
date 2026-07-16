@@ -762,6 +762,35 @@ img {
 /* ============================================================
    项目卡片（实验条目）
    ============================================================ */
+.project-group {
+  margin-bottom: 56px;
+}
+
+.project-group:last-child {
+  margin-bottom: 0;
+}
+
+.project-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 22px;
+  padding-left: 2px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -846,6 +875,19 @@ img {
 .project-meta .domain {
   color: var(--coral);
   font-weight: 600;
+}
+
+.role-badge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  border: 1px solid color-mix(in srgb, var(--indigo) 35%, transparent);
+  border-radius: 999px;
+  padding: 2px 10px;
 }
 
 .project-card.domain-sys .project-meta .domain {
