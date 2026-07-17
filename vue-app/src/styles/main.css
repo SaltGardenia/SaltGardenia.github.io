@@ -20,7 +20,7 @@
   --grid: #E3DED4;
   --line: rgba(27, 27, 31, 0.10);
   --line-strong: rgba(27, 27, 31, 0.16);
-  --card: rgba(255, 255, 255, 0.55);
+  --card: #FCFAF5;
   --card-border: rgba(27, 27, 31, 0.12);
   --shadow-soft: 0 10px 30px rgba(27, 27, 31, 0.07), 0 2px 8px rgba(27, 27, 31, 0.04);
   --shadow-hover: 0 16px 44px rgba(27, 27, 31, 0.12), 0 4px 12px rgba(27, 27, 31, 0.06);
@@ -45,7 +45,7 @@
   --grid: rgba(255, 255, 255, 0.045);
   --line: rgba(255, 255, 255, 0.10);
   --line-strong: rgba(255, 255, 255, 0.18);
-  --card: rgba(255, 255, 255, 0.04);
+  --card: #15201B;
   --card-border: rgba(255, 255, 255, 0.10);
   --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
   --shadow-hover: 0 16px 44px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.30);
@@ -702,18 +702,16 @@ img {
   gap: 14px;
 }
 
-/* 右侧信息卡：磨砂背景，保证可读性 */
+/* 右侧信息卡：实底卡片，保证可读性 */
 .info-item {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
   border-radius: 14px;
-  background: color-mix(in srgb, var(--bg-base) 72%, var(--card));
+  background: var(--card);
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
