@@ -2,13 +2,17 @@
   <section class="hero" id="home">
     <div class="hero-inner">
       <p class="hero-kicker" ref="kickerRef">{{ t('hero.kicker') }}</p>
-      <h1 class="hero-headline" ref="headlineRef" :aria-label="t('hero.headline')">
+      <h1 class="hero-headline" :class="{ 'is-en': i18nStore.locale === 'en' }" ref="headlineRef" :aria-label="t('hero.headline')">
         <span
-          v-for="(ch, i) in headlineChars"
-          :key="i"
-          class="hero-char"
-          aria-hidden="true"
-        >{{ ch === ' ' ? ' ' : ch }}</span>
+          v-for="(line, li) in headlineLines"
+          :key="li"
+          class="hero-line"
+        ><span
+            v-for="(ch, ci) in Array.from(line)"
+            :key="ci"
+            class="hero-char"
+            aria-hidden="true"
+          >{{ ch === ' ' ? ' ' : ch }}</span></span>
       </h1>
 
       <a class="hero-scroll-hint" ref="scrollRef" href="#about" @click.prevent="scrollTo('about')">
@@ -32,7 +36,16 @@ const kickerRef = ref<HTMLElement | null>(null)
 const headlineRef = ref<HTMLElement | null>(null)
 const scrollRef = ref<HTMLElement | null>(null)
 
-const headlineChars = computed(() => Array.from(t('hero.headline')))
+// 英文标语分两行显示；其余语言取完整文案单行（由 text-wrap 平衡）
+const headlineLines = computed<string[]>(() => {
+  if (i18nStore.locale === 'en') {
+    return [
+      'Always believe that something',
+      'wonderful is about to happen',
+    ]
+  }
+  return [t('hero.headline')]
+})
 
 let mm: gsap.MatchMedia | null = null
 

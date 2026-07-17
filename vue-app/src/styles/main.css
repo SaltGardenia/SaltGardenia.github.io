@@ -466,6 +466,19 @@ img {
   text-wrap: balance;
 }
 
+.hero-line {
+  display: block;
+}
+
+/* 英文两行模式：每行不内部折行，并放宽容器宽度，避免被挤成多行 */
+.hero-headline.is-en {
+  max-width: none;
+}
+
+.hero-headline.is-en .hero-line {
+  white-space: nowrap;
+}
+
 .hero-char {
   display: inline-block;
   white-space: pre;
