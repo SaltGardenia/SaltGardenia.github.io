@@ -466,6 +466,19 @@ img {
   text-wrap: balance;
 }
 
+.hero-char {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform, opacity;
+}
+
+/* JS 启用前隐藏动画元素，避免 GSAP 运行前的闪烁；无 JS 时正常显示 */
+.js .hero-kicker,
+.js .hero-char,
+.js .hero-scroll-hint {
+  opacity: 0;
+}
+
 .hero-scroll-hint {
   margin-top: 56px;
   font-family: var(--font-mono);
@@ -539,15 +552,21 @@ img {
    ============================================================ */
 .about-grid {
   display: grid;
-  grid-template-columns: 260px 240px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 40px;
   align-items: start;
 }
 
-/* 第一栏：头像 + 身份 */
+/* 左栏：头像卡 + 下方按钮卡，纵向堆叠 */
 .about-aside {
   position: sticky;
   top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-id {
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: 18px;
@@ -592,10 +611,8 @@ img {
   letter-spacing: 0.04em;
 }
 
-/* 第二栏：社交按钮 */
+/* 左栏下方：社交按钮卡 */
 .about-connect {
-  position: sticky;
-  top: 96px;
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: 18px;
@@ -692,6 +709,14 @@ img {
   box-shadow: var(--shadow-hover);
 }
 
+.info-item--research {
+  align-items: flex-start;
+}
+
+.info-item--research .info-label {
+  margin-top: 6px;
+}
+
 .info-label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -707,6 +732,50 @@ img {
   font-size: 0.95rem;
   color: var(--ink);
   word-break: break-word;
+}
+
+/* 研究方向：每行一个交叉方向，序号 + 关键词 chip 横向排布 */
+.research-direction {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+.research-direction + .research-direction {
+  border-top: 1px dashed var(--line);
+}
+
+/* 艺术感序号：衬线斜体 + 珊瑚红 + 细线点缀 */
+.dir-index {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--coral);
+  padding-right: 12px;
+  margin-right: 4px;
+  position: relative;
+  letter-spacing: -0.02em;
+}
+
+.dir-index::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 18px;
+  background: var(--line-strong);
+  transform: translateY(-50%) rotate(18deg);
+}
+
+.research-direction .chip {
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
 }
 
 .info-value a {
@@ -964,9 +1033,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--bg-base) 85%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg-base);
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-soft);
   cursor: pointer;
@@ -1058,14 +1125,10 @@ img {
    ============================================================ */
 @media (max-width: 1024px) {
   .about-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 260px 1fr;
     gap: 24px;
   }
-  .about-info {
-    grid-column: 1 / -1;
-  }
-  .about-aside,
-  .about-connect {
+  .about-aside {
     position: static;
   }
   .skills-grid {
@@ -1101,17 +1164,6 @@ img {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-  .about-aside {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    padding: 16px;
-  }
-  .about-avatar {
-    width: 96px;
-    flex-shrink: 0;
-    margin-bottom: 0;
   }
   .projects-grid {
     grid-template-columns: 1fr;

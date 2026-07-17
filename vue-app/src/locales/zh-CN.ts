@@ -7,7 +7,7 @@ export default {
   'about.title': '关于',
   'about.name': '李亚泽',
   'about.role': '合肥工业大学',
-  'about.connect': '联系方式',
+  'about.connect': '个人链接',
   'about.label.research': '研究方向',
   'about.cert': '证书',
   'skills.title': '技术栈',

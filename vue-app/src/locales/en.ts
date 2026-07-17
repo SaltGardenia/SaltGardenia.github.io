@@ -7,7 +7,7 @@ export default {
   'about.title': 'About',
   'about.name': 'Yaze Li',
   'about.role': 'Hefei University of Technology',
-  'about.connect': 'Connect',
+  'about.connect': 'Personal Links',
   'about.label.research': 'Research',
   'about.cert': 'Certifications',
   'skills.title': 'Tech Stack',
