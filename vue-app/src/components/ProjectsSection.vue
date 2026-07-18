@@ -16,6 +16,7 @@
           :description="t(project.key + '.desc')"
           :tags="project.tags"
           :link="project.link"
+          :home="project.home"
         />
       </div>
     </div>
@@ -28,9 +29,10 @@ import ProjectCard from '@/components/ProjectCard.vue'
 
 const { t } = useI18nStore()
 
-type ProjectEntry = { key: string; domain: 'vision' | 'system'; tags: string[]; link: string; role?: string }
+type ProjectEntry = { key: string; domain: 'vision' | 'system'; tags: string[]; link: string; role?: string; home?: string }
 
 const projects: ProjectEntry[] = [
+  { key: 'proj8', domain: 'system', tags: ['Skills', 'Agents', 'Code', 'Prompt'], link: 'https://github.com/SaltGardenia/research-code-skill', home: 'https://saltgardenia.github.io/research-code-skill/' },
   { key: 'proj1', domain: 'system', tags: ['PyQt5', 'YOLOv7', 'OpenCV', 'MySQL'], link: 'https://github.com/SaltGardenia/Intelligent-Cockpit-System' },
   { key: 'proj2', domain: 'system', tags: ['PyQt5', 'OpenCV', 'Huawei Cloud'], link: 'https://github.com/SaltGardenia/Smart-Construction-Site-Video-Surveillance-System' },
   { key: 'proj6', domain: 'vision', tags: ['Python', 'Deep Learning', 'Image Classification'], link: 'https://github.com/SaltGardenia/Fruit-Classifier' },

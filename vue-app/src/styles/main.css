@@ -948,9 +948,16 @@ img {
   border-radius: 999px;
 }
 
-.project-card-btn {
+.project-card-actions {
   margin-top: auto;
-  align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.project-card-btn {
+  align-self: flex-end;
   display: inline-flex;
   align-items: center;
   gap: 6px;

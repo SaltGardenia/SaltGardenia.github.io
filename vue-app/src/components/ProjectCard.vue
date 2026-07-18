@@ -10,9 +10,14 @@
       <div class="project-card-tags">
         <span v-for="tag in tags" :key="tag">{{ tag }}</span>
       </div>
-      <a v-if="link" class="project-card-btn" :href="link" target="_blank" rel="noopener noreferrer">
-        {{ btnLabel }} <span class="arrow">→</span>
-      </a>
+      <div class="project-card-actions">
+        <a v-if="home" class="project-card-btn" :href="home" target="_blank" rel="noopener noreferrer">
+          {{ homeLabel }} <span class="arrow">→</span>
+        </a>
+        <a v-if="link" class="project-card-btn" :href="link" target="_blank" rel="noopener noreferrer">
+          {{ btnLabel }} <span class="arrow">→</span>
+        </a>
+      </div>
     </div>
   </article>
 </template>
@@ -28,8 +33,10 @@ defineProps<{
   description: string
   tags: string[]
   link: string
+  home?: string
 }>()
 
 const { t } = useI18nStore()
 const btnLabel = t('projects.view')
+const homeLabel = t('projects.open')
 </script>
