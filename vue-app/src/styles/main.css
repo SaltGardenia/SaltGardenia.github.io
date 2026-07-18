@@ -978,6 +978,12 @@ img {
   background: color-mix(in srgb, var(--coral) 6%, transparent);
 }
 
+.project-card.domain-sys .project-card-btn:hover {
+  color: var(--indigo);
+  border-color: color-mix(in srgb, var(--indigo) 40%, transparent);
+  background: color-mix(in srgb, var(--indigo) 6%, transparent);
+}
+
 .project-card-btn .arrow {
   transition: transform 0.2s ease;
 }
