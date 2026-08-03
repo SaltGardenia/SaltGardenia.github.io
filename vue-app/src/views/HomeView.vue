@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <HeroSection />
-    <AboutSection />
-    <ProjectsSection />
-    <SkillsSection />
-    <FooterSection />
-    <BackTopButton :show="showBackTop" />
+  <div class="page-layout">
+    <SidebarSection />
+    <main class="content">
+      <AboutSection />
+      <ProjectsSection />
+      <SkillsSection />
+      <FooterSection />
+      <BackTopButton :show="showBackTop" />
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import HeroSection from '@/components/HeroSection.vue'
+import SidebarSection from '@/components/SidebarSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import ProjectsSection from '@/components/ProjectsSection.vue'
 import SkillsSection from '@/components/SkillsSection.vue'

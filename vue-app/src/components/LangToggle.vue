@@ -1,14 +1,11 @@
 <template>
-  <div class="nav-actions-pill liquid-glass-nav" id="langPill">
-    <span class="glass-warp"></span>
+  <div class="nav-actions-pill" id="langPill">
     <button class="lang-toggle" @click="toggleLocale" :aria-label="t('lang.toggleAria')">
       <span class="lang-icon">{{ t('lang.toggle') }}</span>
     </button>
     <button class="theme-toggle" @click="toggleTheme" :aria-label="t('theme.toggleAria')">
       <span class="theme-icon">{{ theme === 'light' ? '☾' : '☀' }}</span>
     </button>
-    <div class="glass-highlight"></div>
-    <div class="glass-highlight-overlay"></div>
   </div>
 </template>
 

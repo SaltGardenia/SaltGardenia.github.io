@@ -2,7 +2,6 @@
   <section class="section" id="projects">
     <div class="section-inner reveal">
       <div class="section-head">
-        <span class="sec-index">02</span>
         <h2 class="section-title">{{ t('projects.title') }}</h2>
       </div>
       <div class="projects-grid stagger">
