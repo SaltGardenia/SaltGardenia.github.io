@@ -23,6 +23,8 @@
   --ink-4: #86868B;
   --accent: #D94060;
   --accent-soft: rgba(217, 64, 96, 0.10);
+  --accent-blue: #0071E3;
+  --accent-blue-soft: rgba(0, 113, 227, 0.10);
   --glass: rgba(255, 255, 255, 0.72);
   --glass-strong: rgba(255, 255, 255, 0.90);
   --hairline: rgba(0, 0, 0, 0.08);
@@ -31,6 +33,7 @@
   --pressed: rgba(0, 0, 0, 0.05);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.03), 0 8px 28px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.05), 0 16px 44px rgba(0, 0, 0, 0.10);
+  --spotlight: rgba(255, 255, 255, 0.35);
   --aura-1: rgba(217, 64, 96, 0.10);
   --aura-2: rgba(10, 132, 255, 0.10);
 }
@@ -46,6 +49,8 @@
   --ink-4: #6E6E73;
   --accent: #FF6F8A;
   --accent-soft: rgba(255, 111, 138, 0.14);
+  --accent-blue: #409CFF;
+  --accent-blue-soft: rgba(64, 156, 255, 0.14);
   --glass: rgba(28, 28, 30, 0.66);
   --glass-strong: rgba(28, 28, 30, 0.92);
   --hairline: rgba(255, 255, 255, 0.10);
@@ -54,6 +59,7 @@
   --pressed: rgba(255, 255, 255, 0.08);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.45);
   --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 18px 50px rgba(0, 0, 0, 0.55);
+  --spotlight: rgba(255, 255, 255, 0.06);
   --aura-1: rgba(255, 111, 138, 0.10);
   --aura-2: rgba(10, 132, 255, 0.12);
 }
@@ -212,13 +218,31 @@ img {
 
 /* ---------- 侧栏锚点导航（Apple 设置式选中态） ---------- */
 .sidebar-nav {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2px;
   margin: 40px 0;
 }
 
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  background: var(--selected);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.25s ease;
+  will-change: transform;
+}
+
 .sidebar-nav a {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   padding: 10px 14px;
@@ -241,7 +265,6 @@ img {
 
 .sidebar-nav a.active {
   color: var(--ink);
-  background: var(--selected);
   font-weight: 600;
 }
 
@@ -353,6 +376,23 @@ img {
   transform: scale(0.92);
 }
 
+/* 语言 / 主题图标切换：短促弹出 */
+.toggle-pop {
+  display: inline-block;
+  animation: togglePop 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes togglePop {
+  from {
+    opacity: 0;
+    transform: scale(0.72) translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 /* ============================================================
    区块与标题（小眉题 + 大标题，Apple 式层级）
    ============================================================ */
@@ -387,25 +427,18 @@ img {
 }
 
 /* ============================================================
-   About：简介 + 玻璃信息卡（hairline 分隔行）
+   About：纯排版信息行（hairline 分隔，无卡片）
    ============================================================ */
 .about-info {
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
-  background: var(--glass);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--hairline);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
 }
 
 .info-item {
   display: flex;
   align-items: flex-start;
-  gap: 24px;
-  padding: 22px 26px;
+  gap: 28px;
+  padding: 22px 0;
 }
 
 .info-item + .info-item {
@@ -489,19 +522,32 @@ img {
 
 .project-card {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 26px 28px;
-  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 22px;
+  padding: 20px;
+  border-radius: 22px;
   background: var(--glass);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--hairline);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s ease,
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease,
               border-color 0.3s ease;
+}
+
+/* 光标光斑：跟随指针的径向高光 */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), var(--spotlight), transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 1;
 }
 
 .project-card:hover {
@@ -510,24 +556,92 @@ img {
   border-color: var(--hairline-strong);
 }
 
+.project-card:hover::after {
+  opacity: 1;
+}
+
 .project-card:active {
   transform: translateY(-1px) scale(0.995);
 }
 
-.project-folio {
-  flex-shrink: 0;
-  min-width: 34px;
-  padding-top: 3px;
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--ink-4);
+/* 精选卡：左右两段式大卡 */
+.project-card--featured {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 0;
+  padding: 0;
+  border-radius: 24px;
+}
+
+.project-card--featured .project-visual {
+  min-height: 250px;
+  height: 100%;
+  border-radius: 0;
+}
+
+.project-card--featured .project-body {
+  padding: 30px 32px;
+}
+
+.project-card--featured .project-visual-emoji {
+  font-size: 3.6rem;
+}
+
+.project-card--featured .featured-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+/* 视觉层：领域渐变色块 + 大 emoji */
+.project-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 108px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.project-visual-emoji {
+  font-size: 2.3rem;
+  line-height: 1;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover .project-visual-emoji {
+  transform: scale(1.1);
+}
+
+.domain-vision .project-visual {
+  background:
+    linear-gradient(135deg, rgba(217, 64, 96, 0.18), rgba(217, 64, 96, 0.02) 62%),
+    var(--bg-soft);
+}
+
+.domain-sys .project-visual {
+  background:
+    linear-gradient(135deg, rgba(0, 113, 227, 0.16), rgba(0, 113, 227, 0.02) 62%),
+    var(--bg-soft);
+}
+
+[data-theme='dark'] .domain-vision .project-visual {
+  background:
+    linear-gradient(135deg, rgba(255, 111, 138, 0.20), rgba(255, 111, 138, 0.03) 62%),
+    var(--bg-soft);
+}
+
+[data-theme='dark'] .domain-sys .project-visual {
+  background:
+    linear-gradient(135deg, rgba(64, 156, 255, 0.18), rgba(64, 156, 255, 0.03) 62%),
+    var(--bg-soft);
 }
 
 .project-body {
   flex: 1;
   min-width: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .project-meta {
@@ -539,6 +653,29 @@ img {
   color: var(--ink-4);
 }
 
+.project-folio {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.domain-sys .project-folio {
+  color: var(--accent-blue);
+}
+
+.featured-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
 .role-badge {
   font-size: 0.72rem;
   font-weight: 600;
@@ -547,6 +684,15 @@ img {
   background: var(--accent-soft);
   border-radius: 999px;
   padding: 2px 10px;
+}
+
+.project-meta .featured-badge,
+.project-meta .role-badge {
+  margin-left: auto;
+}
+
+.project-meta .featured-badge + .role-badge {
+  margin-left: 0;
 }
 
 .project-card-title {
@@ -624,35 +770,23 @@ img {
 }
 
 /* ============================================================
-   技能：单栏分类行（标签 + 词组）
+   技能：单栏轻量分类行（无卡片，发丝分隔）
    ============================================================ */
 .skills-grid {
   display: flex;
   flex-direction: column;
-  gap: 18px;
 }
 
 .skill-category {
   display: grid;
   grid-template-columns: 150px 1fr;
-  gap: 20px;
+  gap: 24px;
   align-items: start;
-  padding: 22px 26px;
-  border-radius: 20px;
-  background: var(--glass);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--hairline);
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  padding: 20px 0;
 }
 
-.skill-category:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--hairline-strong);
+.skill-category + .skill-category {
+  border-top: 1px solid var(--hairline);
 }
 
 .skill-category-title {
@@ -842,6 +976,10 @@ img {
     border-radius: 999px;
   }
 
+  .sidebar-nav .nav-indicator {
+    border-radius: 999px;
+  }
+
   .sidebar-social {
     max-width: none;
   }
@@ -911,21 +1049,39 @@ img {
   }
 
   .project-card {
-    flex-direction: column;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .project-card--featured {
+    gap: 0;
+    padding: 0;
+  }
+
+  .project-card--featured .project-visual {
+    min-height: 140px;
+    height: auto;
+  }
+
+  .project-card--featured .project-body {
     padding: 22px 20px;
+  }
+
+  .project-card--featured .project-visual-emoji {
+    font-size: 2.7rem;
   }
 
   .skill-category {
     grid-template-columns: 1fr;
     gap: 12px;
-    padding: 20px;
+    padding: 18px 0;
   }
 
   .info-item {
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 18px 0;
   }
 
   .info-label {
@@ -985,6 +1141,14 @@ img {
   .stagger > * {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+  }
+
+  .toggle-pop {
+    animation: none;
+  }
+
+  .nav-indicator {
     transition: none !important;
   }
 

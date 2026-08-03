@@ -23,10 +23,8 @@ const { t } = useI18nStore()
 
 const categories = [
   { key: 'skills.devLang', tags: ['C/C++', 'Python', 'LaTeX', 'Markdown'] },
-  { key: 'skills.devEnv', tags: ['Windows', 'macOS', 'Linux'] },
-  { key: 'skills.mlDl', tags: ['Scikit-learn', 'TensorFlow', 'PyTorch', 'OpenCV'] },
-  { key: 'skills.dataProc', tags: ['NumPy', 'Pandas', 'Matplotlib', 'labelImg', 'MySQL'] },
-  { key: 'skills.devTools', tags: ['Git', 'GitHub', 'Hugging Face', 'Kaggle', 'pip', 'Conda', 'uv', 'Docker', 'PyQt', 'FastAPI'] },
-  { key: 'skills.research', tags: ['Overleaf', 'Zotero', 'TeXstudio', 'Illustrator', 'Photoshop'] },
+  { key: 'skills.mlDl', tags: ['PyTorch', 'TensorFlow', 'OpenCV', 'Scikit-learn'] },
+  { key: 'skills.tools', tags: ['Git', 'GitHub', 'Docker', 'FastAPI', 'MySQL', 'NumPy', 'Pandas', 'Matplotlib'] },
+  { key: 'skills.research', tags: ['Overleaf', 'Zotero', 'TeXstudio'] },
 ]
 </script>
