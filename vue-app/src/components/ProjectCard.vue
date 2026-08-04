@@ -44,12 +44,13 @@ const props = defineProps<{
   tags: string[]
   link: string
   home?: string
+  homeLabel?: string
   featured?: boolean
 }>()
 
 const { t } = useI18nStore()
 const btnLabel = t('projects.view')
-const homeLabel = t('projects.open')
+const homeLabel = computed(() => t(props.homeLabel ?? 'projects.open'))
 
 const domainClass = computed(() => (props.domain === 'system' ? 'domain-sys' : 'domain-vision'))
 

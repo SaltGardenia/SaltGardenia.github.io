@@ -19,6 +19,7 @@ export default {
   'projects.role.contributor': 'Contributor',
   'projects.view': 'GitHub',
   'projects.open': 'Open',
+  'projects.page': 'Page',
   'proj1.title': '🚗 Intelligent Cockpit System',
   'proj1.desc': 'A PyQt5 + YOLOv7 based intelligent cockpit desktop app featuring real-time object detection, Baidu Maps navigation, music player, phone dialer, and user authentication.',
   'proj2.title': '🏗️ Smart Construction Site Surveillance',

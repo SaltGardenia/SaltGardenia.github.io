@@ -4,8 +4,8 @@
       <div class="sidebar-top">
         <a href="#about" class="sidebar-avatar" @click.prevent="scrollTo('about')" :aria-label="t('about.name')">
           <picture>
-            <source srcset="/img/tou.webp" type="image/webp" />
-            <img src="/img/tou.jpg" :alt="t('about.name')" loading="eager" />
+            <source srcset="/img/tou_new.webp" type="image/webp" />
+            <img src="/img/tou_new.jpg" :alt="t('about.name')" loading="eager" />
           </picture>
         </a>
         <h1 class="sidebar-name">{{ t('about.name') }}</h1>

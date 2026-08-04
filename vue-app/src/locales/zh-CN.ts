@@ -19,6 +19,7 @@ export default {
   'projects.role.contributor': '贡献者',
   'projects.view': 'GitHub',
   'projects.open': '打开',
+  'projects.page': '页面',
   'proj1.title': '🚗 智慧座舱系统',
   'proj1.desc': '基于 PyQt5 + YOLOv7 的智能座舱桌面应用，集成座舱目标检测、百度地图导航、音乐播放、电话拨号及用户登录注册模块。',
   'proj2.title': '🏗️ 智慧工地监控系统',
