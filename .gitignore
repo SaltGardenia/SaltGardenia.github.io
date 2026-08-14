@@ -3,4 +3,7 @@ vue-app/node_modules/
 .DS_Store
 *.log
 .vscode/
+*.tsbuildinfo
+vue-app/vite.config.js
+vue-app/vite.config.d.ts
 
