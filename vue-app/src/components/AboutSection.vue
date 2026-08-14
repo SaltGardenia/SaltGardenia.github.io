@@ -15,10 +15,6 @@
             </div>
           </span>
         </div>
-        <div class="info-item">
-          <span class="info-label">{{ t('about.cert') }}</span>
-          <span class="info-value"><span class="info-tags"><span class="chip">CET-4</span></span></span>
-        </div>
       </div>
     </div>
   </section>
@@ -30,9 +26,7 @@ const { t } = useI18nStore()
 
 // 交叉研究方向：每行一个方向，由多个关键词组成（术语为领域标准英文，中英文通用）
 const researchDirections: string[][] = [
-  ['embodied interaction', 'occlusion-aware generative inpainting', 'visual world models'],
-  ['language-guided interactive 3D scene graph', 'vision-language models', 'incremental scene understanding'],
-  ['generative geometric prior', '3D Gaussian Splatting', 'zero-shot embodied scene reconstruction'],
+  ['3D Gaussian Splatting', '3D scene reconstruction'],
   ['sparse vision transformers', 'sparse attention', 'multimodal representation learning'],
 ]
 </script>

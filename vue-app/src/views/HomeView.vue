@@ -4,7 +4,6 @@
     <main class="content">
       <AboutSection />
       <ProjectsSection />
-      <SkillsSection />
       <FooterSection />
       <BackTopButton :show="showBackTop" />
     </main>
@@ -16,7 +15,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import SidebarSection from '@/components/SidebarSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import ProjectsSection from '@/components/ProjectsSection.vue'
-import SkillsSection from '@/components/SkillsSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import BackTopButton from '@/components/BackTopButton.vue'
 

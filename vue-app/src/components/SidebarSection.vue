@@ -46,7 +46,6 @@ const { locale } = storeToRefs(i18nStore)
 const navItems = [
   { id: 'about', label: 'nav.about' },
   { id: 'projects', label: 'nav.projects' },
-  { id: 'skills', label: 'nav.skills' },
 ]
 
 const activeSection = ref('')
