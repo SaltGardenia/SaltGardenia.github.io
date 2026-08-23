@@ -8,6 +8,8 @@ export default {
   'about.name': 'Yaze Li',
   'about.role': 'Hefei University of Technology',
   'about.label.research': 'Research Direction',
+  'about.label.skills': 'Skills & Tools',
+  'about.label.stats': 'Contribution Stats',
   'about.cert': 'Certifications',
   'skills.title': 'Tech Stack',
   'skills.devLang': 'Languages',

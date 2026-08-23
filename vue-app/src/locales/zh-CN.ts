@@ -8,6 +8,8 @@ export default {
   'about.name': '李亚泽',
   'about.role': '合肥工业大学',
   'about.label.research': '研究方向',
+  'about.label.skills': '技能与工具',
+  'about.label.stats': '贡献统计',
   'about.cert': '证书',
   'skills.title': '技术栈',
   'skills.devLang': '开发语言',

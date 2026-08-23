@@ -511,6 +511,50 @@ img {
   border-radius: 999px;
 }
 
+/* Skills & Tools / Contribution Stats：标签单独一行，媒体整体占满下方宽度，
+   避免与标签挤在同一行导致卡片过小 */
+.info-item--skills,
+.info-item--stats {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.info-item--skills .info-label,
+.info-item--stats .info-label {
+  margin-top: 0;
+}
+
+/* GitHub 挂件（Skills & Tools / Contribution Stats）：直接嵌入 GitHub 卡片，
+   保持与 about 其余信息行一致的左对齐与留白节奏，移动端可换列 */
+.about-media {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.about-media-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.about-media img {
+  width: 100%;
+  height: auto;
+}
+
+.about-media-row img {
+  width: auto;
+  min-width: 0;
+  flex: 1 1 0;
+  border-radius: 14px;
+  border: 1px solid var(--hairline);
+  background: var(--bg-soft);
+}
+
 /* ============================================================
    项目：右侧单栏卡片流（不并排）
    ============================================================ */

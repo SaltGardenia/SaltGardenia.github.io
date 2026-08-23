@@ -7,7 +7,9 @@ const researchDirections: string[][] = [
 ]
 
 export default function AboutSection() {
-  const { t } = useI18n()
+  const { t, theme } = useI18n()
+  const skillsTheme = theme
+  const cardsTheme = theme === 'dark' ? 'github_dark' : 'default'
 
   return (
     <section className="section" id="about">
@@ -30,6 +32,49 @@ export default function AboutSection() {
                   ))}
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="info-item info-item--skills">
+            <span className="info-label">{t('about.label.skills')}</span>
+            <div className="info-value">
+              <div className="about-media">
+                <img
+                  src={`https://skillicons.dev/icons?i=python,cpp,pytorch,tensorflow,linux,latex,git,docker,vscode,anaconda&perline=10&theme=${skillsTheme}`}
+                  alt="skills"
+                  loading="lazy"
+                />
+                <img
+                  src={`https://skillicons.dev/icons?i=opencv,matlab,blender,c,rust,bash,vim,cmake,ubuntu,javascript&perline=10&theme=${skillsTheme}`}
+                  alt="skills"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="info-item info-item--stats">
+            <span className="info-label">{t('about.label.stats')}</span>
+            <div className="info-value">
+              <div className="about-media">
+                <div className="about-media-row">
+                  <img
+                    src={`https://github-profile-summary-cards.vercel.app/api/cards/stats?username=SaltGardenia&theme=${cardsTheme}`}
+                    alt="stats"
+                    loading="lazy"
+                  />
+                  <img
+                    src={`https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=SaltGardenia&theme=${cardsTheme}`}
+                    alt="repos per language"
+                    loading="lazy"
+                  />
+                  <img
+                    src={`https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=SaltGardenia&theme=${cardsTheme}`}
+                    alt="most commit language"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
