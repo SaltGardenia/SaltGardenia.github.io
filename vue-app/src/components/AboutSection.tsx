@@ -9,7 +9,8 @@ const researchDirections: string[][] = [
 export default function AboutSection() {
   const { t, theme } = useI18n()
   const skillsTheme = theme
-  const cardsTheme = theme === 'dark' ? 'github_dark' : 'default'
+  const statsTheme = theme === 'dark' ? 'github_dark' : 'default'
+  const streakTheme = theme === 'dark' ? 'github-dark' : 'default'
 
   return (
     <section className="section" id="about">
@@ -59,18 +60,18 @@ export default function AboutSection() {
               <div className="about-media">
                 <div className="about-media-row">
                   <img
-                    src={`https://github-profile-summary-cards.vercel.app/api/cards/stats?username=SaltGardenia&theme=${cardsTheme}`}
-                    alt="stats"
+                    src={`https://github-readme-stats.vercel.app/api?username=SaltGardenia&theme=${statsTheme}&include_all_commits=true&count_private=true`}
+                    alt="github stats"
                     loading="lazy"
                   />
                   <img
-                    src={`https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=SaltGardenia&theme=${cardsTheme}`}
-                    alt="repos per language"
+                    src={`https://github-readme-stats.vercel.app/api/top-langs/?username=SaltGardenia&theme=${statsTheme}&layout=compact`}
+                    alt="top languages"
                     loading="lazy"
                   />
                   <img
-                    src={`https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=SaltGardenia&theme=${cardsTheme}`}
-                    alt="most commit language"
+                    src={`https://streak-stats.demolab.com/?user=SaltGardenia&theme=${streakTheme}`}
+                    alt="streak stats"
                     loading="lazy"
                   />
                 </div>
