@@ -7,7 +7,7 @@ type ContribProject = {
 }
 
 const contribProjects: ContribProject[] = [
-  { key: 'contrib5', link: 'https://github.com/SaltGardenia/hfut-paperlist.github.io', page: 'https://hfut-paperlist.github.io/' },
+  { key: 'contrib5', link: 'https://github.com/hfut-paperlist/hfut-paperlist.github.io', page: 'https://hfut-paperlist.github.io/' },
   { key: 'contrib7', link: 'https://github.com/Yuan1z0825/nature-skills', page: 'https://yuan1z0825.github.io/nature-skills/' },
 ]
 

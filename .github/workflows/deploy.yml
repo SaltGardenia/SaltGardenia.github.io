@@ -26,15 +26,15 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: vue-app/package-lock.json
+          cache-dependency-path: react-app/package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: vue-app
+        working-directory: react-app
 
       - name: Build
         run: npm run build
-        working-directory: vue-app
+        working-directory: react-app
 
       - name: Commit built site
         run: |
