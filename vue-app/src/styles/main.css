@@ -470,10 +470,6 @@ img {
   padding: 12px 0;
 }
 
-.research-direction + .research-direction {
-  border-top: 1px solid var(--hairline);
-}
-
 .dir-index {
   flex-shrink: 0;
   font-family: var(--font-display);
