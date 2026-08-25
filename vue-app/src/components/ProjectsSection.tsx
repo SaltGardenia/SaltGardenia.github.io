@@ -1,5 +1,6 @@
 import { useI18n } from '@/i18n'
 import ProjectCard from '@/components/ProjectCard'
+import ContribCard from '@/components/ContribCard'
 
 type ProjectEntry = {
   key: string
@@ -14,8 +15,6 @@ type ProjectEntry = {
 const projects: ProjectEntry[] = [
   { key: 'proj9', domain: 'vision', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
   { key: 'proj8', domain: 'vision', tags: ['Skills', 'Agents', 'Code', 'Prompt'], link: 'https://github.com/SaltGardenia/research-code-skill', home: 'https://saltgardenia.github.io/research-code-skill/', homeLabel: 'projects.page' },
-  { key: 'proj5', domain: 'vision', role: 'contributor', tags: ['HTML', 'CSS', 'JavaScript', 'GitHub Pages'], link: 'https://github.com/SaltGardenia/hfut-paperlist.github.io' },
-  { key: 'proj7', domain: 'vision', role: 'contributor', tags: ['Skills', 'Agents', 'Prompt'], link: 'https://github.com/Yuan1z0825/nature-skills' },
 ]
 
 export default function ProjectsSection() {
@@ -42,6 +41,7 @@ export default function ProjectsSection() {
               homeLabel={project.homeLabel}
             />
           ))}
+          <ContribCard />
         </div>
       </div>
     </section>
