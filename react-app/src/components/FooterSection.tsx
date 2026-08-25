@@ -7,7 +7,7 @@ export default function FooterSection() {
     <footer className="footer">
       <div className="footer-inner">
         <span className="sig">
-          <b>LiYaze</b> — Profile &amp; Selected Work
+          <b>LiYaze</b> — Profile
         </span>
         <span dangerouslySetInnerHTML={{ __html: t('footer.copyright') }} />
       </div>
