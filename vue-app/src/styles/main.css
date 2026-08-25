@@ -811,6 +811,7 @@ img {
 
 /* 贡献项目：每个项目独立小卡片，错位排布 */
 .contrib-card .project-body {
+  grid-column: 1 / -1;
   padding: 22px 24px;
 }
 
