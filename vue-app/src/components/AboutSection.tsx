@@ -70,12 +70,7 @@ export default function AboutSection() {
             <div className="info-value">
               <div className="about-media">
                 <img
-                  src={`https://skillicons.dev/icons?i=python,cpp,pytorch,tensorflow,linux,latex,git,docker,vscode,anaconda&perline=10&theme=${skillsTheme}`}
-                  alt="skills"
-                  loading="lazy"
-                />
-                <img
-                  src={`https://skillicons.dev/icons?i=opencv,matlab,blender,c,rust,bash,vim,cmake,ubuntu,javascript&perline=10&theme=${skillsTheme}`}
+                  src={`https://skillicons.dev/icons?i=python,c,cpp,r,html,css,javascript,linux,ubuntu,windows,qt,react,nodejs,npm,clion,pycharm,vscode,visualstudio,markdown,latex,pytorch,opencv,anaconda,scikitlearn,cmake,docker,githubactions,git,github,bash&perline=10&theme=${skillsTheme}`}
                   alt="skills"
                   loading="lazy"
                 />
