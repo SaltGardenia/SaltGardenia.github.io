@@ -9,7 +9,7 @@ const researchDirections: string[][] = [
 
 // Contribution Stats 数据由远程仓库 SaltGardenia/SaltGardenia 的 GitHub Action
 // 每日生成并提交到 output/stats/，此处直接读取静态文件，避免调用受限的公共服务。
-const STATS_BASE = 'https://raw.githubusercontent.com/SaltGardenia/SaltGardenia/output/stats'
+const STATS_BASE = 'https://raw.githubusercontent.com/SaltGardenia/SaltGardenia/contribution-stats/stats'
 
 // 远程静态文件原则上稳定；此处仅兜底处理瞬时加载失败：自动重试，
 // 若最终仍失败则隐藏（避免出现破图/报错图标），旧数据仍保留在远程，刷新后即可恢复。
