@@ -23,6 +23,7 @@ export default {
   'projects.open': 'Open',
   'projects.page': 'Page',
   'projects.contribTitle': 'Contributed Projects',
+  'projects.toyTitle': 'Toy Project',
   'contrib5.name': 'HFUT Paper List',
   'contrib7.name': 'nature-skills',
   'proj5.title': '📄 HFUT Paper List',

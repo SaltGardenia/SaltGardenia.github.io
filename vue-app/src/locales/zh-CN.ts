@@ -23,6 +23,7 @@ export default {
   'projects.open': '打开',
   'projects.page': '页面',
   'projects.contribTitle': '贡献项目',
+  'projects.toyTitle': '玩具项目',
   'contrib5.name': 'HFUT 论文列表',
   'contrib7.name': 'nature-skills',
   'proj5.title': '📄 HFUT 论文列表',

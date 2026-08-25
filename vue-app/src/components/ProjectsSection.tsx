@@ -1,6 +1,7 @@
 import { useI18n } from '@/i18n'
 import ProjectCard from '@/components/ProjectCard'
 import ContribCard from '@/components/ContribCard'
+import ToyCard from '@/components/ToyCard'
 
 type ProjectEntry = {
   key: string
@@ -42,6 +43,7 @@ export default function ProjectsSection() {
             />
           ))}
           <ContribCard />
+          <ToyCard />
         </div>
       </div>
     </section>
