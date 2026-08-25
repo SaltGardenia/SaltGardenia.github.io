@@ -895,6 +895,13 @@ img {
   color: var(--ink);
 }
 
+.contrib-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
 .contrib-btn {
   flex-shrink: 0;
   padding: 7px 16px;
