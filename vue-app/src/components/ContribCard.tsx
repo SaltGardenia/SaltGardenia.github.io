@@ -10,6 +10,8 @@ const contribProjects: ContribProject[] = [
   { key: 'contrib7', link: 'https://github.com/Yuan1z0825/nature-skills' },
 ]
 
+const CONTRIB_EMOJI = ['🌿', '✨', '🔗', '💡']
+
 export default function ContribCard() {
   const { t } = useI18n()
 
@@ -20,9 +22,12 @@ export default function ContribCard() {
           <span className="role-badge">{t('projects.role.contributor')}</span>
         </div>
         <h3 className="project-card-title">{t('projects.contribTitle')}</h3>
-        <ul className="contrib-list">
-          {contribProjects.map((p) => (
-            <li key={p.key} className="contrib-item">
+        <div className="contrib-stack">
+          {contribProjects.map((p, i) => (
+            <div className="contrib-chip" key={p.key}>
+              <span className="contrib-chip-emoji" aria-hidden="true">
+                {CONTRIB_EMOJI[i % CONTRIB_EMOJI.length]}
+              </span>
               <span className="contrib-name">{t(p.key + '.name')}</span>
               <a
                 className="project-card-btn contrib-btn"
@@ -32,9 +37,9 @@ export default function ContribCard() {
               >
                 {t('projects.view')} <span className="arrow">→</span>
               </a>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </article>
   )
