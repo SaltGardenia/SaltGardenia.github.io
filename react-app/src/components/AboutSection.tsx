@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useI18n } from '@/i18n'
+import skillsLight from '@/assets/skills-light.svg'
+import skillsDark from '@/assets/skills-dark.svg'
 
 // 交叉研究方向：每行一个方向，由多个关键词组成（术语为领域标准英文，中英文通用）
 const researchDirections: string[][] = [
@@ -39,7 +41,7 @@ export default function AboutSection() {
   const { t, theme } = useI18n()
   const dark = theme === 'dark'
   const statsFile = (name: string) => `${STATS_BASE}/${name}${dark ? '-dark' : ''}.svg`
-  const skillsSrc = dark ? '/skills-dark.svg' : '/skills-light.svg'
+  const skillsSrc = dark ? skillsDark : skillsLight
 
   return (
     <section className="section" id="about">
