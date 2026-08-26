@@ -37,9 +37,9 @@ function StatsImage({ src, alt }: { src: string; alt: string }) {
 
 export default function AboutSection() {
   const { t, theme } = useI18n()
-  const skillsTheme = theme
   const dark = theme === 'dark'
   const statsFile = (name: string) => `${STATS_BASE}/${name}${dark ? '-dark' : ''}.svg`
+  const skillsSrc = dark ? '/skills-dark.svg' : '/skills-light.svg'
 
   return (
     <section className="section" id="about">
@@ -70,7 +70,7 @@ export default function AboutSection() {
             <div className="info-value">
               <div className="about-media">
                 <img
-                  src={`https://skillicons.dev/icons?i=python,c,cpp,r,html,css,javascript,linux,ubuntu,windows,qt,react,nodejs,npm,clion,pycharm,vscode,visualstudio,markdown,latex,pytorch,opencv,anaconda,scikitlearn,cmake,docker,githubactions,git,github,bash&perline=10&theme=${skillsTheme}`}
+                  src={skillsSrc}
                   alt="skills"
                   loading="lazy"
                 />
