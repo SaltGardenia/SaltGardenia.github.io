@@ -4,6 +4,7 @@ import SocialLinks from '@/components/SocialLinks'
 
 const navItems = [
   { id: 'about', label: 'nav.about' },
+  { id: 'publications', label: 'nav.publications' },
   { id: 'projects', label: 'nav.projects' },
 ]
 

@@ -5,8 +5,8 @@ import skillsDark from '@/assets/skills-dark.svg'
 
 // 交叉研究方向：每行一个方向，由多个关键词组成（术语为领域标准英文，中英文通用）
 const researchDirections: string[][] = [
-  ['3D Gaussian Splatting', '3D scene reconstruction'],
-  ['sparse vision transformers', 'sparse attention'],
+  ['3D Gaussian Splatting', '3D Scene Reconstruction'],
+  ['Sparse Vision Transformers', 'Sparse Attention'],
 ]
 
 // Contribution Stats 数据由远程仓库 SaltGardenia/SaltGardenia 的 GitHub Action

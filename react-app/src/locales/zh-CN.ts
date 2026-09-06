@@ -1,6 +1,7 @@
 export default {
   'nav.about': '关于',
   'nav.skills': '技术栈',
+  'nav.publications': '发表',
   'nav.projects': '项目',
   'sidebar.tagline': '永远相信美好的事情即将发生',
   'sidebar.navAria': '页面导航',
@@ -16,6 +17,10 @@ export default {
   'skills.mlDl': '机器学习与深度学习',
   'skills.tools': '工具与数据',
   'skills.research': '科研',
+  'publications.title': '发表论文',
+  'publications.view': '论文',
+  'publications.code': 'GitHub',
+  'publications.project': '工程',
   'projects.title': '项目',
   'projects.featured': '精选',
   'projects.role.contributor': '贡献者',

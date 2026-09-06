@@ -745,6 +745,29 @@ img {
   margin-bottom: 10px;
 }
 
+.first-author-name {
+  font-weight: 700;
+  color: var(--ink);
+  position: relative;
+}
+
+.first-author-name::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 1px;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.first-author-name:hover::after {
+  opacity: 0.8;
+}
+
 .project-card-desc {
   font-size: 0.94rem;
   line-height: 1.7;
@@ -807,6 +830,72 @@ img {
 
 .project-card-btn:hover .arrow {
   transform: translateX(3px);
+}
+
+/* ============================================================
+   Publications：论文卡片（复用项目卡样式，新增论文专属区）
+   ============================================================ */
+.publication-year {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+}
+
+.authors-list {
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  margin: 6px 0 4px;
+  line-height: 1.5;
+}
+
+.authors-list .first-author {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.venue-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.venue-name {
+  font-weight: 500;
+}
+
+.pub-year {
+  font-family: var(--font-mono);
+  color: var(--ink-4);
+}
+
+.venue-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.domain-sys .venue-badge {
+  color: var(--accent-blue);
+  background: var(--accent-blue-soft);
 }
 
 /* 贡献项目：每个项目独立小卡片，错位排布 */
@@ -1229,6 +1318,12 @@ img {
 
   .project-card-actions {
     justify-content: flex-start;
+  }
+
+  .publication-year {
+    position: static;
+    display: inline-block;
+    margin-top: 4px;
   }
 
   .footer-inner {

@@ -1,6 +1,7 @@
 export default {
   'nav.about': 'About',
   'nav.skills': 'Tech Stack',
+  'nav.publications': 'Publications',
   'nav.projects': 'Projects',
   'sidebar.tagline': 'Always believe that something wonderful is about to happen',
   'sidebar.navAria': 'Sections',
@@ -16,6 +17,10 @@ export default {
   'skills.mlDl': 'ML & DL',
   'skills.tools': 'Tooling & Data',
   'skills.research': 'Research',
+  'publications.title': 'Publications',
+  'publications.view': 'Paper',
+  'publications.code': 'GitHub',
+  'publications.project': 'Project',
   'projects.title': 'Projects',
   'projects.featured': 'Featured',
   'projects.role.contributor': 'Contributor',

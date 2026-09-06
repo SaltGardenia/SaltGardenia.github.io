@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import SidebarSection from '@/components/SidebarSection'
 import AboutSection from '@/components/AboutSection'
+import PublicationsSection from '@/components/PublicationsSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import FooterSection from '@/components/FooterSection'
 import BackTopButton from '@/components/BackTopButton'
@@ -52,6 +53,7 @@ export default function HomeView() {
       <SidebarSection />
       <main className="content">
         <AboutSection />
+        <PublicationsSection />
         <ProjectsSection />
         <FooterSection />
         <BackTopButton show={showBackTop} />
