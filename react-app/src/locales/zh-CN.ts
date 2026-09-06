@@ -20,7 +20,7 @@ export default {
   'publications.title': '发表论文',
   'publications.view': '论文',
   'publications.code': 'GitHub',
-  'publications.project': '工程',
+  'publications.project': '页面',
   'projects.title': '项目',
   'projects.featured': '精选',
   'projects.role.contributor': '贡献者',

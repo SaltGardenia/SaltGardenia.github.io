@@ -20,7 +20,7 @@ export default {
   'publications.title': 'Publications',
   'publications.view': 'Paper',
   'publications.code': 'GitHub',
-  'publications.project': 'Project',
+  'publications.project': 'Page',
   'projects.title': 'Projects',
   'projects.featured': 'Featured',
   'projects.role.contributor': 'Contributor',
