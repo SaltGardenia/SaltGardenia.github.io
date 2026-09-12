@@ -15,6 +15,7 @@ type ProjectEntry = {
 
 const projects: ProjectEntry[] = [
   { key: 'proj9', domain: 'vision', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
+  { key: 'proj10', domain: 'vision', tags: ['Skills', 'Papers', 'Agents', 'Writing'], link: 'https://github.com/SaltGardenia/sci-story-skills', home: 'https://saltgardenia.github.io/sci-story-skills/', homeLabel: 'projects.page' },
   { key: 'proj8', domain: 'vision', tags: ['Skills', 'Agents', 'Code', 'Prompt'], link: 'https://github.com/SaltGardenia/research-code-skill', home: 'https://saltgardenia.github.io/research-code-skill/', homeLabel: 'projects.page' },
 ]
 

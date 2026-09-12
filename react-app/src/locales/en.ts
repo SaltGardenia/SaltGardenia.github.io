@@ -37,6 +37,8 @@ export default {
   'proj9.desc': 'An interactive AI research-landscape dashboard visualizing research-direction heat across CCF A/B/C venues — direction maps, venue and journal overviews, a conference calendar, and weekly-updated OpenAlex data.',
   'proj8.title': '🧰 research-code-skill',
   'proj8.desc': 'A curated collection of research-code skills, workflows, and reusable prompts for accelerating scientific coding and reproducible experiments.',
+  'proj10.title': '📖 sci-story-skills',
+  'proj10.desc': 'An AI agent skill that turns research ideas into reviewer-defensible top-conference papers — a three-layer pipeline (corpus mining → research architecture → reviewer editing) distilled from 102 best papers, with 9 working modes and a Story Lock safeguard.',
   'proj7.title': '🌿 nature-skills',
   'proj7.desc': 'A research-oriented workflow and skills orchestration project offering literature search, citation management, and agent collaboration. Contributing to feature development and maintenance.',
   'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',

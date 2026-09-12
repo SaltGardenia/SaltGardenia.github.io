@@ -37,6 +37,8 @@ export default {
   'proj9.desc': '一张可交互的 AI 研究版图仪表盘，呈现 CCF A/B/C 会议与期刊的研究方向热度——含方向版图、会议/期刊全景、截稿日历，数据基于 OpenAlex 每周自动更新。',
   'proj8.title': '🧰 research-code-skill',
   'proj8.desc': '一套精选的科研代码技能、工作流与可复用提示词，用于加速科学计算编码与可复现实验。',
+  'proj10.title': '📖 sci-story-skills',
+  'proj10.desc': '将研究想法打磨为经得起审稿人推敲的顶会论文的 AI 智能体技能——基于 102 篇最佳论文提炼的三层流水线（语料挖掘 → 研究架构 → 审稿人编辑），含 9 种工作模式与 Story Lock 故事锁定机制。',
   'proj7.title': '🌿 nature-skills',
   'proj7.desc': '面向科研的工作流与技能编排项目，提供文献检索、引用管理与智能体协作等能力。以贡献者身份参与功能开发与维护。',
   'footer.copyright': '© 2026 LiYaze. All Rights Reserved.',
