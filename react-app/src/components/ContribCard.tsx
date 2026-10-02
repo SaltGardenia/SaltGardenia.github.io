@@ -15,7 +15,7 @@ export default function ContribCard() {
   const { t } = useI18n()
 
   return (
-    <article className="project-card contrib-card">
+    <article className="project-card contrib-card domain-sys">
       <div className="project-body">
         <h3 className="project-card-title">{t('projects.contribTitle')}</h3>
         <div className="contrib-stack">

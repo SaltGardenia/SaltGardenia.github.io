@@ -17,7 +17,7 @@ export default function ToyCard() {
   const { t } = useI18n()
 
   return (
-    <article className="project-card contrib-card">
+    <article className="project-card contrib-card domain-vision">
       <div className="project-body">
         <h3 className="project-card-title">{t('projects.toyTitle')}</h3>
         <div className="contrib-stack">
