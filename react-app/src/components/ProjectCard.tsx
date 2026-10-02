@@ -30,14 +30,6 @@ export default function ProjectCard({
 
   const domainClass = domain === 'system' ? 'domain-sys' : 'domain-vision'
 
-  // 标题开头的 emoji 作为卡片视觉元素
-  const emojiPattern =
-    /^(\p{Extended_Pictographic}\uFE0F?(?:\u200D\p{Extended_Pictographic}\uFE0F?)*)/u
-
-  const emojiMatch = title.match(emojiPattern)
-  const emoji = emojiMatch ? emojiMatch[1] : '🧩'
-  const cleanTitle = title.replace(emojiPattern, '').trim()
-
   // 光标光斑：跟随指针的径向高光
   function onPointerMove(e: PointerEvent<HTMLElement>) {
     const el = e.currentTarget
@@ -48,16 +40,16 @@ export default function ProjectCard({
 
   return (
     <article className={`project-card ${domainClass}`} onPointerMove={onPointerMove}>
-      <div className={`project-visual ${domainClass}`} aria-hidden="true">
-        <span className="project-visual-emoji">{emoji}</span>
-      </div>
+      <span className="card-ghost" aria-hidden="true">
+        {exp}
+      </span>
 
       <div className="project-body">
         <div className="project-meta">
           <span className="project-folio">{exp}</span>
           {role && <span className="role-badge">{t('projects.role.' + role)}</span>}
         </div>
-        <h3 className="project-card-title">{cleanTitle}</h3>
+        <h3 className="project-card-title">{title}</h3>
         <p className="project-card-desc">{description}</p>
         <div className="project-card-tags">
           {tags.map((tag) => (

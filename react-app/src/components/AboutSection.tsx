@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import { useI18n } from '@/i18n'
+import SocialLinks from '@/components/SocialLinks'
 import skillsLight from '@/assets/skills-light.svg'
 import skillsDark from '@/assets/skills-dark.svg'
 
-// 交叉研究方向：每行一个方向，由多个关键词组成（术语为领域标准英文，中英文通用）
-const researchDirections: string[][] = [
-  ['3D Gaussian Splatting', '3D Scene Reconstruction'],
-  ['Sparse Vision Transformers', 'Sparse Attention'],
-]
+// 交叉研究方向：每行一个方向，由多个关键词组成，随界面语言切换
+const researchDirections: Record<'zh-CN' | 'en', string[][]> = {
+  'zh-CN': [
+    ['3D 视觉'],
+    ['稀疏视觉Transformer'],
+    ['智能体'],
+  ],
+  en: [
+    ['3D Vision'],
+    ['Sparse Vision Transformers'],
+    ['Agent'],
+  ],
+}
 
 // Contribution Stats 数据由远程仓库 SaltGardenia/SaltGardenia 的 GitHub Action
 // 每日生成并提交到 output/stats/，此处直接读取静态文件，避免调用受限的公共服务。
@@ -38,23 +47,36 @@ function StatsImage({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function AboutSection() {
-  const { t, theme } = useI18n()
+  const { t, theme, locale } = useI18n()
   const dark = theme === 'dark'
   const statsFile = (name: string) => `${STATS_BASE}/${name}${dark ? '-dark' : ''}.svg`
   const skillsSrc = dark ? skillsDark : skillsLight
+  const directions = researchDirections[locale]
 
   return (
     <section className="section" id="about">
-      <div className="section-inner reveal">
-        <div className="section-head">
-          <h2 className="section-title">{t('about.title')}</h2>
-        </div>
+      <div className="about-cols">
+        <aside className="about-profile" aria-label="Profile">
+          <div className="about-avatar">
+            <picture>
+              <source srcSet="/img/tou_new.webp" type="image/webp" />
+              <img src="/img/tou_new.jpg" alt={t('about.name')} loading="eager" />
+            </picture>
+          </div>
+          <h1 className="about-name">{t('about.name')}</h1>
+          <p className="about-role">{t('about.role')}</p>
+          <p className="about-tagline">{t('sidebar.tagline')}</p>
+          <div className="about-social">
+            <SocialLinks />
+          </div>
+        </aside>
 
-        <div className="about-info stagger">
+        <div className="section-inner reveal">
+          <div className="about-info stagger">
           <div className="info-item info-item--research">
             <span className="info-label">{t('about.label.research')}</span>
             <div className="info-value">
-              {researchDirections.map((dir, i) => (
+              {directions.map((dir, i) => (
                 <div className="research-direction" key={i}>
                   <span className="dir-index">{String(i + 1).padStart(2, '0')}</span>
                   {dir.map((kw, j) => (
@@ -98,6 +120,7 @@ export default function AboutSection() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>

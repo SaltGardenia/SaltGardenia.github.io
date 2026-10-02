@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import SidebarSection from '@/components/SidebarSection'
+import TopNav from '@/components/TopNav'
 import AboutSection from '@/components/AboutSection'
 import PublicationsSection from '@/components/PublicationsSection'
 import ProjectsSection from '@/components/ProjectsSection'
@@ -50,7 +50,7 @@ export default function HomeView() {
 
   return (
     <div className="page-layout">
-      <SidebarSection />
+      <TopNav />
       <main className="content">
         <AboutSection />
         <PublicationsSection />
