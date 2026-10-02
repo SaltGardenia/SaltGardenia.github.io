@@ -684,11 +684,11 @@ img {
   transform: translateY(-1px) scale(0.995);
 }
 
-/* 幽灵序号：超大轻色数字，卡片的视觉锚点（取代 emoji 色块） */
+/* 幽灵序号：超大轻色数字，卡片的视觉锚点（置于右上，避开底部按钮区） */
 .card-ghost {
   position: absolute;
-  right: 20px;
-  bottom: 6px;
+  right: 22px;
+  top: 8px;
   z-index: 0;
   font-family: var(--font-display);
   font-size: 4.6rem;
@@ -1256,7 +1256,7 @@ img {
   .card-ghost {
     font-size: 3.4rem;
     right: 16px;
-    bottom: 4px;
+    top: 6px;
   }
 
   .skill-category {
