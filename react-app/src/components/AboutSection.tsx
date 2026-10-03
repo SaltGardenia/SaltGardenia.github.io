@@ -9,12 +9,10 @@ const researchDirections: Record<'zh-CN' | 'en', string[][]> = {
   'zh-CN': [
     ['3D 视觉'],
     ['稀疏视觉Transformer'],
-    ['智能体'],
   ],
   en: [
     ['3D Vision'],
     ['Sparse Vision Transformers'],
-    ['Agent'],
   ],
 }
 
