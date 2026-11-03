@@ -3,10 +3,11 @@ import { useI18n } from '@/i18n'
 type ContribProject = {
   key: string
   link: string
-  page: string
+  page?: string
 }
 
 const contribProjects: ContribProject[] = [
+  { key: 'contrib8', link: 'https://github.com/OneDragon-Anything/ZenlessZoneZero-OneDragon', page: 'https://one-dragon.com/zzz/zh/home.html' },
   { key: 'contrib5', link: 'https://github.com/hfut-paperlist/hfut-paperlist.github.io', page: 'https://hfut-paperlist.github.io/' },
   { key: 'contrib7', link: 'https://github.com/Yuan1z0825/nature-skills', page: 'https://yuan1z0825.github.io/nature-skills/' },
 ]
@@ -26,14 +27,16 @@ export default function ContribCard() {
               </span>
               <span className="contrib-name">{t(p.key + '.name')}</span>
               <span className="contrib-actions">
-                <a
-                  className="project-card-btn contrib-btn"
-                  href={p.page}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t('projects.page')} <span className="arrow">→</span>
-                </a>
+                {p.page && (
+                  <a
+                    className="project-card-btn contrib-btn"
+                    href={p.page}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t('projects.page')} <span className="arrow">→</span>
+                  </a>
+                )}
                 <a
                   className="project-card-btn contrib-btn"
                   href={p.link}
