@@ -869,6 +869,219 @@ img {
 }
 
 /* ============================================================
+   项目收纳区：精选大卡之外的紧凑行列表
+   ============================================================ */
+.project-rows-block {
+  margin-top: 18px;
+}
+
+.project-rows-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 4px 10px;
+}
+
+.project-rows-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+.project-rows-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--hairline-strong), transparent);
+}
+
+.project-rows {
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.project-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 22px;
+  transition: background-color 0.25s ease;
+}
+
+.project-row + .project-row {
+  border-top: 1px solid var(--hairline);
+}
+
+/* 左缘滑入的领域色指示条 */
+.project-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transform-origin: center;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-row:hover {
+  background: var(--pressed);
+}
+
+.project-row:hover::before {
+  opacity: 0.55;
+  transform: scaleY(1);
+}
+
+/* 蓝色主体变体：与红色主体逐行交叉 */
+.project-row.accent-sys .project-row-index {
+  color: var(--accent-blue);
+}
+
+.project-row.accent-sys::before {
+  background: var(--accent-blue);
+}
+
+/* 光标光斑：与精选大卡一致的径向高光 */
+.project-row::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--spotlight), transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+}
+
+.project-row:hover::after {
+  opacity: 1;
+}
+
+.project-row-index {
+  z-index: 1;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+.project-row-main {
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-row-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.project-row-sum {
+  margin: 3px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  line-height: 1.45;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.project-row-tags {
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.project-row-tags span {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  background: var(--selected);
+  white-space: nowrap;
+}
+
+.project-row-actions {
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.project-row-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--bg-soft);
+  border: 1px solid var(--hairline);
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.project-row-link:hover {
+  color: var(--ink);
+  background: var(--glass-strong);
+  border-color: var(--hairline-strong);
+}
+
+.project-row-link:active {
+  transform: scale(0.97);
+}
+
+.project-row-link .arrow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-row-link:hover .arrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+  .project-row {
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+
+  .project-row-tags {
+    display: none;
+  }
+
+  .project-row-actions {
+    margin-left: auto;
+  }
+}
+
+/* ============================================================
    Publications：论文卡片（复用项目卡样式，新增论文专属区）
    ============================================================ */
 .publication-year {

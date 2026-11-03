@@ -1,5 +1,6 @@
 import { useI18n } from '@/i18n'
 import ProjectCard from '@/components/ProjectCard'
+import ProjectRow from '@/components/ProjectRow'
 import ContribCard from '@/components/ContribCard'
 import ToyCard from '@/components/ToyCard'
 
@@ -13,17 +14,22 @@ type ProjectEntry = {
   homeLabel?: string
 }
 
+// 前 FEATURED_COUNT 个以完整大卡展示，其余收纳进紧凑行列表
+const FEATURED_COUNT = 2
+
 const projects: ProjectEntry[] = [
-  { key: 'proj11', domain: 'vision', tags: ['Kotlin', 'Android', '液态玻璃 UI'], link: 'https://github.com/SaltGardenia/calm-schedule' },
-  { key: 'proj12', domain: 'vision', tags: ['Kotlin', 'Android', '本地优先'], link: 'https://github.com/SaltGardenia/calm-ledger' },
+  { key: 'proj11', domain: 'vision', tags: ['Kotlin', 'Android', 'tag.liquidGlass'], link: 'https://github.com/SaltGardenia/calm-schedule' },
+  { key: 'proj12', domain: 'vision', tags: ['Kotlin', 'Android', 'tag.localFirst'], link: 'https://github.com/SaltGardenia/calm-ledger' },
   { key: 'proj9', domain: 'vision', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
   { key: 'proj10', domain: 'vision', tags: ['Skills', 'Papers', 'Agents', 'Writing'], link: 'https://github.com/SaltGardenia/sci-story-skills', home: 'https://saltgardenia.github.io/sci-story-skills/', homeLabel: 'projects.page' },
   { key: 'proj13', domain: 'vision', tags: ['Skills', 'Paper Writing', 'Methodology', 'Rebuttal'], link: 'https://github.com/SaltGardenia/paper-writing-guide-SKILL' },
-  { key: 'proj8', domain: 'vision', tags: ['Skills', 'Agents', 'Code', 'Prompt'], link: 'https://github.com/SaltGardenia/research-code-skill', home: 'https://saltgardenia.github.io/research-code-skill/', homeLabel: 'projects.page' },
 ]
 
 export default function ProjectsSection() {
   const { t } = useI18n()
+
+  const featured = projects.slice(0, FEATURED_COUNT)
+  const rest = projects.slice(FEATURED_COUNT)
 
   return (
     <section className="section" id="projects">
@@ -32,7 +38,7 @@ export default function ProjectsSection() {
           <h2 className="section-title">{t('projects.title')}</h2>
         </div>
         <div className="projects-grid stagger">
-          {projects.map((project, i) => (
+          {featured.map((project, i) => (
             <ProjectCard
               key={project.key}
               exp={String(i + 1).padStart(2, '0')}
@@ -46,9 +52,33 @@ export default function ProjectsSection() {
               homeLabel={project.homeLabel}
             />
           ))}
-          <ContribCard />
-          <ToyCard />
         </div>
+
+        {rest.length > 0 && (
+          <div className="project-rows-block">
+            <div className="project-rows-head">
+              <span className="project-rows-title">{t('projects.moreTitle')}</span>
+              <span className="project-rows-line" aria-hidden="true" />
+            </div>
+            <div className="project-rows">
+              {rest.map((project, i) => (
+                <ProjectRow
+                  key={project.key}
+                  exp={String(i + 1).padStart(2, '0')}
+                  title={t(project.key + '.title')}
+                  summary={t(project.key + '.sum')}
+                  link={project.link}
+                  home={project.home}
+                  homeLabel={project.homeLabel}
+                  accent={(FEATURED_COUNT + i) % 2 === 0 ? 'vision' : 'system'}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        <ContribCard />
+        <ToyCard />
       </div>
     </section>
   )

@@ -1,4 +1,5 @@
 import { useI18n } from '@/i18n'
+import ProjectRow from '@/components/ProjectRow'
 
 type ContribProject = {
   key: string
@@ -16,40 +17,25 @@ export default function ContribCard() {
   const { t } = useI18n()
 
   return (
-    <article className="project-card contrib-card domain-sys">
-      <div className="project-body">
-        <h3 className="project-card-title">{t('projects.contribTitle')}</h3>
-        <div className="contrib-stack">
-          {contribProjects.map((p, i) => (
-            <div className="contrib-chip" key={p.key}>
-              <span className={`contrib-visual ${i % 2 === 0 ? 'contrib-vision' : 'contrib-sys'}`}>
-                <span className="contrib-index">{String(i + 1).padStart(2, '0')}</span>
-              </span>
-              <span className="contrib-name">{t(p.key + '.name')}</span>
-              <span className="contrib-actions">
-                {p.page && (
-                  <a
-                    className="project-card-btn contrib-btn"
-                    href={p.page}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t('projects.page')} <span className="arrow">→</span>
-                  </a>
-                )}
-                <a
-                  className="project-card-btn contrib-btn"
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t('projects.view')} <span className="arrow">→</span>
-                </a>
-              </span>
-            </div>
-          ))}
-        </div>
+    <div className="project-rows-block">
+      <div className="project-rows-head">
+        <span className="project-rows-title">{t('projects.contribTitle')}</span>
+        <span className="project-rows-line" aria-hidden="true" />
       </div>
-    </article>
+      <div className="project-rows">
+        {contribProjects.map((p, i) => (
+          <ProjectRow
+            key={p.key}
+            exp={String(i + 1).padStart(2, '0')}
+            title={t(p.key + '.name')}
+            summary={t(p.key + '.sum')}
+            home={p.page}
+            homeLabel="projects.page"
+            link={p.link}
+            accent={i % 2 === 0 ? 'system' : 'vision'}
+          />
+        ))}
+      </div>
+    </div>
   )
 }

@@ -53,7 +53,7 @@ export default function ProjectCard({
         <p className="project-card-desc">{description}</p>
         <div className="project-card-tags">
           {tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <span key={tag}>{t(tag)}</span>
           ))}
         </div>
         <div className="project-card-actions">
