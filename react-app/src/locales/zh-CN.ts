@@ -30,8 +30,6 @@ export default {
   'projects.contribTitle': '贡献项目',
   'projects.moreTitle': '其他项目',
   'projects.toyTitle': '玩具项目',
-  'contrib8.name': 'ZenlessZoneZero-OneDragon',
-  'contrib8.sum': '绝区零一条龙：全自动日常代办工具（fork 自 OneDragon-Anything）。',
   'contrib5.name': 'HFUT 论文列表',
   'contrib5.sum': '合工大论文列表展示页，部署于 GitHub Pages。',
   'contrib7.name': 'nature-skills',

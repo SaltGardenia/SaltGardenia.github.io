@@ -3,7 +3,6 @@ import { useI18n } from '@/i18n'
 
 interface ProjectCardProps {
   exp: string
-  domain: 'vision' | 'system'
   role?: string
   title: string
   description: string
@@ -15,7 +14,6 @@ interface ProjectCardProps {
 
 export default function ProjectCard({
   exp,
-  domain,
   role,
   title,
   description,
@@ -28,7 +26,8 @@ export default function ProjectCard({
   const btnLabel = t('projects.view')
   const homeLabelText = t(homeLabel ?? 'projects.open')
 
-  const domainClass = domain === 'system' ? 'domain-sys' : 'domain-vision'
+  // 主体色由序号自动推导：奇数号红（vision）、偶数号蓝（system）
+  const domainClass = parseInt(exp, 10) % 2 === 0 ? 'domain-sys' : 'domain-vision'
 
   // 光标光斑：跟随指针的径向高光
   function onPointerMove(e: PointerEvent<HTMLElement>) {

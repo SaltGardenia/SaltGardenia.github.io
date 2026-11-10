@@ -8,7 +8,6 @@ type ContribProject = {
 }
 
 const contribProjects: ContribProject[] = [
-  { key: 'contrib8', link: 'https://github.com/OneDragon-Anything/ZenlessZoneZero-OneDragon', page: 'https://one-dragon.com/zzz/zh/home.html' },
   { key: 'contrib5', link: 'https://github.com/hfut-paperlist/hfut-paperlist.github.io', page: 'https://hfut-paperlist.github.io/' },
   { key: 'contrib7', link: 'https://github.com/Yuan1z0825/nature-skills', page: 'https://yuan1z0825.github.io/nature-skills/' },
 ]
@@ -32,7 +31,6 @@ export default function ContribCard() {
             home={p.page}
             homeLabel="projects.page"
             link={p.link}
-            accent={i % 2 === 0 ? 'system' : 'vision'}
           />
         ))}
       </div>

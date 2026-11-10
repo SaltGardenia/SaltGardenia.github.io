@@ -30,8 +30,6 @@ export default {
   'projects.contribTitle': 'Contributed Projects',
   'projects.moreTitle': 'More Projects',
   'projects.toyTitle': 'Toy Projects',
-  'contrib8.name': 'ZenlessZoneZero-OneDragon',
-  'contrib8.sum': 'ZZZ all-in-one automation toolkit, forked from OneDragon-Anything.',
   'contrib5.name': 'HFUT Paper List',
   'contrib5.sum': 'An HFUT paper-list showcase, deployed on GitHub Pages.',
   'contrib7.name': 'nature-skills',

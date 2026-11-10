@@ -6,7 +6,6 @@ import ToyCard from '@/components/ToyCard'
 
 type ProjectEntry = {
   key: string
-  domain: 'vision' | 'system'
   tags: string[]
   link: string
   role?: string
@@ -18,11 +17,11 @@ type ProjectEntry = {
 const FEATURED_COUNT = 2
 
 const projects: ProjectEntry[] = [
-  { key: 'proj11', domain: 'vision', tags: ['Kotlin', 'Android', 'tag.liquidGlass'], link: 'https://github.com/SaltGardenia/calm-schedule' },
-  { key: 'proj12', domain: 'vision', tags: ['Kotlin', 'Android', 'tag.localFirst'], link: 'https://github.com/SaltGardenia/calm-ledger' },
-  { key: 'proj9', domain: 'vision', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
-  { key: 'proj10', domain: 'vision', tags: ['Skills', 'Papers', 'Agents', 'Writing'], link: 'https://github.com/SaltGardenia/sci-story-skills', home: 'https://saltgardenia.github.io/sci-story-skills/', homeLabel: 'projects.page' },
-  { key: 'proj13', domain: 'vision', tags: ['Skills', 'Paper Writing', 'Methodology', 'Rebuttal'], link: 'https://github.com/SaltGardenia/paper-writing-guide-SKILL' },
+  { key: 'proj11', tags: ['Kotlin', 'Android', 'tag.liquidGlass'], link: 'https://github.com/SaltGardenia/calm-schedule' },
+  { key: 'proj12', tags: ['Kotlin', 'Android', 'tag.localFirst'], link: 'https://github.com/SaltGardenia/calm-ledger' },
+  { key: 'proj9', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
+  { key: 'proj10', tags: ['Skills', 'Papers', 'Agents', 'Writing'], link: 'https://github.com/SaltGardenia/sci-story-skills', home: 'https://saltgardenia.github.io/sci-story-skills/', homeLabel: 'projects.page' },
+  { key: 'proj13', tags: ['Skills', 'Paper Writing', 'Methodology', 'Rebuttal'], link: 'https://github.com/SaltGardenia/paper-writing-guide-SKILL' },
 ]
 
 export default function ProjectsSection() {
@@ -42,7 +41,6 @@ export default function ProjectsSection() {
             <ProjectCard
               key={project.key}
               exp={String(i + 1).padStart(2, '0')}
-              domain={i % 2 === 0 ? 'vision' : 'system'}
               role={project.role}
               title={t(project.key + '.title')}
               description={t(project.key + '.desc')}
@@ -70,7 +68,6 @@ export default function ProjectsSection() {
                   link={project.link}
                   home={project.home}
                   homeLabel={project.homeLabel}
-                  accent={(FEATURED_COUNT + i) % 2 === 0 ? 'vision' : 'system'}
                 />
               ))}
             </div>

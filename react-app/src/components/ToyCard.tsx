@@ -32,7 +32,6 @@ export default function ToyCard() {
             title={p.name}
             summary={t('toy.' + p.key + '.sum')}
             link={p.link}
-            accent={i % 2 === 0 ? 'vision' : 'system'}
           />
         ))}
       </div>

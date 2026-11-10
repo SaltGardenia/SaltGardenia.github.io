@@ -9,7 +9,6 @@ interface ProjectRowProps {
   link?: string
   home?: string
   homeLabel?: string
-  accent?: 'vision' | 'system'
 }
 
 export default function ProjectRow({
@@ -20,12 +19,13 @@ export default function ProjectRow({
   link,
   home,
   homeLabel,
-  accent = 'vision',
 }: ProjectRowProps) {
   const { t } = useI18n()
   const btnLabel = t('projects.view')
   const homeLabelText = t(homeLabel ?? 'projects.open')
-  const accentClass = accent === 'system' ? 'accent-sys' : 'accent-vision'
+
+  // 主体色由序号自动推导：奇数号红（vision）、偶数号蓝（system）
+  const accentClass = parseInt(exp, 10) % 2 === 0 ? 'accent-sys' : 'accent-vision'
 
   // 光标光斑：跟随指针的径向高光
   function onPointerMove(e: PointerEvent<HTMLElement>) {
