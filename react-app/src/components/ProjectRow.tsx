@@ -9,6 +9,15 @@ interface ProjectRowProps {
   link?: string
   home?: string
   homeLabel?: string
+  stars?: number
+}
+
+// star 数展示格式：千位以上缩写为 k
+function formatStars(n: number): string {
+  if (n >= 1000) {
+    return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+  }
+  return String(n)
 }
 
 export default function ProjectRow({
@@ -19,6 +28,7 @@ export default function ProjectRow({
   link,
   home,
   homeLabel,
+  stars,
 }: ProjectRowProps) {
   const { t } = useI18n()
   const btnLabel = t('projects.view')
@@ -48,6 +58,11 @@ export default function ProjectRow({
             <span key={tag}>{t(tag)}</span>
           ))}
         </div>
+      )}
+      {typeof stars === 'number' && (
+        <span className="project-row-stars" title={`${stars} stars`}>
+          ★ {formatStars(stars)}
+        </span>
       )}
       <div className="project-row-actions">
         {home && (

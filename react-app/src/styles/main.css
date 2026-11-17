@@ -1026,6 +1026,18 @@ img {
   white-space: nowrap;
 }
 
+.project-row-stars {
+  z-index: 1;
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  background: var(--selected);
+  white-space: nowrap;
+}
+
 .project-row-actions {
   z-index: 1;
   flex-shrink: 0;
@@ -1072,7 +1084,8 @@ img {
     padding: 14px 18px;
   }
 
-  .project-row-tags {
+  .project-row-tags,
+  .project-row-stars {
     display: none;
   }
 
