@@ -1026,9 +1026,18 @@ img {
   white-space: nowrap;
 }
 
-.project-row-stars {
+/* star / fork 统计胶囊：位于操作按钮前 */
+.project-row-stats {
   z-index: 1;
   flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.project-row-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 3px 10px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -1036,6 +1045,10 @@ img {
   color: var(--ink-3);
   background: var(--selected);
   white-space: nowrap;
+}
+
+.project-row-stat svg {
+  opacity: 0.75;
 }
 
 .project-row-actions {
@@ -1085,7 +1098,7 @@ img {
   }
 
   .project-row-tags,
-  .project-row-stars {
+  .project-row-stats {
     display: none;
   }
 

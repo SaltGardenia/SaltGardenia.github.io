@@ -14,15 +14,15 @@ type ProjectEntry = {
 }
 
 // 前 FEATURED_COUNT 个以完整大卡展示，其余收纳进紧凑行列表
-const FEATURED_COUNT = 2
+const FEATURED_COUNT = 3
 
 const projects: ProjectEntry[] = [
+  { key: 'proj14', tags: ['Course Hub', 'Notes', 'GitHub Pages'], link: 'https://github.com/SaltGardenia/HFUT-CS-Online', home: 'https://saltgardenia.github.io/HFUT-CS-Online/', homeLabel: 'projects.page' },
   { key: 'proj11', tags: ['Kotlin', 'Android', 'tag.liquidGlass'], link: 'https://github.com/SaltGardenia/calm-schedule' },
   { key: 'proj12', tags: ['Kotlin', 'Android', 'tag.localFirst'], link: 'https://github.com/SaltGardenia/calm-ledger' },
   { key: 'proj9', tags: ['Next.js', 'Dashboard', 'Data Viz', 'OpenAlex'], link: 'https://github.com/SaltGardenia/AI-ApexTrace', home: 'https://saltgardenia.github.io/AI-ApexTrace/', homeLabel: 'projects.page' },
   { key: 'proj10', tags: ['Skills', 'Papers', 'Agents', 'Writing'], link: 'https://github.com/SaltGardenia/sci-story-skills', home: 'https://saltgardenia.github.io/sci-story-skills/', homeLabel: 'projects.page' },
   { key: 'proj13', tags: ['Skills', 'Paper Writing', 'Methodology', 'Rebuttal'], link: 'https://github.com/SaltGardenia/paper-writing-guide-SKILL' },
-  { key: 'proj14', tags: ['Algorithms', 'Course Notes', 'GitHub Pages'], link: 'https://github.com/SaltGardenia/HFUT-algorithm-design', home: 'https://saltgardenia.github.io/HFUT-algorithm-design/', homeLabel: 'projects.page' },
   { key: 'proj8', tags: ['Skills', 'Agents', 'Code', 'Prompt'], link: 'https://github.com/SaltGardenia/research-code-skill', home: 'https://saltgardenia.github.io/research-code-skill/', homeLabel: 'projects.page' },
 ]
 

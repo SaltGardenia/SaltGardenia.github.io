@@ -42,6 +42,13 @@ export default function HomeView() {
     onScroll()
     const observer = setupReveal()
 
+    // 刷新时恢复 hash 定位：首帧渲染时锚点元素尚不存在，
+    // 浏览器原生跳转落空，这里在挂载后补一次
+    const hashId = window.location.hash.replace('#', '')
+    if (hashId) {
+      document.getElementById(hashId)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior })
+    }
+
     return () => {
       window.removeEventListener('scroll', onScroll)
       observer?.disconnect()

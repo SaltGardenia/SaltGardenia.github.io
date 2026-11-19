@@ -10,15 +10,37 @@ interface ProjectRowProps {
   home?: string
   homeLabel?: string
   stars?: number
+  forks?: number
 }
 
-// star 数展示格式：千位以上缩写为 k
-function formatStars(n: number): string {
+// 计数展示格式：千位以上缩写为 k
+function formatCount(n: number): string {
   if (n >= 1000) {
     return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
   }
   return String(n)
 }
+
+// Feather 风格描边图标，与站内其他图标一致
+const StarIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+    strokeLinejoin="round" style={{ display: 'block' }}>
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+)
+
+const ForkIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+    strokeLinejoin="round" style={{ display: 'block' }}>
+    <circle cx="12" cy="18" r="3" />
+    <circle cx="6" cy="6" r="3" />
+    <circle cx="18" cy="6" r="3" />
+    <path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9" />
+    <path d="M12 12v3" />
+  </svg>
+)
 
 export default function ProjectRow({
   exp,
@@ -29,6 +51,7 @@ export default function ProjectRow({
   home,
   homeLabel,
   stars,
+  forks,
 }: ProjectRowProps) {
   const { t } = useI18n()
   const btnLabel = t('projects.view')
@@ -59,9 +82,18 @@ export default function ProjectRow({
           ))}
         </div>
       )}
-      {typeof stars === 'number' && (
-        <span className="project-row-stars" title={`${stars} stars`}>
-          ★ {formatStars(stars)}
+      {(typeof stars === 'number' || typeof forks === 'number') && (
+        <span className="project-row-stats">
+          {typeof stars === 'number' && (
+            <span className="project-row-stat" title={`${stars} stars`}>
+              <StarIcon /> {formatCount(stars)}
+            </span>
+          )}
+          {typeof forks === 'number' && (
+            <span className="project-row-stat" title={`${forks} forks`}>
+              <ForkIcon /> {formatCount(forks)}
+            </span>
+          )}
         </span>
       )}
       <div className="project-row-actions">
